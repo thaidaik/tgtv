@@ -73,12 +73,6 @@ class Admin_products extends CI_Controller {
         //if any filter post was sent but we are in some page, we must load the session data
 
         //filtered && || paginated
-        echo '<pre>';
-        var_dump($this->uri->segment(3));
-        var_dump($manufacture_id);
-        var_dump($search_string);
-        var_dump($order);
-        echo '</pre>';
         if($manufacture_id !== false && $search_string !== false && $order !== false || $this->uri->segment(3) == true){ 
            
             /*

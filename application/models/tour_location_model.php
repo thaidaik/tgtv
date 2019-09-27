@@ -63,6 +63,16 @@ class Tour_location_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function get_data_field_tour_location()
+    {
+
+        $this->db->select('id');
+        $this->db->select('country');
+        $this->db->from('tour_location');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     /**
      * Count the number of rows
      * @param int $search_string

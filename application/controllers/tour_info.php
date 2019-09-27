@@ -9,6 +9,7 @@ class Tour_info extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('tour_info_model');
+        $this->load->model('tour_location_model');
 
         if(!$this->session->userdata('is_logged_in')){
             redirect('admin/login');
@@ -168,65 +169,60 @@ class Tour_info extends CI_Controller {
 
     }//index
 
-    function uploadImage()
-    {
-        $config['upload_path']   =   "uploads/";
-        $config['allowed_types'] =   "gif|jpg|jpeg|png";
-        $config['max_size']      =   "5000";
-        $config['max_width']     =   "1907";
-        $config['max_height']    =   "1280";
-        $this->load->library('upload',$config);
-        if(!$this->upload->do_upload('tour_image'))
-        {
-            echo $this->upload->display_errors();
-        }
-        else
-        {
-            $finfo=$this->upload->data();
-            $this->_createThumbnail($finfo['file_name']);
-            $data['uploadInfo'] = $finfo;
-            $data['thumbnail_name'] = $finfo['raw_name']. '_thumb' .$finfo['file_ext'];
-            return $data;
-        }
-    }
 
     public function add()
     {
+        $this->load->helper('upload_helper');
         //if save button was clicked, get the data sent via post
         if ($this->input->server('REQUEST_METHOD') === 'POST')
         {
-
             //form validation
             $this->form_validation->set_rules('tour_code', 'tour_code', 'required');
             $this->form_validation->set_rules('tour_name', 'tour_name', 'required');
             $this->form_validation->set_rules('tour_price', 'tour_price', 'required|numeric');
             $this->form_validation->set_rules('tour_duration', 'tour_duration', 'required|numeric');
-            $this->form_validation->set_rules('manufacture_id', 'manufacture_id', 'required');
+            $this->form_validation->set_rules('location_link', 'location_link', 'required');
             $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
 
             //if the form has passed through the validation
             if ($this->form_validation->run())
             {
-                $dataImage = $this->uploadImage();
+                $dataImage = uploadImage('tour_image');
                 $dataImageName = $dataImage['uploadInfo'];
-
+                $startdate = date("Y-m-d", strtotime($this->input->post('start_date')));
+                $location_link = $this->input->post('location_link');
                 $data_to_store = array(
-                    'description' => $this->input->post('description'),
-                    'stock' => $this->input->post('stock'),
-                    'cost_price' => $this->input->post('cost_price'),
-                    'sell_price' => $this->input->post('sell_price'),
-                    'manufacture_id' => $this->input->post('manufacture_id')
+                    'tour_code' => $this->input->post('tour_code'),
+                    'tour_name' => $this->input->post('tour_name'),
+                    'tour_price' => $this->input->post('tour_price'),
+                    'tour_price_min' => $this->input->post('tour_price_min'),
+                    'tour_duration' => $this->input->post('tour_duration'),
+                    'start_date' => $startdate,
+                    'tour_gift' => $this->input->post('tour_gift'),
+                    'group_size' => $this->input->post('group_size'),
+                    'tour_description' => $this->input->post('tour_description'),
+                    'tour_image' => $dataImageName['file_name'],
+                    'tour_image_thumb' => $dataImage['thumbnail_name'],
+                    'tour_guide_info' => $this->input->post('tour_guide_info'),
+                    'tour_color' => $this->input->post('tour_color'),
+                    'create_date' => date('Y-m-d H:i:s'),
+                    'modify_date' => date('Y-m-d H:i:s'),
+                    'modify_by' => $this->session->userdata('user_id'),
                 );
                 //if the insert has returned true then we show the flash message
-                if($this->tour_info_model->store_product($data_to_store, $dataImageName['file_name'], $dataImage['thumbnail_name'])){
+                if($this->tour_info_model->add_tour_info($data_to_store, $location_link)){
                     $data['flash_message'] = TRUE;
                 }else{
                     $data['flash_message'] = FALSE;
                 }
             }
         }
-        //fetch manufactures data to populate the select field
-        //load the view
+        $data_field_tour_location = $this->tour_location_model->get_data_field_tour_location();
+        foreach ($data_field_tour_location as $value){
+            $field_tour_location[$value['id']] = $value['country'];
+        }
+        $data['field_tour_location'] = $field_tour_location;
+
         $data['main_content'] = 'tour/info/add';
         $this->load->view('includes/template', $data);
     }
@@ -244,44 +240,60 @@ class Tour_info extends CI_Controller {
         if ($this->input->server('REQUEST_METHOD') === 'POST')
         {
             //form validation
-            $this->form_validation->set_rules('description', 'description', 'required');
-            $this->form_validation->set_rules('stock', 'stock', 'required|numeric');
-            $this->form_validation->set_rules('cost_price', 'cost_price', 'required|numeric');
-            $this->form_validation->set_rules('sell_price', 'sell_price', 'required|numeric');
-            $this->form_validation->set_rules('manufacture_id', 'manufacture_id', 'required');
+            $this->form_validation->set_rules('tour_code', 'tour_code', 'required');
+            $this->form_validation->set_rules('tour_name', 'tour_name', 'required');
+            $this->form_validation->set_rules('tour_price', 'tour_price', 'required|numeric');
+            $this->form_validation->set_rules('tour_duration', 'tour_duration', 'required|numeric');
+            $this->form_validation->set_rules('location_link', 'location_link', 'required');
             $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
             //if the form has passed through the validation
             if ($this->form_validation->run())
             {
-
-                $data_to_store = array(
-                    'description' => $this->input->post('description'),
-                    'stock' => $this->input->post('stock'),
-                    'cost_price' => $this->input->post('cost_price'),
-                    'sell_price' => $this->input->post('sell_price'),
-                    'manufacture_id' => $this->input->post('manufacture_id')
+                $startdate = date("Y-m-d", strtotime($this->input->post('start_date')));
+                $location_link = $this->input->post('location_link');
+                $data_to_tour = array(
+                    'tour_code' => $this->input->post('tour_code'),
+                    'tour_name' => $this->input->post('tour_name'),
+                    'tour_price' => $this->input->post('tour_price'),
+                    'tour_price_min' => $this->input->post('tour_price_min'),
+                    'tour_duration' => $this->input->post('tour_duration'),
+                    'start_date' => $startdate,
+                    'tour_gift' => $this->input->post('tour_gift'),
+                    'group_size' => $this->input->post('group_size'),
+                    'tour_description' => $this->input->post('tour_description'),
+                    'tour_guide_info' => $this->input->post('tour_guide_info'),
+                    'tour_color' => $this->input->post('tour_color'),
+                    'create_date' => date('Y-m-d H:i:s'),
+                    'modify_date' => date('Y-m-d H:i:s'),
+                    'modify_by' => $this->session->userdata('user_id'),
                 );
+                $dataImage = uploadImage('tour_image');
+                $dataImageName = $dataImage['uploadInfo'];
+                if(!empty($dataImage)){
+                    $data_to_tour['tour_image'] = $dataImageName['file_name'];
+                    $data_to_tour['tour_image_thumb'] = $dataImage['thumbnail_name'];
+                }
                 //if the insert has returned true then we show the flash message
-                if($this->products_model->update_product($id, $data_to_store) == TRUE){
+                if($this->tour_info_model->update_tour_info($id, $data_to_tour, $location_link) == TRUE){
                     $this->session->set_flashdata('flash_message', 'updated');
                 }else{
                     $this->session->set_flashdata('flash_message', 'not_updated');
                 }
-                redirect('admin/products/update/'.$id.'');
+                redirect('tour/info/update/'.$id.'');
 
             }//validation run
 
         }
 
-        //if we are updating, and the data did not pass trough the validation
-        //the code below wel reload the current data
-
-        //product data
-        $data['product'] = $this->products_model->get_product_by_id($id);
-        //fetch manufactures data to populate the select field
-        $data['manufactures'] = $this->manufacturers_model->get_manufacturers();
+        $data_field_tour_location = $this->tour_location_model->get_data_field_tour_location();
+        foreach ($data_field_tour_location as $value){
+            $field_tour_location[$value['id']] = $value['country'];
+        }
+        $data['field_tour_location'] = $field_tour_location;
+        $data['tour_info_data'] = $this->tour_info_model->get_tour_info_by_id($id);
+        $data['tour_location_link'] = $this->tour_info_model->get_tour_location_link_by_tour_info_id($id);
         //load the view
-        $data['main_content'] = 'admin/products/edit';
+        $data['main_content'] = 'tour/info/edit';
         $this->load->view('includes/template', $data);
 
     }//update

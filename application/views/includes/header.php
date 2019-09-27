@@ -36,8 +36,20 @@
                         </ul>
                     </li>
 
-                    <li <?php if($this->uri->segment(2) == 'tour'){echo 'class="active"';}?>>
-                        <a href="<?php echo base_url(); ?>tour/list">List tour</a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >Tours Manager<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li <?php if($this->uri->segment(2) == 'tour' && $this->uri->segment(3) == 'list'){echo 'class="active"';}?>>
+                                <a href="<?php echo base_url(); ?>tour/list">List Tour</a>
+                            </li>
+                            <li <?php if($this->uri->segment(2) == 'tour' && $this->uri->segment(3) == 'location'){echo 'class="active"';}?>>
+                                <a href="<?php echo base_url(); ?>tour/location">List Location</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li <?php if($this->uri->segment(2) == 'tour' && $this->uri->segment(2) == 'info'){echo 'class="active"';}?>>
+                                <a href="<?php echo base_url(); ?>tour/info/add">Add New Tour</a>
+                            </li>
+                        </ul>
                     </li>
                     <li <?php if($this->uri->segment(2) == 'customer'){echo 'class="active"';}?>>
                         <a href="<?php echo base_url(); ?>customer/list">List customer</a>

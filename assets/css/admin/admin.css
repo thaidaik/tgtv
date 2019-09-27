@@ -92,6 +92,9 @@ form label:first-child{
   height: auto;
   padding: 6px 9px;
 }
+.form-signin select[multiple]{
+  height: 111px;
+}
 .form-signin select,
 .form-signin input[type="text"],
 .form-signin input[type="password"] {
