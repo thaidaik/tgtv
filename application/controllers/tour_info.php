@@ -24,14 +24,15 @@ class Tour_info extends CI_Controller {
     {
 
         //all the posts sent by the view
-        $manufacture_id = $this->input->post('manufacture_id');
+        $location_link = $this->input->post('location_link');
         $search_string = $this->input->post('search_string');
         $order = $this->input->post('order');
         $order_type = $this->input->post('order_type');
 
         //pagination settings
-        $config['per_page'] = 5;
-        $config['base_url'] = base_url().'admin/products';
+        $config['per_page'] = 2;
+
+        $config['base_url'] = base_url().'tour/info';
         $config['use_page_numbers'] = TRUE;
         $config['num_links'] = 10;
         $config['full_tag_open'] = '<ul class="pagination">';
@@ -75,29 +76,21 @@ class Tour_info extends CI_Controller {
         //make the data type var avaible to our view
         $data['order_type_selected'] = $order_type;
 
-
-        //we must avoid a page reload with the previous session data
-        //if any filter post was sent, then it's the first time we load the content
-        //in this case we clean the session filter data
-        //if any filter post was sent but we are in some page, we must load the session data
+        $data_field_tour_location = $this->tour_location_model->get_data_field_tour_location();
+        $field_tour_location = array(0 => "all");
+        foreach ($data_field_tour_location as $value){
+            $field_tour_location[$value['id']] = $value['country'];
+        }
 
         //filtered && || paginated
-        if($manufacture_id !== false && $search_string !== false && $order !== false || $this->uri->segment(3) == true){
+        if($location_link !== false && $search_string !== false && $order !== false || $this->uri->segment(3) == true){
 
-            /*
-            The comments here are the same for line 79 until 99
-
-            if post is not null, we store it in session data array
-            if is null, we use the session data already stored
-            we save order into the the var to load the view with the param already selected
-            */
-
-            if($manufacture_id !== 0){
-                $filter_session_data['manufacture_selected'] = $manufacture_id;
+            if($location_link !== 0){
+                $filter_session_data['location_link_selected'] = $location_link;
             }else{
-                $manufacture_id = $this->session->userdata('manufacture_selected');
+                $location_link = $this->session->userdata('location_link_selected');
             }
-            $data['manufacture_selected'] = $manufacture_id;
+            $data['location_link_selected'] = $location_link;
 
             if($search_string){
                 $filter_session_data['search_string_selected'] = $search_string;
@@ -118,30 +111,30 @@ class Tour_info extends CI_Controller {
             $this->session->set_userdata($filter_session_data);
 
             //fetch manufacturers data into arrays
-            $data['manufactures'] = $this->manufacturers_model->get_manufacturers();
+            $data['field_tour_location'] = $field_tour_location;
 
-            $data['count_products']= $this->products_model->count_products($manufacture_id, $search_string, $order);
-            $config['total_rows'] = $data['count_products'];
+            $data['count_tour_infos']= $this->tour_info_model->count_tour_infos($location_link, $search_string, $order);
+            $config['total_rows'] = $data['count_tour_infos'];
 
             //fetch sql data into arrays
             if($search_string){
                 if($order){
-                    $data['products'] = $this->products_model->get_products($manufacture_id, $search_string, $order, $order_type, $config['per_page'],$limit_end);
+                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($location_link, $search_string, $order, $order_type, $config['per_page'],$limit_end);
                 }else{
-                    $data['products'] = $this->products_model->get_products($manufacture_id, $search_string, '', $order_type, $config['per_page'],$limit_end);
+                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($location_link, $search_string, '', $order_type, $config['per_page'],$limit_end);
                 }
             }else{
                 if($order){
-                    $data['products'] = $this->products_model->get_products($manufacture_id, '', $order, $order_type, $config['per_page'],$limit_end);
+                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($location_link, '', $order, $order_type, $config['per_page'],$limit_end);
                 }else{
-                    $data['products'] = $this->products_model->get_products($manufacture_id, '', '', $order_type, $config['per_page'],$limit_end);
+                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($location_link, '', '', $order_type, $config['per_page'],$limit_end);
                 }
             }
 
         }else{
 
             //clean filter data inside section
-            $filter_session_data['manufacture_selected'] = null;
+            $filter_session_data['location_link_selected'] = null;
             $filter_session_data['search_string_selected'] = null;
             $filter_session_data['order'] = null;
             $filter_session_data['order_type'] = null;
@@ -149,22 +142,22 @@ class Tour_info extends CI_Controller {
 
             //pre selected options
             $data['search_string_selected'] = '';
-            $data['manufacture_selected'] = 0;
+            $data['location_link_selected'] = array();
             $data['order'] = 'id';
 
             //fetch sql data into arrays
-            $data['manufactures'] = $this->manufacturers_model->get_manufacturers();
-            $data['count_products']= $this->products_model->count_products();
-            $data['products'] = $this->products_model->get_products('', '', '', $order_type, $config['per_page'],$limit_end);
-            $config['total_rows'] = $data['count_products'];
+            $data['field_tour_location'] = $field_tour_location;
+            $data['count_tour_infos']= $this->tour_info_model->count_tour_infos();
+            $data['tour_infos'] = $this->tour_info_model->get_tour_infos('', '', '', $order_type, $config['per_page'],$limit_end);
+            $config['total_rows'] = $data['count_tour_infos'];
 
-        }//!isset($manufacture_id) && !isset($search_string) && !isset($order)
+        }//!isset($location_link) && !isset($search_string) && !isset($order)
 
         //initializate the panination helper
         $this->pagination->initialize($config);
 
         //load the view
-        $data['main_content'] = 'admin/products/list';
+        $data['main_content'] = 'tour/info/list';
         $this->load->view('includes/template', $data);
 
     }//index
@@ -235,7 +228,7 @@ class Tour_info extends CI_Controller {
     {
         //product id
         $id = $this->uri->segment(4);
-
+        $this->load->helper('upload_helper');
         //if save button was clicked, get the data sent via post
         if ($this->input->server('REQUEST_METHOD') === 'POST')
         {
@@ -263,7 +256,6 @@ class Tour_info extends CI_Controller {
                     'tour_description' => $this->input->post('tour_description'),
                     'tour_guide_info' => $this->input->post('tour_guide_info'),
                     'tour_color' => $this->input->post('tour_color'),
-                    'create_date' => date('Y-m-d H:i:s'),
                     'modify_date' => date('Y-m-d H:i:s'),
                     'modify_by' => $this->session->userdata('user_id'),
                 );

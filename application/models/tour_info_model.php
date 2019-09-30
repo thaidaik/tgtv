@@ -39,7 +39,6 @@ class Tour_info_model extends CI_Model {
     {
 
         $this->db->select('tour_info.*');
-        $this->db->select('tour_location.country as country_name');
         $this->db->from('tour_info');
         if($location_link != null && $location_link != 0){
             $this->db->where('location_link', $location_link);
@@ -55,7 +54,7 @@ class Tour_info_model extends CI_Model {
         if($order){
             $this->db->order_by($order, $order_type);
         }else{
-            $this->db->order_by('id', $order_type);
+            $this->db->order_by('tour_id', $order_type);
         }
 
 
@@ -75,12 +74,12 @@ class Tour_info_model extends CI_Model {
      * @param int $order
      * @return int
      */
-    function count_tour_infos($manufacture_id=null, $search_string=null, $order=null)
+    function count_tour_infos($location_link=null, $search_string=null, $order=null)
     {
         $this->db->select('*');
-        $this->db->from('products');
-        if($manufacture_id != null && $manufacture_id != 0){
-            $this->db->where('manufacture_id', $manufacture_id);
+        $this->db->from('tour_info');
+        if($location_link != null && $location_link != 0){
+            $this->db->where('location_link', $location_link);
         }
         if($search_string){
             $this->db->like('description', $search_string);
@@ -88,7 +87,7 @@ class Tour_info_model extends CI_Model {
         if($order){
             $this->db->order_by($order, 'Asc');
         }else{
-            $this->db->order_by('id', 'Asc');
+            $this->db->order_by('tour_id', 'Asc');
         }
         $query = $this->db->get();
         return $query->num_rows();
@@ -120,9 +119,19 @@ class Tour_info_model extends CI_Model {
      */
     function update_tour_info($id, $data, $location_link)
     {
-        $this->db->where('id', $id);
+        $this->db->where('tour_id', $id);
         $this->db->update('tour_info', $data);
         $report = array();
+        $report['error'] = $this->db->_error_number();
+        $report['message'] = $this->db->_error_message();
+        $this->reset_tour_location_link($id);
+        foreach ($location_link as $value){
+            $data_link= array(
+                'tour_info_id' => $id,
+                'tour_location_id' => $value
+            );
+            $this->db->insert('tour_location_link', $data_link);
+        }
         $report['error'] = $this->db->_error_number();
         $report['message'] = $this->db->_error_message();
         if($report !== 0){
@@ -137,9 +146,14 @@ class Tour_info_model extends CI_Model {
      * @param int $id - product id
      * @return boolean
      */
-    function delete_tour_info($id, $datalink){
+    function delete_tour_info($id){
         $this->db->where('id', $id);
         $this->db->delete('tour_info');
+    }
+
+    function reset_tour_location_link($id){
+        $this->db->where('tour_info_id', $id);
+        $this->db->delete('tour_location_link');
     }
 
     function get_tour_location_link_by_tour_info_id($id){

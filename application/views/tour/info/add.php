@@ -57,8 +57,8 @@
         echo '<div class="control-group"><label class="control-label required" for="tour_name">Tour Name</label>';
         echo form_input('tour_name', set_value('tour_name'), 'placeholder="tour_name" class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="tour_image">Select Location</label>';
-        echo form_multiselect('location_link[]', $field_tour_location, '1', 'class="form-control"');
+        echo '<div class="control-group"><label class="control-label required" for="phone">Tour Duraction</label>';
+        echo form_input('tour_duration', set_value('tour_duration'), 'placeholder="tour_duration" class="form-control"');
         echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="group_size">Group Size</label>';
         echo form_input('group_size', set_value('group_size'), 'placeholder="group_size" class="form-control"');
@@ -69,8 +69,8 @@
 
         echo '</div>';
         echo '<div class="col-sm-6">';
-        echo '<div class="control-group"><label class="control-label required" for="phone">Tour Duraction</label>';
-        echo form_input('tour_duration', set_value('tour_duration'), 'placeholder="tour_duration" class="form-control"');
+        echo '<div class="control-group"><label class="control-label required" for="tour_image">Select Location</label>';
+        echo form_multiselect('location_link[]', $field_tour_location, '1', 'class="form-control"');
         echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="start_date">Start Date</label>';
         echo '<div class="input-group datepicker">';
@@ -87,11 +87,11 @@
         echo '<div class="control-group"><label class="control-label required" for="tour_price_min">Tour Price Min</label>';
         echo form_input('tour_price_min', set_value('tour_price_min'), 'placeholder="tour_price_min" class="form-control"');
         echo '</div>';
+        echo '<div class="control-group"><label class="control-label required" for="tour_gift">Tour Guide Info</label>';
+        echo form_input('tour_guide_info', set_value('tour_guide_info'), 'placeholder="tour_guide_info" class="form-control"');
+        echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="tour_color">Select Color</label>';
         echo form_dropdown('tour_color', $color_table, set_value('tour_color'), 'class="form-control"');
-        echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="tour_gift">Tour Guide Info</label>';
-        echo form_textarea('tour_guide_info', set_value('tour_guide_info'), 'placeholder="tour_guide_info" class="form-control"');
         echo '</div>';
 
         echo '</div>';

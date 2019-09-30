@@ -93,7 +93,7 @@ form label:first-child{
   padding: 6px 9px;
 }
 .form-signin select[multiple]{
-  height: 111px;
+  height: 184px;
 }
 .form-signin select,
 .form-signin input[type="text"],
@@ -105,7 +105,9 @@ form label:first-child{
 .form-signin select{
   padding: 8px 9px 9px;
 }
-
+.control-group textarea.form-control {
+  height: 257px;
+}
 /*********************/
 .datepicker .form-control,
 .timepicker .form-control,
