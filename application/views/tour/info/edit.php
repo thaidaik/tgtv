@@ -2,12 +2,12 @@
 
     <ul class="breadcrumb">
         <li>
-            <a href="<?php echo site_url("admin"); ?>">
+            <a href="#">
                 <?php echo ucfirst($this->uri->segment(1));?>
             </a>
         </li>
         <li>
-            <a href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>">
+            <a href="<?php echo site_url("tour").'/'.$this->uri->segment(2); ?>">
                 <?php echo ucfirst($this->uri->segment(2));?>
             </a>
         </li>
@@ -70,7 +70,7 @@
         echo form_input('group_size', $tour_info_data[0]['group_size'], 'placeholder="group_size" class="form-control"');
         echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="tourtour_description_gift">Tour Description</label>';
-        echo form_textarea('tour_description', $tour_info_data[0]['tour_description'], 'placeholder="tour_description" class="form-control"');
+        echo form_textarea('tour_description', $tour_info_data[0]['tour_description'], 'placeholder="tour_description" class="form-control editor"');
         echo '</div>';
 
         echo '</div>';
@@ -109,4 +109,11 @@
         echo '</div>';
         ?>
     </div>
+    <!-- Script -->
+    <script>
+        tinymce.init({
+            selector:'.editor',
+            theme: 'silver',
+        });
+    </script>
 </div>

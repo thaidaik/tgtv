@@ -95,6 +95,16 @@ class Tour_location_model extends CI_Model {
         return $query->num_rows();
     }
 
+    function count_country_link($country_id)
+    {
+        $this->db->select('*');
+        $this->db->from('tour_location_link as tlk');
+        $this->db->join('tour_location as tl', 'tlk.tour_location_id = tl.id', 'inner');
+        $this->db->where('tlk.tour_location_id', $country_id);
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
     /**
      * Add the new item into the database
      * @param array $data - associative array with data to store

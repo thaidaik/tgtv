@@ -19,7 +19,7 @@
       </div>
       
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <table class="table table-hover">
                 <thead>
               <tr>
@@ -29,14 +29,22 @@
             </thead>
             <tbody>
               <?php
-              foreach($manufacturers as $row)
+              $this->load->model('manufacturers_model');
+              $fix_data = array();
+              foreach($manufacturers as $key=>$row){
+                  $fix_data[$key] = $row;
+                  $fix_data[$key]['count'] = $this->manufacturers_model->count_member($row['id']);
+              }
+              foreach($fix_data as $row)
               {
                 echo '<tr>';
-                echo '<td>'.$row['name'].'</td>';
+                echo '<td>'.$row['name'].' <span class="badge"> '.$row['count'].'</span></td>';
                 echo '<td class="crud-actions">
-                  <a href="'.site_url("admin").'/role/update/'.$row['id'].'" class="btn btn-info">edit</a>  
-                  <a href="'.site_url("admin").'/role/delete/'.$row['id'].'" class="btn btn-danger">delete</a>
-                </td>';
+                  <a href="'.site_url("admin").'/role/update/'.$row['id'].'" class="btn btn-info">edit</a>  ';
+                if($row['count'] == 0){
+                    echo '<a href="'.site_url("admin").'/role/delete/'.$row['id'].'" class="btn btn-danger">delete</a> ';
+                }
+                echo '</td>';
                 echo '</tr>';
               }
               ?>      

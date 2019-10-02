@@ -117,3 +117,12 @@ form label:first-child{
 .block-fix{
   margin-top: 30px;
 }
+#location_link{
+  height: 155px;
+}
+#search_field{
+  width: 253px;
+}
+.bottom-block{
+  margin-bottom: 20px;
+}

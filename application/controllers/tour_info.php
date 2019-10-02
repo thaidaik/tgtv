@@ -26,11 +26,14 @@ class Tour_info extends CI_Controller {
         //all the posts sent by the view
         $location_link = $this->input->post('location_link');
         $search_string = $this->input->post('search_string');
+        $sizes_selected = $this->input->post('sizes_selected');
+        $month_selected = $this->input->post('month_selected');
+        $year_selected = $this->input->post('year_selected');
         $order = $this->input->post('order');
         $order_type = $this->input->post('order_type');
 
         //pagination settings
-        $config['per_page'] = 2;
+        $config['per_page'] = 10;
 
         $config['base_url'] = base_url().'tour/info';
         $config['use_page_numbers'] = TRUE;
@@ -77,7 +80,6 @@ class Tour_info extends CI_Controller {
         $data['order_type_selected'] = $order_type;
 
         $data_field_tour_location = $this->tour_location_model->get_data_field_tour_location();
-        $field_tour_location = array(0 => "all");
         foreach ($data_field_tour_location as $value){
             $field_tour_location[$value['id']] = $value['country'];
         }
@@ -99,10 +101,30 @@ class Tour_info extends CI_Controller {
             }
             $data['search_string_selected'] = $search_string;
 
+            if($month_selected){
+                $filter_session_data['month_selected'] = $month_selected;
+            }else{
+                $month_selected = $this->session->userdata('month_selected');
+            }
+            $data['month_selected'] = $month_selected;
+
+            if($year_selected){
+                $filter_session_data['year_selected'] = $year_selected;
+            }else{
+                $year_selected = $this->session->userdata('year_selected');
+            }
+            $data['year_selected'] = $year_selected;
+
+            if($sizes_selected){
+                $filter_session_data['sizes_selected'] = $sizes_selected;
+            }else{
+                $sizes_selected = $this->session->userdata('sizes_selected');
+            }
+            $data['sizes_selected'] = $sizes_selected;
+
             if($order){
                 $filter_session_data['order'] = $order;
-            }
-            else{
+            }else{
                 $order = $this->session->userdata('order');
             }
             $data['order'] = $order;
@@ -135,6 +157,9 @@ class Tour_info extends CI_Controller {
 
             //clean filter data inside section
             $filter_session_data['location_link_selected'] = null;
+            $filter_session_data['month_selected'] = null;
+            $filter_session_data['year_selected'] = null;
+            $filter_session_data['sizes_selected'] = null;
             $filter_session_data['search_string_selected'] = null;
             $filter_session_data['order'] = null;
             $filter_session_data['order_type'] = null;
@@ -144,6 +169,7 @@ class Tour_info extends CI_Controller {
             $data['search_string_selected'] = '';
             $data['location_link_selected'] = array();
             $data['order'] = 'id';
+            $data['sizes_selected'] = $data['month_selected'] = $data['year_selected'] = 'all';
 
             //fetch sql data into arrays
             $data['field_tour_location'] = $field_tour_location;
@@ -156,6 +182,8 @@ class Tour_info extends CI_Controller {
         //initializate the panination helper
         $this->pagination->initialize($config);
 
+        $this->load->database();
+        $data['data'] = $this->db->get("products")->result();
         //load the view
         $data['main_content'] = 'tour/info/list';
         $this->load->view('includes/template', $data);
@@ -301,5 +329,51 @@ class Tour_info extends CI_Controller {
         $this->products_model->delete_product($id);
         redirect('admin/products');
     }//edit
+
+
+    public function ajaxViewTour(){
+        $this->load->helper('true_function');
+        $id = $this->input->post('id');
+        $showdata = '';
+        $tour_data_array = $this->tour_info_model->get_tour_info_by_id($id);
+        if($tour_data_array && count($tour_data_array)){
+            $tour_data = $tour_data_array[0];
+        }
+        echo '<div class="row">';
+        echo '<div class="col-md-6">';
+        echo '<div class="row bottom-block"><label>Tour code: </label>'.$tour_data['tour_code'].'</div>';
+        echo '<div class="row bottom-block"><label>Tour duration: </label>'.$tour_data['tour_duration'].' days</div>';
+        echo '<div class="row bottom-block"><label>Start date: </label>'.convertDateDMY($tour_data['start_date']).'</div>';
+        echo '<div class="row bottom-block"><label>Group size: </label>'.$tour_data['group_size'].' persons</div>';
+        echo '</div>';
+        echo '<div class="col-md-6">';
+        echo '<div class="row bottom-block"><label>Tour price: </label>'.convertMilion($tour_data['tour_price']).'</div>';
+        echo '<div class="row bottom-block"><label>Tour price min: </label>'.convertMilion($tour_data['tour_price_min']).'</div>';
+        echo '<div class="row bottom-block"><label>Tour gift: </label>'.$tour_data['tour_gift'].'</div>';
+        echo '<div class="row bottom-block"><label>Used Slot: </label>'.'xx'.' persons</div>';
+        echo '</div>';
+        echo '</div>';
+
+        echo '<div class="row bottom-block">';
+        echo '<div class="col-md-12"><div class="row"><label>Guide info: </label>'.$tour_data['tour_guide_info'].'</div></div>';
+        echo '</div>';
+        echo '<div class="row bottom-block">';
+        echo '<div class="col-md-12"><strong>Tour description: </strong><br/><br/>'.htmlspecialchars_decode($tour_data['tour_description']).'</div>';
+        echo '</div>';
+        echo $showdata;
+    }
+
+    //test ajax
+    public function ajaxRequestPost()
+    {
+        $this->load->database();
+        $data = array(
+            'stock' => $this->input->post('stock'),
+            'description' => $this->input->post('description')
+        );
+        $this->db->insert('products', $data);
+
+        echo 'Added successfully.';
+    }
 
 }

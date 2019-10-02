@@ -4,6 +4,7 @@
   <title>TGTV</title>
   <meta charset="utf-8">
   <link href="<?php echo base_url(); ?>assets/css/admin/global.css" rel="stylesheet" type="text/css">
+  <script src='<?php echo base_url(); ?>resources/tinymce/tinymce.min.js'></script>
 </head>
 <body>
     <nav class="navbar navbar-inverse">
@@ -19,7 +20,6 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Home</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >User <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -40,19 +40,16 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >Tours Manager<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li <?php if($this->uri->segment(2) == 'tour' && $this->uri->segment(3) == 'list'){echo 'class="active"';}?>>
-                                <a href="<?php echo base_url(); ?>tour/list">List Tour</a>
+                                <a href="<?php echo base_url(); ?>tour/info">List Tour</a>
                             </li>
-                            <li <?php if($this->uri->segment(2) == 'tour' && $this->uri->segment(3) == 'location'){echo 'class="active"';}?>>
-                                <a href="<?php echo base_url(); ?>tour/location">List Location</a>
-                            </li>
-                            <li role="separator" class="divider"></li>
                             <li <?php if($this->uri->segment(2) == 'tour' && $this->uri->segment(2) == 'info'){echo 'class="active"';}?>>
                                 <a href="<?php echo base_url(); ?>tour/info/add">Add New Tour</a>
                             </li>
+                            <li role="separator" class="divider"></li>
+                            <li <?php if($this->uri->segment(2) == 'tour' && $this->uri->segment(3) == 'location'){echo 'class="active"';}?>>
+                                <a href="<?php echo base_url(); ?>tour/location">List Location</a>
+                            </li>
                         </ul>
-                    </li>
-                    <li <?php if($this->uri->segment(2) == 'customer'){echo 'class="active"';}?>>
-                        <a href="<?php echo base_url(); ?>customer/list">List customer</a>
                     </li>
                     <li <?php if($this->uri->segment(2) == 'signup'){echo 'class="active"';}?>>
                         <a href="<?php echo base_url(); ?>admin/signup">Sign up</a>

@@ -84,7 +84,16 @@ class Manufacturers_model extends CI_Model {
 		    $this->db->order_by('id', 'Asc');
 		}
 		$query = $this->db->get();
-		return $query->num_rows();        
+		return $query->num_rows();
+    }
+
+    function count_member($role_id)
+    {
+		$this->db->select('*');
+		$this->db->from('membership');
+		$this->db->where('role', $role_id);
+		$query = $this->db->get();
+		return $query->num_rows();
     }
 
     /**
@@ -126,6 +135,26 @@ class Manufacturers_model extends CI_Model {
 		$this->db->where('id', $id);
 		$this->db->delete('manufacturers'); 
 	}
- 
+
+	//test sql
+/*
+ * SELECT manu.id, manu.name, COUNT(manu.`name`) AS count_data
+FROM manufacturers as manu
+INNER JOIN membership AS mem
+ON manu.id = mem.role
+WHERE manu.id != '1704'
+GROUP BY manu.name
+
+SELECT tl.id, tl.country, count(tl.country) AS count_data
+FROM tour_location_link as tlk
+Inner JOIN tour_info AS ti
+ON tlk.tour_info_id = ti.tour_id
+Inner JOIN tour_location AS tl
+ON tlk.tour_location_id = tl.id
+GROUP BY tl.country
+
+*/
+
+
 }
 ?>	

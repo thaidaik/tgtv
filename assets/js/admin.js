@@ -8,14 +8,14 @@ var Admin = {
       });
     });
   }
-   
+
 };
 
 $(function(){
 
   $('.toggle-login-recovery').click(function(e){
-  Admin.toggleLoginRecovery();
-  e.preventDefault();
+    Admin.toggleLoginRecovery();
+    e.preventDefault();
   });
 
   var defaults = {
@@ -49,4 +49,59 @@ $(function(){
   $('.timepicker').datetimepicker(optionsTime);
   $('.datetimepicker').datetimepicker(optionsDatetime);
 
+
+  //ajax view tour
+  $(".view-tour").click(function(){
+    var id = this.getAttribute('data-id');
+    var title = this.getAttribute('data-title');
+    $.ajax({
+      url: base_url+'/ajax-viewTour',
+      type: 'POST',
+      dataType: "html",
+      data: {id: id,},
+      beforeSend:function(d){
+        $('.modal-body').html("<center><strong style='color:red'>Please Wait...<br><img height='25' width='120' src='"+ base_url +"/assets/img/giphy.gif' /></strong></center>");
+      },
+      error: function() {
+        alert('Something is xxx wrong');
+      },
+      success: function(data) {
+        $("#myModalLabel").html(title);
+        $(".modal-body").html(data);
+      }
+    });
+  });
+//tooltip test
+   $('#right').tooltip();
+   $('.tooltip-showname').tooltip();
+
+
+//test ajax
+  $(".testx").click(function(){
+    // var data = this.getAttribute('data-id');
+    // alert(data);
+    var stock = $("input[name='stock']").val();
+    var description = $("textarea[name='description']").val();
+    $.ajax({
+      url: base_url+'/ajax-requestPost',
+      type: 'POST',
+      dataType: "html",
+      data: {stock: stock, description: description},
+      beforeSend:function(d){
+        $('#div_result').html("<center><strong style='color:red'>Please Wait...<br><img height='25' width='120' src='"+ base_url +"/assets/img/giphy.gif' /></strong></center>");
+        return;
+      },
+      error: function() {
+        alert('Something is wrong');
+      },
+      success: function(data) {
+        $("tbody").append("<tr><td>"+stock+"</td><td>"+description+"</td></tr>");
+        $("#div_result").html(data);
+      },
+
+    });
+  });
+
 });
+
+

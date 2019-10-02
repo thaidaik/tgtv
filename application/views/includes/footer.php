@@ -14,6 +14,10 @@
 	<script src="<?php echo base_url(); ?>assets/js/vi.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/bootstrap-datetimepicker.min.js"></script>
+    <script>var base_url = '<?php echo base_url() ?>';</script>
     <script src="<?php echo base_url(); ?>assets/js/admin.js"></script>
+
+
+
 </body>
 </html>
