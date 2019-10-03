@@ -35,16 +35,31 @@ class Tour_info_model extends CI_Model {
      * @param int $limit_end
      * @return array
      */
-    public function get_tour_infos($location_link=null, $search_string=null, $order=null, $order_type='Asc', $limit_start, $limit_end)
+    public function get_tour_infos($month_selected=null,  $year_selected=null, $sizes_selected=null, $location_link=null, $search_string=null, $order=null, $order_type='Asc', $limit_start, $limit_end)
     {
-
         $this->db->select('tour_info.*');
         $this->db->from('tour_info');
-        if($location_link != null && $location_link != 0){
-            $this->db->where('location_link', $location_link);
+        if($sizes_selected != false && $sizes_selected != null && $sizes_selected != 'all'){
+            $size_array = explode('-',$sizes_selected);
+            $this->db->where('tour_info.group_size BETWEEN "'.$size_array[0].'" AND "'.$size_array[1].'"');
+        }
+        if($month_selected != false && $month_selected != null && $month_selected != 'all'){
+            $this->db->where('MONTH(tour_info.start_date)',$month_selected);
+        }
+        if($year_selected != false && $year_selected != null && $year_selected != 'all'){
+            $this->db->where('YEAR(tour_info.start_date)',$year_selected);
+        }
+        if($location_link != null && count($location_link) != 0){
+            foreach ($location_link as $key=>$value){
+                if($key == 0){
+                    $this->db->where('tour_location_link.tour_location_id', $value);
+                }else{
+                    $this->db->or_where('tour_location_link.tour_location_id', $value);
+                }
+            }
         }
         if($search_string){
-            $this->db->like('tour_name', $search_string);
+            $this->db->like('tour_info.tour_name', $search_string);
         }
 
         $this->db->join('tour_location_link', 'tour_info.tour_id = tour_location_link.tour_info_id', 'inner');
@@ -54,7 +69,7 @@ class Tour_info_model extends CI_Model {
         if($order){
             $this->db->order_by($order, $order_type);
         }else{
-            $this->db->order_by('tour_id', $order_type);
+            $this->db->order_by('tour_info.tour_id', $order_type);
         }
 
 
@@ -74,20 +89,40 @@ class Tour_info_model extends CI_Model {
      * @param int $order
      * @return int
      */
-    function count_tour_infos($location_link=null, $search_string=null, $order=null)
+    function count_tour_infos($month_selected=null,  $year_selected=null, $sizes_selected=null, $location_link=null, $search_string=null, $order=null)
     {
-        $this->db->select('*');
+        $this->db->select('tour_info.*');
         $this->db->from('tour_info');
-        if($location_link != null && $location_link != 0){
-            $this->db->where('location_link', $location_link);
+        if($sizes_selected != false && $sizes_selected != null && $sizes_selected != 'all'){
+            $size_array = explode('-',$sizes_selected);
+            $this->db->where('tour_info.group_size BETWEEN "'.$size_array[0].'" AND "'.$size_array[1].'"');
+        }
+        if($month_selected != false && $month_selected != null && $month_selected != 'all'){
+            $this->db->where('MONTH(tour_info.start_date)',$month_selected);
+        }
+        if($year_selected != false && $year_selected != null && $year_selected != 'all'){
+            $this->db->where('YEAR(tour_info.start_date)',$year_selected);
+        }
+        if($location_link != null && count($location_link) != 0){
+            foreach ($location_link as $key=>$value){
+                if($key == 0){
+                    $this->db->where('tour_location_link.tour_location_id', $value);
+                }else{
+                    $this->db->or_where('tour_location_link.tour_location_id', $value);
+                }
+            }
         }
         if($search_string){
-            $this->db->like('description', $search_string);
+            $this->db->like('tour_info.tour_name', $search_string);
         }
+        $this->db->join('tour_location_link', 'tour_info.tour_id = tour_location_link.tour_info_id', 'inner');
+
+        $this->db->group_by('tour_info.tour_id');
+
         if($order){
             $this->db->order_by($order, 'Asc');
         }else{
-            $this->db->order_by('tour_id', 'Asc');
+            $this->db->order_by('tour_info.tour_id', 'Asc');
         }
         $query = $this->db->get();
         return $query->num_rows();

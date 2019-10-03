@@ -24,11 +24,10 @@
                 );
                 $options_sizes = array(
                     'all' => 'all',
-                    'group_1x' => '10-19',
-                    'group_2x' => '20-29',
-                    'group_3x' => '30-39',
-                    'group_4x' => '40-49',
-                    'group_5x' => '50-59',
+                    '0-19' => '0-19',
+                    '20-29' => '20-29',
+                    '30-39' => '30-39',
+                    '40-49' => '40-49',
                 );
                 $options_order_type = array('Asc' => 'Asc', 'Desc' => 'Desc');
                 $options_duration = array('5','6','7','8','9','10','11','12','13',);
@@ -39,9 +38,9 @@
                 echo '<div class="row">';
                     echo '<div class="col-md-3">';
                         echo form_label('Tour:', 'location_link');
-                        echo form_multiselect('location_link', $field_tour_location, $location_link_selected, 'class="form-control" id="location_link"');
+                        echo form_multiselect('location_link[]', $field_tour_location, $location_link_selected, 'class="form-control" id="location_link"');
                     echo '</div>';
-                    echo '<div class="col-md-8">';
+                    echo '<div class="col-md-7">';
                         echo '<div class="row bottom-block" >';
                             echo form_label('Search:', 'search_string');
                             echo form_input('search_string', $search_string_selected, 'class="form-control" id="search_field"');
@@ -61,9 +60,14 @@
                             echo form_dropdown('order_type', $options_order_type, $order_type_selected, 'class="form-control"');
                         echo '</div>';
                     echo '</div>';
-                    echo '<div class="col-md-1">';
-                $data_submit = array('name' => 'mysubmit', 'class' => 'btn btn-primary', 'value' => 'Go');
+                    echo '<div class="col-md-2">';
+                        $data_submit = array('name' => 'mysubmit', 'class' => 'btn btn-primary', 'value' => 'Go');
+                        echo '<div class="row bottom-block" >';
                         echo form_submit($data_submit);
+                echo '</div>';
+                echo '<div class="row bottom-block" >';
+                        echo '<a class="btn btn-danger" href="'.base_url().'tour/info">Reset</a>';
+                echo '</div>';
                     echo '</div>';
                 echo '</div>';
                 echo form_close();

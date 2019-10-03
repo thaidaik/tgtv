@@ -26,9 +26,9 @@ class Tour_info extends CI_Controller {
         //all the posts sent by the view
         $location_link = $this->input->post('location_link');
         $search_string = $this->input->post('search_string');
-        $sizes_selected = $this->input->post('sizes_selected');
-        $month_selected = $this->input->post('month_selected');
-        $year_selected = $this->input->post('year_selected');
+        $sizes_selected = $this->input->post('group_size');
+        $month_selected = $this->input->post('start_month');
+        $year_selected = $this->input->post('start_year');
         $order = $this->input->post('order');
         $order_type = $this->input->post('order_type');
 
@@ -85,7 +85,8 @@ class Tour_info extends CI_Controller {
         }
 
         //filtered && || paginated
-        if($location_link !== false && $search_string !== false && $order !== false || $this->uri->segment(3) == true){
+
+        if($search_string !== false && $order !== false || $this->uri->segment(3) == true){
 
             if($location_link !== 0){
                 $filter_session_data['location_link_selected'] = $location_link;
@@ -135,21 +136,21 @@ class Tour_info extends CI_Controller {
             //fetch manufacturers data into arrays
             $data['field_tour_location'] = $field_tour_location;
 
-            $data['count_tour_infos']= $this->tour_info_model->count_tour_infos($location_link, $search_string, $order);
+            $data['count_tour_infos']= $this->tour_info_model->count_tour_infos($month_selected, $year_selected, $sizes_selected, $location_link, $search_string, $order);
             $config['total_rows'] = $data['count_tour_infos'];
 
             //fetch sql data into arrays
             if($search_string){
                 if($order){
-                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($location_link, $search_string, $order, $order_type, $config['per_page'],$limit_end);
+                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link, $search_string, $order, $order_type, $config['per_page'],$limit_end);
                 }else{
-                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($location_link, $search_string, '', $order_type, $config['per_page'],$limit_end);
+                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link, $search_string, '', $order_type, $config['per_page'],$limit_end);
                 }
             }else{
                 if($order){
-                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($location_link, '', $order, $order_type, $config['per_page'],$limit_end);
+                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link, '', $order, $order_type, $config['per_page'],$limit_end);
                 }else{
-                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($location_link, '', '', $order_type, $config['per_page'],$limit_end);
+                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link, '', '', $order_type, $config['per_page'],$limit_end);
                 }
             }
 
@@ -174,7 +175,7 @@ class Tour_info extends CI_Controller {
             //fetch sql data into arrays
             $data['field_tour_location'] = $field_tour_location;
             $data['count_tour_infos']= $this->tour_info_model->count_tour_infos();
-            $data['tour_infos'] = $this->tour_info_model->get_tour_infos('', '', '', $order_type, $config['per_page'],$limit_end);
+            $data['tour_infos'] = $this->tour_info_model->get_tour_infos('', '', '','', '', '', $order_type, $config['per_page'],$limit_end);
             $config['total_rows'] = $data['count_tour_infos'];
 
         }//!isset($location_link) && !isset($search_string) && !isset($order)
