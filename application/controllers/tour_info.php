@@ -365,6 +365,11 @@ class Tour_info extends CI_Controller {
     }
 
     //test xls create xlsx
+
+//Horizontal alignment styles Can you use : HORIZONTAL_LEFT = 'left', HORIZONTAL_RIGHT = 'right', HORIZONTAL_CENTER  = 'center', HORIZONTAL_CENTER_CONTINUOUS = 'centerContinuous' and HORIZONTAL_JUSTIFY  = 'justify'.
+//
+//Vertical alignment styles Can you use : VERTICAL_BOTTOM = 'bottom', VERTICAL_TOP = 'top', VERTICAL_CENTER = 'center', VERTICAL_JUSTIFY = 'justify' and HORIZONTAL_GENERAL = 'general'.
+
     public function createXLS() {
         $this->load->helper('true_function');
         // create file name
@@ -395,6 +400,9 @@ class Tour_info extends CI_Controller {
             $sheet->getRowDimension($rowCount)->setRowHeight(-1);
             //$sheet->getStyle("A".$rowCount.":F".$rowCount)->getAlignment()->setWrapText(true);
             $sheet->getStyle('B'. $rowCount)->getAlignment()->setWrapText(true);
+            $sheet->getStyle('C'. $rowCount .':F'.$rowCount)->getAlignment()->applyFromArray(
+                array('vertical' => PHPExcel_Style_Alignment::VERTICAL_TOP)
+            );
 
             $sheet->SetCellValue('A' . $rowCount, $listID);
             $sheet->SetCellValue('B' . $rowCount, $element['tour_name']);
@@ -408,7 +416,7 @@ class Tour_info extends CI_Controller {
         $sheet->getColumnDimension('B')->setWidth(70);
         $sheet->getColumnDimension('C')->setWidth(15);
         $sheet->getColumnDimension('D')->setWidth(15);
-        $sheet->getColumnDimension('E')->setWidth(5);
+        $sheet->getColumnDimension('E')->setWidth(10);
         $sheet->getColumnDimension('F')->setWidth(15);
 
         $sheet->getStyle("A2:F2")->getFont()->setBold(true);

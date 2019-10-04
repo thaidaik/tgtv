@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91703b58-40d6-4d6c-b436-65e47fd4571d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/application/libraries/Excel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/config/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/config/routes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/tour_info.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/tour_info.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/tour_info_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/tour_info_model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/tour/info/list.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/tour/info/list.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/controllers/tour_info.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="411" column="52" selection-start-line="411" selection-start-column="52" selection-end-line="411" selection-end-column="52" />
+            <state relative-caret-position="287">
+              <caret line="397" column="43" selection-start-line="397" selection-start-column="43" selection-end-line="397" selection-end-column="43" />
               <folding>
                 <element signature="n#update#0;n#Tour_info#0;n#!!top" />
                 <element signature="n#delete#0;n#Tour_info#0;n#!!top" />
@@ -245,6 +241,12 @@
               <item name="tgtv" type="462c0819:PsiDirectoryNode" />
               <item name="uploads" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="tgtv" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tgtv" type="462c0819:PsiDirectoryNode" />
+              <item name="uploads" type="462c0819:PsiDirectoryNode" />
+              <item name="doc" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -324,7 +326,7 @@
       <workItem from="1569999890689" duration="9364000" />
       <workItem from="1570091191626" duration="7665000" />
       <workItem from="1570161129734" duration="1727000" />
-      <workItem from="1570173181594" duration="6131000" />
+      <workItem from="1570173181594" duration="6779000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1569580313505</created>
@@ -354,11 +356,18 @@
       <option name="project" value="LOCAL" />
       <updated>1570098770951</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update">
+      <created>1570184424092</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1570184424092</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="169494000" />
+    <option name="totallyTimeSpent" value="170142000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -788,8 +797,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/tour_info.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="411" column="52" selection-start-line="411" selection-start-column="52" selection-end-line="411" selection-end-column="52" />
+        <state relative-caret-position="287">
+          <caret line="397" column="43" selection-start-line="397" selection-start-column="43" selection-end-line="397" selection-end-column="43" />
           <folding>
             <element signature="n#update#0;n#Tour_info#0;n#!!top" />
             <element signature="n#delete#0;n#Tour_info#0;n#!!top" />
