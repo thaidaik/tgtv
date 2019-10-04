@@ -175,7 +175,7 @@ class Tour_info extends CI_Controller {
             //fetch sql data into arrays
             $data['field_tour_location'] = $field_tour_location;
             $data['count_tour_infos']= $this->tour_info_model->count_tour_infos();
-            $data['tour_infos'] = $this->tour_info_model->get_tour_infos('', '', '','', '', '', $order_type, $config['per_page'],$limit_end);
+            $data['tour_infos'] = $this->tour_info_model->get_tour_infos('', '', '', '', '', '', $order_type, $config['per_page'],$limit_end);
             $config['total_rows'] = $data['count_tour_infos'];
 
         }//!isset($location_link) && !isset($search_string) && !isset($order)
@@ -362,6 +362,64 @@ class Tour_info extends CI_Controller {
         echo '<div class="col-md-12"><strong>Tour description: </strong><br/><br/>'.htmlspecialchars_decode($tour_data['tour_description']).'</div>';
         echo '</div>';
         echo $showdata;
+    }
+
+    //test xls create xlsx
+    public function createXLS() {
+        $this->load->helper('true_function');
+        // create file name
+        $fileName = 'data-'.time().'.xlsx';
+        // load excel library
+        $this->load->library('excel');
+        $empInfo = $this->tour_info_model->get_tour_infos('', '', '','', '', '', '', '20','');
+
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        $sheet = $objPHPExcel->getActiveSheet();
+        // set Header
+        $sheet->SetCellValue('A1', 'TGTV');
+        $sheet->mergeCells('A1:AA1');
+        $sheet->SetCellValue('A2', 'id');
+        $sheet->SetCellValue('B2', 'tour_name');
+        $sheet->SetCellValue('C2', 'tour_price');
+        $sheet->SetCellValue('D2', 'start_date');
+        $sheet->SetCellValue('E2', 'group_size');
+        $sheet->SetCellValue('F2', 'tour_code');
+        // set Row
+        $rowCount = 3;
+
+        foreach ($empInfo as $element) {
+            $listID = $rowCount -2;
+
+            $sheet->getRowDimension($rowCount)->setRowHeight(-1);
+            //$sheet->getStyle("A".$rowCount.":F".$rowCount)->getAlignment()->setWrapText(true);
+            $sheet->getStyle('B'. $rowCount)->getAlignment()->setWrapText(true);
+
+            $sheet->SetCellValue('A' . $rowCount, $listID);
+            $sheet->SetCellValue('B' . $rowCount, $element['tour_name']);
+            $sheet->SetCellValue('C' . $rowCount, $element['tour_price']);
+            $sheet->SetCellValue('D' . $rowCount, convertDateDMY($element['start_date']));
+            $sheet->SetCellValue('E' . $rowCount, $element['group_size']);
+            $sheet->SetCellValue('F' . $rowCount, $element['tour_code']);
+            $rowCount++;
+        }
+//        $sheet->getRowDimension('1')->setRowHeight(20);
+        $sheet->getColumnDimension('B')->setWidth(70);
+        $sheet->getColumnDimension('C')->setWidth(15);
+        $sheet->getColumnDimension('D')->setWidth(15);
+        $sheet->getColumnDimension('E')->setWidth(5);
+        $sheet->getColumnDimension('F')->setWidth(15);
+
+        $sheet->getStyle("A2:F2")->getFont()->setBold(true);
+
+
+
+        $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+        $objWriter->save('uploads/doc/'.$fileName);
+        // download file
+        header("Content-Type: application/vnd.ms-excel");
+        redirect('uploads/doc/'.$fileName);
     }
 
     //test ajax

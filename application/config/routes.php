@@ -83,9 +83,11 @@ $route['tour/location/(:any)'] = 'tour_location/index/$1'; //$1 = page number
 
 $route['ajax-viewTour'] = 'tour_info/ajaxViewTour';
 
-$route['ajax-request'] = 'tour_info/ajaxRequest';
-$route['ajax-requestPost'] = 'tour_info/ajaxRequestPost';
 
+
+
+//test
+$route['xls'] = 'tour_info/createXLS';
 $route['ajax-request-test'] = 'ItemController/ajaxRequest';
 $route['ajax-requestPost-test'] = 'ItemController/ajaxRequestPost';
 /* End of file routes.php */

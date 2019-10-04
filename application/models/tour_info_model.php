@@ -35,7 +35,7 @@ class Tour_info_model extends CI_Model {
      * @param int $limit_end
      * @return array
      */
-    public function get_tour_infos($month_selected=null,  $year_selected=null, $sizes_selected=null, $location_link=null, $search_string=null, $order=null, $order_type='Asc', $limit_start, $limit_end)
+    public function get_tour_infos($month_selected=null,  $year_selected=null, $sizes_selected=null, $location_link=null, $search_string=null, $order=null, $order_type='Asc', $limit_start=null, $limit_end)
     {
         $this->db->select('tour_info.*');
         $this->db->from('tour_info');
@@ -72,11 +72,9 @@ class Tour_info_model extends CI_Model {
             $this->db->order_by('tour_info.tour_id', $order_type);
         }
 
-
-        $this->db->limit($limit_start, $limit_end);
-        //$this->db->limit('4', '4');
-
-
+        if($limit_start){
+            $this->db->limit($limit_start, $limit_end);
+        }
         $query = $this->db->get();
 
         return $query->result_array();

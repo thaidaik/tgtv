@@ -75,7 +75,7 @@
 
             </div>
 
-            <table class="table table-striped table-bordered table-condensed">
+            <table class="table table-striped table-hover">
                 <thead>
                 <tr>
                     <th class="">Code</th>
@@ -92,9 +92,9 @@
                 $this->load->helper('true_function');
                 foreach($tour_infos as $row)
                 {
-                    echo '<tr>';
+                    echo '<tr class="'.$row['tour_color'].'">';
                     echo '<td><a href="#" class="view-tour" data-id="'.$row['tour_id'].'" data-title="'.$row['tour_name'].'" data-toggle="modal" data-target="#myModal">'.$row['tour_code'].'</a></td>';
-                    echo '<td><span class="tooltip-showname" data-toggle="tooltip" data-placement="right" id="tooltip-top" data-original-title="'.$row['tour_name'].'">'.truncateWords($row['tour_name'], 12).'</span></td>';
+                    echo '<td><span class="tooltip-showname" data-toggle="tooltip" data-placement="right" id="tooltip-top" data-original-title="'.$row['tour_name'].'">'.truncateWords($row['tour_name'], 15).'</span></td>';
                     echo '<td>'.convertMilion($row['tour_price']).'</td>';
                     echo '<td>'.$row['tour_duration'].' d</td>';
                     echo '<td>'.$row['group_size'].' p</td>';
