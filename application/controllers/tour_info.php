@@ -398,7 +398,6 @@ class Tour_info extends CI_Controller {
             $listID = $rowCount -2;
 
             $sheet->getRowDimension($rowCount)->setRowHeight(-1);
-            //$sheet->getStyle("A".$rowCount.":F".$rowCount)->getAlignment()->setWrapText(true);
             $sheet->getStyle('B'. $rowCount)->getAlignment()->setWrapText(true);
             $sheet->getStyle('C'. $rowCount .':F'.$rowCount)->getAlignment()->applyFromArray(
                 array('vertical' => PHPExcel_Style_Alignment::VERTICAL_TOP)
@@ -420,6 +419,12 @@ class Tour_info extends CI_Controller {
         $sheet->getColumnDimension('F')->setWidth(15);
 
         $sheet->getStyle("A2:F2")->getFont()->setBold(true);
+        $sheet->getStyle("A2:F2")->getFill()->applyFromArray(array(
+            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+            'startcolor' => array(
+                'rgb' => 'F48024'
+            )
+        ));
 
 
 
