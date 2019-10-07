@@ -384,9 +384,45 @@ $config['tour_continent'] = array(
     'africa'=>'Africa',
     'australia'=>'Australia',
 );
+
+//guest
+$config['guest_s_type'] = array(
+    '0'=>'Khách tham khảo tour',
+    '1'=>'Khách sử dụng tour',
+);
+$config['guest_s_visa'] = array(
+	'0'=>'Khách chờ visa',
+	'1'=>'Khách đã có visa',
+);
+$config['guest_s_pay'] = array(
+	'0'=>'Thanh toán hết',
+	'1'=>'Thanh toán trên 50%',
+	'2'=>'Thanh toán dưới 50%',
+	'3'=>'Nợ',
+);
+$config['guest_s_group'] = array(
+	'0'=>'Cá nhân',
+	'1'=>'Gia đình',
+	'2'=>'Nhóm bạn',
+);
+$config['guest_power'] = array(
+	'0'=>'Mạnh',
+	'1'=>'Khá',
+	'2'=>'Trung bình',
+	'3'=>'Yếu',
+	'4'=>'Chưa rõ',
+);
+$config['guest_com_location'] = array(
+	'0'=>'CEO',
+	'1'=>'Trưởng phòng',
+	'2'=>'Kinh doanh',
+	'3'=>'Về hưu',
+	'4'=>'Nội trợ',
+);
+
+//textas
 $config['text_add_well_done_1'] = "<strong>Well done!</strong> ";
 $config['text_add_well_done_2'] = " created with success.";
 $config['text_add_alert'] = '<strong>Oh snap!</strong> change a few things up and try submitting again.';
-
 $config['text_save_changes'] = 'Save changes';
 $config['text_cancel'] = 'Cancel';

@@ -446,17 +446,5 @@ class Tour_info extends CI_Controller {
         redirect('uploads/doc/'.$fileName);
     }
 
-    //test ajax
-    public function ajaxRequestPost()
-    {
-        $this->load->database();
-        $data = array(
-            'stock' => $this->input->post('stock'),
-            'description' => $this->input->post('description')
-        );
-        $this->db->insert('products', $data);
-
-        echo 'Added successfully.';
-    }
 
 }

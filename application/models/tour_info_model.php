@@ -50,13 +50,18 @@ class Tour_info_model extends CI_Model {
             $this->db->where('YEAR(tour_info.start_date)',$year_selected);
         }
         if($location_link != null && count($location_link) != 0){
+            $str_query = '(';
             foreach ($location_link as $key=>$value){
                 if($key == 0){
-                    $this->db->where('tour_location_link.tour_location_id', $value);
+                    $str_query .= 'tour_location_link.tour_location_id = '.$value;
+                    //$this->db->where('tour_location_link.tour_location_id', $value);
                 }else{
-                    $this->db->or_where('tour_location_link.tour_location_id', $value);
+                    $str_query .= ' OR tour_location_link.tour_location_id = '.$value;
+                    //$this->db->or_where('tour_location_link.tour_location_id', $value);
                 }
             }
+            $str_query .= ')';
+            $this->db->where($str_query, null, false);
         }
         if($search_string){
             $this->db->like('tour_info.tour_name', $search_string);
