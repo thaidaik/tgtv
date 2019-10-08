@@ -1,5 +1,5 @@
 <?php
-class Tour_info extends CI_Controller {
+class Guest_info extends CI_Controller {
 
     /**
      * Responsable for auto load the model
@@ -8,9 +8,7 @@ class Tour_info extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('tour_info_model');
-        $this->load->model('tour_location_model');
-
+        $this->load->model('guest_info_model');
         if(!$this->session->userdata('is_logged_in')){
             redirect('admin/login');
         }
@@ -195,15 +193,16 @@ class Tour_info extends CI_Controller {
     public function add()
     {
         $this->load->helper('upload_helper');
+        $this->load->helper('true_function');
         //if save button was clicked, get the data sent via post
         if ($this->input->server('REQUEST_METHOD') === 'POST')
         {
             //form validation
-            $this->form_validation->set_rules('tour_code', 'tour_code', 'required');
-            $this->form_validation->set_rules('tour_name', 'tour_name', 'required');
-            $this->form_validation->set_rules('tour_price', 'tour_price', 'required|numeric');
-            $this->form_validation->set_rules('tour_duration', 'tour_duration', 'required|numeric');
-            $this->form_validation->set_rules('location_link', 'location_link', 'required');
+            $this->form_validation->set_rules('guest_phone', 'guest_phone', 'required');
+            $this->form_validation->set_rules('guest_name', 'guest_name', 'required');
+            $this->form_validation->set_rules('guest_cmnd', 'guest_cmnd', 'required|numeric');
+            $this->form_validation->set_rules('guest_passport', 'guest_passport', 'required|numeric');
+            $this->form_validation->set_rules('guest_address', 'guest_address', 'required');
             $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
 
             //if the form has passed through the validation
@@ -211,41 +210,41 @@ class Tour_info extends CI_Controller {
             {
                 $dataImage = uploadImage('tour_image');
                 $dataImageName = $dataImage['uploadInfo'];
-                $startdate = date("Y-m-d", strtotime($this->input->post('start_date')));
-                $location_link = $this->input->post('location_link');
+                $birthday = date("Y-m-d", strtotime($this->input->post('guest_birthday')));
+                $guest_code = initials($this->input->post('guest_name')).'_'.randomPassword();
                 $data_to_store = array(
-                    'tour_code' => $this->input->post('tour_code'),
-                    'tour_name' => $this->input->post('tour_name'),
-                    'tour_price' => $this->input->post('tour_price'),
-                    'tour_price_min' => $this->input->post('tour_price_min'),
-                    'tour_duration' => $this->input->post('tour_duration'),
-                    'start_date' => $startdate,
-                    'tour_gift' => $this->input->post('tour_gift'),
-                    'group_size' => $this->input->post('group_size'),
-                    'tour_description' => $this->input->post('tour_description'),
-                    'tour_image' => $dataImageName['file_name'],
-                    'tour_image_thumb' => $dataImage['thumbnail_name'],
-                    'tour_guide_info' => $this->input->post('tour_guide_info'),
-                    'tour_color' => $this->input->post('tour_color'),
-                    'create_date' => date('Y-m-d H:i:s'),
-                    'modify_date' => date('Y-m-d H:i:s'),
-                    'modify_by' => $this->session->userdata('user_id'),
+                    'guest_code' => $guest_code,
+                    'guest_s_type' => $this->input->post('guest_s_type'),
+                    'guest_s_visa' => $this->input->post('guest_s_visa'),
+                    'guest_s_pay' => $this->input->post('guest_s_pay'),
+                    'guest_s_pay_data' => $this->input->post('guest_s_pay_data'),
+                    'guest_s_group' => $this->input->post('guest_s_group'),
+                    'guest_name' => $this->input->post('guest_name'),
+                    'guest_sex' => $this->input->post('guest_sex'),
+                    'guest_address' => $this->input->post('guest_address'),
+                    'guest_phone' => $this->input->post('guest_phone'),
+                    'guest_email' => $this->input->post('guest_email'),
+                    'guest_birthday' => $birthday,
+                    'guest_cmnd' => $this->input->post('guest_cmnd'),
+                    'guest_passport' => $this->input->post('guest_passport'),
+                    'guest_country' => $this->input->post('guest_country'),
+                    'guest_power' => $this->input->post('guest_power'),
+                    'guest_com_location' => $this->input->post('guest_com_location'),
+                    'guest_images' => $dataImageName['file_name'],
+                    'guest_thumb' => $dataImage['thumbnail_name'],
+                    'guest_create_date' => date('Y-m-d H:i:s'),
+                    'guest_modify_date' => date('Y-m-d H:i:s'),
+                    'guest_modify_by' => $this->session->userdata('user_id'),
                 );
                 //if the insert has returned true then we show the flash message
-                if($this->tour_info_model->add_tour_info($data_to_store, $location_link)){
+                if($this->guest_info_model->add_guest_info($data_to_store)){
                     $data['flash_message'] = TRUE;
                 }else{
                     $data['flash_message'] = FALSE;
                 }
             }
         }
-        $data_field_tour_location = $this->tour_location_model->get_data_field_tour_location();
-        foreach ($data_field_tour_location as $value){
-            $field_tour_location[$value['id']] = $value['country'];
-        }
-        $data['field_tour_location'] = $field_tour_location;
-
-        $data['main_content'] = 'tour/info/add';
+        $data['main_content'] = 'guest/info/add';
         $this->load->view('includes/template', $data);
     }
 

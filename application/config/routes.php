@@ -73,21 +73,26 @@ $route['tour/info/update'] = 'tour_info/update';
 $route['tour/info/update/(:any)'] = 'tour_info/update/$1';
 $route['tour/info/delete/(:any)'] = 'tour_info/delete/$1';
 $route['tour/info/(:any)'] = 'tour_info/index/$1'; //$1 = page number
+$route['ajax-viewTour'] = 'tour_info/ajaxViewTour';
+$route['tour_xls'] = 'tour_info/createXLS';
 
 $route['tour/location'] = 'tour_location/index';
+$route['tour/location/(:any)'] = 'tour_location/index/$1'; //$1 = page number
 $route['tour/location/add'] = 'tour_location/add';
 $route['tour/location/update'] = 'tour_location/update';
 $route['tour/location/update/(:any)'] = 'tour_location/update/$1';
 $route['tour/location/delete/(:any)'] = 'tour_location/delete/$1';
-$route['tour/location/(:any)'] = 'tour_location/index/$1'; //$1 = page number
 
-$route['ajax-viewTour'] = 'tour_info/ajaxViewTour';
-
-
-
-
+$route['guest/info'] = 'guest_info/index';
+$route['guest/info/(:any)'] = 'guest_info/index/$1'; //$1 = page number
+$route['guest/info/add'] = 'guest_info/add';
+$route['guest/info/update'] = 'guest_info/update';
+$route['guest/info/update/(:any)'] = 'guest_info/update/$1';
+$route['guest/info/delete/(:any)'] = 'guest_info/delete/$1';
+$route['ajax-viewGuest'] = 'guest_info/ajaxViewTour';
+$route['guest_xls'] = 'guest_info/createXLS';
 //test
-$route['xls'] = 'tour_info/createXLS';
+
 $route['ajax-request-test'] = 'ItemController/ajaxRequest';
 $route['ajax-requestPost-test'] = 'ItemController/ajaxRequestPost';
 /* End of file routes.php */

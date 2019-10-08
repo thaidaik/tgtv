@@ -395,10 +395,10 @@ $config['guest_s_visa'] = array(
 	'1'=>'Khách đã có visa',
 );
 $config['guest_s_pay'] = array(
-	'0'=>'Thanh toán hết',
-	'1'=>'Thanh toán trên 50%',
-	'2'=>'Thanh toán dưới 50%',
-	'3'=>'Nợ',
+	'0'=>'Thanh toán hết', //success
+	'1'=>'Thanh toán trên 50%', //info
+	'2'=>'Thanh toán dưới 50%', //danger
+	'3'=>'Nợ', //warning
 );
 $config['guest_s_group'] = array(
 	'0'=>'Cá nhân',
