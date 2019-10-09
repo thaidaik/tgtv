@@ -29,7 +29,7 @@
             echo $this->config->item('text_add_well_done_1').'New location'.$this->config->item('text_add_well_done_2');
             echo '</div>';
         }else{
-            echo '<div class="alert alert-error">';
+            echo '<div class="alert alert-danger">';
             echo '<a class="close" data-dismiss="alert">×</a>';
             echo $this->config->item('text_add_alert');
             echo '</div>';

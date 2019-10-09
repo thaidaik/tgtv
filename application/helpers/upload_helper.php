@@ -8,12 +8,12 @@ if ( ! function_exists('uploadImage'))
         $config['upload_path']   =   "uploads/";
         $config['allowed_types'] =   "gif|jpg|jpeg|png";
         $config['max_size']      =   "5000";
-        $config['max_width']     =   "1907";
-        $config['max_height']    =   "1280";
+        $config['max_width']     =   "2200";
+        $config['max_height']    =   "2200";
         $CI->load->library('upload',$config);
         if(!$CI->upload->do_upload($image_name))
         {
-            echo $CI->upload->display_errors();
+            return $CI->upload->display_errors();
         }
         else
         {

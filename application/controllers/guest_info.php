@@ -209,7 +209,16 @@ class Guest_info extends CI_Controller {
             if ($this->form_validation->run())
             {
                 $dataImage = uploadImage('tour_image');
-                $dataImageName = $dataImage['uploadInfo'];
+                $error_upload = '';
+                if(isset($dataImage['uploadInfo']) && $dataImage['uploadInfo'] != null){
+                    $dataImageName = $dataImage['uploadInfo'];
+                    $guest_images = $dataImageName['file_name'];
+                    $guest_thumb = $dataImage['thumbnail_name'];
+                }else{
+                    $guest_images = 'tgtv.jpg';
+                    $guest_thumb = 'tgtv_thumb.jpg';
+                    $error_upload = $dataImage;
+                }
                 $birthday = date("Y-m-d", strtotime($this->input->post('guest_birthday')));
                 $guest_code = initials($this->input->post('guest_name')).'_'.randomPassword();
                 $data_to_store = array(
@@ -230,8 +239,8 @@ class Guest_info extends CI_Controller {
                     'guest_country' => $this->input->post('guest_country'),
                     'guest_power' => $this->input->post('guest_power'),
                     'guest_com_location' => $this->input->post('guest_com_location'),
-                    'guest_images' => $dataImageName['file_name'],
-                    'guest_thumb' => $dataImage['thumbnail_name'],
+                    'guest_images' => $guest_images,
+                    'guest_thumb' => $guest_thumb,
                     'guest_create_date' => date('Y-m-d H:i:s'),
                     'guest_modify_date' => date('Y-m-d H:i:s'),
                     'guest_modify_by' => $this->session->userdata('user_id'),
@@ -242,6 +251,7 @@ class Guest_info extends CI_Controller {
                 }else{
                     $data['flash_message'] = FALSE;
                 }
+                $data['error_upload'] = $error_upload;
             }
         }
         $data['main_content'] = 'guest/info/add';

@@ -31,9 +31,18 @@
             echo $this->config->item('text_add_well_done_1').'New Guest'.$this->config->item('text_add_well_done_2');
             echo '</div>';
         }else{
-            echo '<div class="alert alert-error">';
+            echo '<div class="alert alert-danger">';
             echo '<a class="close" data-dismiss="alert">×</a>';
             echo $this->config->item('text_add_alert');
+            echo '</div>';
+        }
+    }
+    if(isset($error_upload)){
+        if($error_upload != '')
+        {
+            echo '<div class="alert alert-danger">';
+            echo '<a class="close" data-dismiss="alert">×</a>';
+            echo $error_upload;
             echo '</div>';
         }
     }

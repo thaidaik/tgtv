@@ -51,9 +51,19 @@
                             </li>
                         </ul>
                     </li>
-                    <li <?php if($this->uri->segment(2) == 'signup'){echo 'class="active"';}?>>
-                        <a href="<?php echo base_url(); ?>admin/signup">Sign up</a>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >Guest Manager<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li <?php if($this->uri->segment(2) == 'guest' && $this->uri->segment(3) == 'list'){echo 'class="active"';}?>>
+                                <a href="<?php echo base_url(); ?>guest/info">List Tour</a>
+                            </li>
+                            <li <?php if($this->uri->segment(2) == 'guest' && $this->uri->segment(2) == 'info'){echo 'class="active"';}?>>
+                                <a href="<?php echo base_url(); ?>guest/info/add">Add New Tour</a>
+                            </li>
+                        </ul>
                     </li>
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >Profile <span class="caret"></span></a>
                         <ul class="dropdown-menu">

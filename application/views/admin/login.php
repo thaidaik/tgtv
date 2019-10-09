@@ -14,7 +14,7 @@
       echo form_input('user_name', '', 'placeholder="Username" class="form-control"');
       echo form_password('password', '', 'placeholder="Password" class="form-control"');
       if(isset($message_error) && $message_error){
-          echo '<div class="alert alert-error">';
+          echo '<div class="alert alert-danger">';
             echo '<a class="close" data-dismiss="alert">×</a>';
             echo '<strong>Oh snap!</strong> Change a few things up and try submitting again.';
           echo '</div>';             

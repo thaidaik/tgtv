@@ -33,7 +33,7 @@
             echo '<strong>Well done!</strong> Role updated with success.';
             echo '</div>';
         }else{
-            echo '<div class="alert alert-error">';
+            echo '<div class="alert alert-danger">';
             echo '<a class="close" data-dismiss="alert">×</a>';
             echo '<strong>Oh snap!</strong> change a few things up and try submitting again.';
             echo '</div>';
