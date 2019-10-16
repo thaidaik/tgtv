@@ -22,11 +22,11 @@ class Guest_info_model extends CI_Model {
      * @param int $product_id
      * @return array
      */
-    public function get_tour_info_by_id($id)
+    public function get_guest_info_by_id($id)
     {
         $this->db->select('*');
-        $this->db->from('tour_info');
-        $this->db->where('tour_id', $id);
+        $this->db->from('guest_info');
+        $this->db->where('guest_id', $id);
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -42,46 +42,21 @@ class Guest_info_model extends CI_Model {
      * @param int $limit_end
      * @return array
      */
-    public function get_tour_infos($month_selected=null,  $year_selected=null, $sizes_selected=null, $location_link=null, $search_string=null, $order=null, $order_type='Asc', $limit_start=null, $limit_end)
+    public function get_guest_infos($search_string=null, $order=null, $order_type='Asc', $limit_start=null, $limit_end)
     {
-        $this->db->select('tour_info.*');
-        $this->db->from('tour_info');
-        if($sizes_selected != false && $sizes_selected != null && $sizes_selected != 'all'){
-            $size_array = explode('-',$sizes_selected);
-            $this->db->where('tour_info.group_size BETWEEN "'.$size_array[0].'" AND "'.$size_array[1].'"');
-        }
-        if($month_selected != false && $month_selected != null && $month_selected != 'all'){
-            $this->db->where('MONTH(tour_info.start_date)',$month_selected);
-        }
-        if($year_selected != false && $year_selected != null && $year_selected != 'all'){
-            $this->db->where('YEAR(tour_info.start_date)',$year_selected);
-        }
-        if($location_link != null && count($location_link) != 0){
-            $str_query = '(';
-            foreach ($location_link as $key=>$value){
-                if($key == 0){
-                    $str_query .= 'tour_location_link.tour_location_id = '.$value;
-                    //$this->db->where('tour_location_link.tour_location_id', $value);
-                }else{
-                    $str_query .= ' OR tour_location_link.tour_location_id = '.$value;
-                    //$this->db->or_where('tour_location_link.tour_location_id', $value);
-                }
-            }
-            $str_query .= ')';
-            $this->db->where($str_query, null, false);
-        }
+        $this->db->select('*');
+        $this->db->from('guest_info');
+
         if($search_string){
-            $this->db->like('tour_info.tour_name', $search_string);
+            $this->db->like('guest_name', $search_string);
         }
 
-        $this->db->join('tour_location_link', 'tour_info.tour_id = tour_location_link.tour_info_id', 'inner');
-
-        $this->db->group_by('tour_info.tour_id');
+        $this->db->group_by('guest_id');
 
         if($order){
             $this->db->order_by($order, $order_type);
         }else{
-            $this->db->order_by('tour_info.tour_id', $order_type);
+            $this->db->order_by('guest_id', $order_type);
         }
 
         if($limit_start){
@@ -99,40 +74,21 @@ class Guest_info_model extends CI_Model {
      * @param int $order
      * @return int
      */
-    function count_tour_infos($month_selected=null,  $year_selected=null, $sizes_selected=null, $location_link=null, $search_string=null, $order=null)
+    function count_guest_infos($search_string=null, $order=null)
     {
-        $this->db->select('tour_info.*');
-        $this->db->from('tour_info');
-        if($sizes_selected != false && $sizes_selected != null && $sizes_selected != 'all'){
-            $size_array = explode('-',$sizes_selected);
-            $this->db->where('tour_info.group_size BETWEEN "'.$size_array[0].'" AND "'.$size_array[1].'"');
-        }
-        if($month_selected != false && $month_selected != null && $month_selected != 'all'){
-            $this->db->where('MONTH(tour_info.start_date)',$month_selected);
-        }
-        if($year_selected != false && $year_selected != null && $year_selected != 'all'){
-            $this->db->where('YEAR(tour_info.start_date)',$year_selected);
-        }
-        if($location_link != null && count($location_link) != 0){
-            foreach ($location_link as $key=>$value){
-                if($key == 0){
-                    $this->db->where('tour_location_link.tour_location_id', $value);
-                }else{
-                    $this->db->or_where('tour_location_link.tour_location_id', $value);
-                }
-            }
-        }
-        if($search_string){
-            $this->db->like('tour_info.tour_name', $search_string);
-        }
-        $this->db->join('tour_location_link', 'tour_info.tour_id = tour_location_link.tour_info_id', 'inner');
+        $this->db->select('*');
+        $this->db->from('guest_info');
 
-        $this->db->group_by('tour_info.tour_id');
+        if($search_string){
+            $this->db->like('guest_name', $search_string);
+        }
+
+        $this->db->group_by('guest_id');
 
         if($order){
             $this->db->order_by($order, 'Asc');
         }else{
-            $this->db->order_by('tour_info.tour_id', 'Asc');
+            $this->db->order_by('guest_id', 'Asc');
         }
         $query = $this->db->get();
         return $query->num_rows();
@@ -154,21 +110,11 @@ class Guest_info_model extends CI_Model {
      * @param array $data - associative array with data to store
      * @return boolean
      */
-    function update_tour_info($id, $data, $location_link)
+    function update_guest_info($id, $data)
     {
-        $this->db->where('tour_id', $id);
-        $this->db->update('tour_info', $data);
+        $this->db->where('guest_id', $id);
+        $this->db->update('guest_info', $data);
         $report = array();
-        $report['error'] = $this->db->_error_number();
-        $report['message'] = $this->db->_error_message();
-        $this->reset_tour_location_link($id);
-        foreach ($location_link as $value){
-            $data_link= array(
-                'tour_info_id' => $id,
-                'tour_location_id' => $value
-            );
-            $this->db->insert('tour_location_link', $data_link);
-        }
         $report['error'] = $this->db->_error_number();
         $report['message'] = $this->db->_error_message();
         if($report !== 0){
@@ -183,22 +129,49 @@ class Guest_info_model extends CI_Model {
      * @param int $id - product id
      * @return boolean
      */
-    function delete_tour_info($id){
+    function delete_guest_info($id){
         $this->db->where('id', $id);
         $this->db->delete('tour_info');
     }
 
-    function reset_tour_location_link($id){
-        $this->db->where('tour_info_id', $id);
-        $this->db->delete('tour_location_link');
+    function add_sale_and_tour_toguest($data, $id=null)
+    {
+        if($id){
+            $this->db->where('id', $id);
+            $this->db->delete('guest_tour_link');
+        }
+        $insert = $this->db->insert('guest_tour_link', $data);
+        return $insert;
     }
 
-    function get_tour_location_link_by_tour_info_id($id){
-        $this->db->select('*');
-        $this->db->from('tour_location_link');
-        $this->db->where('tour_info_id', $id);
+    function get_sale_and_tour_toguest($guestid)
+    {
+        $this->db->select('guest_tour_link.id as guest_tour_link_id, guest_info.guest_name as guest_name, membership.id as user_id, membership.first_name as user_name, tour_info.tour_id as tour_id, tour_info.tour_name as tour_name, tour_info.start_date as start_date');
+        $this->db->from('guest_tour_link');
+        $this->db->join('membership', 'membership.id = guest_tour_link.user_sale_id', 'inner');
+        $this->db->join('tour_info', 'tour_info.tour_id = guest_tour_link.tour_info_id', 'inner');
+        $this->db->join('guest_info', 'guest_info.guest_id = guest_tour_link.guest_info_id', 'inner');
+
+        $this->db->where('guest_tour_link.guest_info_id', $guestid);
+        $this->db->group_by('guest_tour_link.id');
+
         $query = $this->db->get();
-        return $query->result();
+        return $query->result_array();
+    }
+
+    function get_guest_tour_sale_data($id)
+    {
+        $this->db->select('guest_tour_link.id as guest_tour_link_id, guest_info.guest_name as guest_name, membership.id as user_id, membership.first_name as user_name, tour_info.tour_id as tour_id, tour_info.tour_name as tour_name, tour_info.start_date as start_date');
+        $this->db->from('guest_tour_link');
+        $this->db->join('membership', 'membership.id = guest_tour_link.user_sale_id', 'inner');
+        $this->db->join('tour_info', 'tour_info.tour_id = guest_tour_link.tour_info_id', 'inner');
+        $this->db->join('guest_info', 'guest_info.guest_id = guest_tour_link.guest_info_id', 'inner');
+
+        $this->db->where('guest_tour_link.id', $id);
+        $this->db->group_by('guest_tour_link.id');
+
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
 }

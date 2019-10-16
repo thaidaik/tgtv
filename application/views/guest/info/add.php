@@ -53,7 +53,6 @@
         $user_sex = $this->config->item('user_sex');
         $arr_guest_s_type = $this->config->item('guest_s_type');
         $arr_guest_s_visa = $this->config->item('guest_s_visa');
-        $arr_guest_s_pay = $this->config->item('guest_s_pay');
         $arr_guest_s_group = $this->config->item('guest_s_group');
         $arr_guest_power = $this->config->item('guest_power');
         $arr_guest_com_location = $this->config->item('guest_com_location');
@@ -72,6 +71,9 @@
         echo '<div class="control-group"><label class="control-label required" for="sex">Sex</label>';
         echo form_dropdown('sex', $user_sex, set_value('sex'), 'class="form-control"');
         echo '</div>';
+        echo '<div class="control-group"><label class="control-label required" for="guest_phone">guest_phone</label>';
+        echo form_input('guest_phone', set_value('guest_phone'), 'placeholder="guest_phone" class="form-control"');
+        echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="guest_address">guest_address</label>';
         echo form_input('guest_address', set_value('guest_address'), 'placeholder="guest_address" class="form-control"');
         echo '</div>';
@@ -84,18 +86,9 @@
         echo '<div class="control-group"><label class="control-label required" for="guest_s_pay">guest_s_group</label>';
         echo form_dropdown('guest_s_group', $arr_guest_s_group, set_value('guest_s_group'), 'class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="guest_s_pay">guest_s_pay</label>';
-        echo form_dropdown('guest_s_pay', $arr_guest_s_pay, set_value('guest_s_pay'), 'class="form-control"');
-        echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="guest_s_pay_data">guest_s_pay_data</label>';
-        echo form_input('guest_s_pay_data', set_value('guest_s_pay_data'), 'placeholder="guest_s_pay_data" class="form-control"');
-        echo '</div>';
         echo '</div>';
 
         echo '<div class="col-sm-6">';
-        echo '<div class="control-group"><label class="control-label required" for="guest_phone">guest_phone</label>';
-        echo form_input('guest_phone', set_value('guest_phone'), 'placeholder="guest_phone" class="form-control"');
-        echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="guest_email">guest_email</label>';
         echo form_input('guest_email', set_value('guest_email'), 'placeholder="guest_email" class="form-control"');
         echo '</div>';
@@ -118,9 +111,10 @@
         echo '<div class="control-group"><label class="control-label required" for="guest_com_location">guest_com_location</label>';
         echo form_dropdown('guest_com_location', $arr_guest_com_location, set_value('guest_com_location'), 'class="form-control"');
         echo '</div>';
+        echo '</div>';
 
         echo '</div>';
-        echo '</div>';
+
         echo '<div class="row">';
         echo '<div class="col-sm-6">';
         echo form_submit('submit', 'submit', 'class="btn btn-large btn-primary"');

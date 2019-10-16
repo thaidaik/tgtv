@@ -84,13 +84,16 @@ $route['tour/location/update/(:any)'] = 'tour_location/update/$1';
 $route['tour/location/delete/(:any)'] = 'tour_location/delete/$1';
 
 $route['guest/info'] = 'guest_info/index';
-$route['guest/info/(:any)'] = 'guest_info/index/$1'; //$1 = page number
 $route['guest/info/add'] = 'guest_info/add';
 $route['guest/info/update'] = 'guest_info/update';
 $route['guest/info/update/(:any)'] = 'guest_info/update/$1';
 $route['guest/info/delete/(:any)'] = 'guest_info/delete/$1';
+$route['guest/info/(:any)'] = 'guest_info/index/$1'; //$1 = page number
 $route['ajax-viewGuest'] = 'guest_info/ajaxViewTour';
 $route['guest_xls'] = 'guest_info/createXLS';
+
+$route['guest/link/tour/(:any)'] = 'guest_info/addInfoTour/$1';
+$route['guest/add/payment/(:any)'] = 'guest_info/addPayment/$1';
 //test
 
 $route['ajax-request-test'] = 'ItemController/ajaxRequest';

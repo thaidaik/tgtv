@@ -179,5 +179,17 @@ class Users_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
+
+
+
+    public function get_all_users()
+    {
+        $this->db->select('*');
+        $this->db->from('membership');
+        $this->db->group_by('id');
+        $this->db->order_by('id', 'Asc');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
 

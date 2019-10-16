@@ -124,5 +124,5 @@ form label:first-child{
   width: 253px;
 }
 .bottom-block{
-  margin-bottom: 20px;
+  margin-bottom: 20px !important;
 }

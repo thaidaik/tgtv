@@ -22,11 +22,7 @@ class Guest_info extends CI_Controller {
     {
 
         //all the posts sent by the view
-        $location_link = $this->input->post('location_link');
         $search_string = $this->input->post('search_string');
-        $sizes_selected = $this->input->post('group_size');
-        $month_selected = $this->input->post('start_month');
-        $year_selected = $this->input->post('start_year');
         $order = $this->input->post('order');
         $order_type = $this->input->post('order_type');
 
@@ -77,21 +73,9 @@ class Guest_info extends CI_Controller {
         //make the data type var avaible to our view
         $data['order_type_selected'] = $order_type;
 
-        $data_field_tour_location = $this->tour_location_model->get_data_field_tour_location();
-        foreach ($data_field_tour_location as $value){
-            $field_tour_location[$value['id']] = $value['country'];
-        }
-
         //filtered && || paginated
 
         if($search_string !== false && $order !== false || $this->uri->segment(3) == true){
-
-            if($location_link !== 0){
-                $filter_session_data['location_link_selected'] = $location_link;
-            }else{
-                $location_link = $this->session->userdata('location_link_selected');
-            }
-            $data['location_link_selected'] = $location_link;
 
             if($search_string){
                 $filter_session_data['search_string_selected'] = $search_string;
@@ -99,27 +83,6 @@ class Guest_info extends CI_Controller {
                 $search_string = $this->session->userdata('search_string_selected');
             }
             $data['search_string_selected'] = $search_string;
-
-            if($month_selected){
-                $filter_session_data['month_selected'] = $month_selected;
-            }else{
-                $month_selected = $this->session->userdata('month_selected');
-            }
-            $data['month_selected'] = $month_selected;
-
-            if($year_selected){
-                $filter_session_data['year_selected'] = $year_selected;
-            }else{
-                $year_selected = $this->session->userdata('year_selected');
-            }
-            $data['year_selected'] = $year_selected;
-
-            if($sizes_selected){
-                $filter_session_data['sizes_selected'] = $sizes_selected;
-            }else{
-                $sizes_selected = $this->session->userdata('sizes_selected');
-            }
-            $data['sizes_selected'] = $sizes_selected;
 
             if($order){
                 $filter_session_data['order'] = $order;
@@ -131,34 +94,29 @@ class Guest_info extends CI_Controller {
             //save session data into the session
             $this->session->set_userdata($filter_session_data);
 
-            //fetch manufacturers data into arrays
-            $data['field_tour_location'] = $field_tour_location;
 
-            $data['count_tour_infos']= $this->tour_info_model->count_tour_infos($month_selected, $year_selected, $sizes_selected, $location_link, $search_string, $order);
+            $data['count_tour_infos']= $this->guest_info_model->count_guest_infos($search_string, $order);
             $config['total_rows'] = $data['count_tour_infos'];
 
             //fetch sql data into arrays
             if($search_string){
                 if($order){
-                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link, $search_string, $order, $order_type, $config['per_page'],$limit_end);
+                    $data['tour_infos'] = $this->guest_info_model->get_guest_infos($search_string, $order, $order_type, $config['per_page'],$limit_end);
                 }else{
-                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link, $search_string, '', $order_type, $config['per_page'],$limit_end);
+                    $data['tour_infos'] = $this->guest_info_model->get_guest_infos($search_string, '', $order_type, $config['per_page'],$limit_end);
                 }
             }else{
                 if($order){
-                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link, '', $order, $order_type, $config['per_page'],$limit_end);
+                    $data['tour_infos'] = $this->guest_info_model->get_guest_infos('', $order, $order_type, $config['per_page'],$limit_end);
                 }else{
-                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link, '', '', $order_type, $config['per_page'],$limit_end);
+                    $data['tour_infos'] = $this->guest_info_model->get_guest_infos('', '', $order_type, $config['per_page'],$limit_end);
                 }
             }
 
         }else{
 
             //clean filter data inside section
-            $filter_session_data['location_link_selected'] = null;
-            $filter_session_data['month_selected'] = null;
-            $filter_session_data['year_selected'] = null;
-            $filter_session_data['sizes_selected'] = null;
+
             $filter_session_data['search_string_selected'] = null;
             $filter_session_data['order'] = null;
             $filter_session_data['order_type'] = null;
@@ -166,14 +124,10 @@ class Guest_info extends CI_Controller {
 
             //pre selected options
             $data['search_string_selected'] = '';
-            $data['location_link_selected'] = array();
             $data['order'] = 'id';
-            $data['sizes_selected'] = $data['month_selected'] = $data['year_selected'] = 'all';
 
-            //fetch sql data into arrays
-            $data['field_tour_location'] = $field_tour_location;
-            $data['count_tour_infos']= $this->tour_info_model->count_tour_infos();
-            $data['tour_infos'] = $this->tour_info_model->get_tour_infos('', '', '', '', '', '', $order_type, $config['per_page'],$limit_end);
+            $data['count_tour_infos']= $this->guest_info_model->count_guest_infos();
+            $data['tour_infos'] = $this->guest_info_model->get_guest_infos('', '', $order_type, $config['per_page'],$limit_end);
             $config['total_rows'] = $data['count_tour_infos'];
 
         }//!isset($location_link) && !isset($search_string) && !isset($order)
@@ -184,7 +138,7 @@ class Guest_info extends CI_Controller {
         $this->load->database();
         $data['data'] = $this->db->get("products")->result();
         //load the view
-        $data['main_content'] = 'tour/info/list';
+        $data['main_content'] = 'guest/info/list';
         $this->load->view('includes/template', $data);
 
     }//index
@@ -225,8 +179,6 @@ class Guest_info extends CI_Controller {
                     'guest_code' => $guest_code,
                     'guest_s_type' => $this->input->post('guest_s_type'),
                     'guest_s_visa' => $this->input->post('guest_s_visa'),
-                    'guest_s_pay' => $this->input->post('guest_s_pay'),
-                    'guest_s_pay_data' => $this->input->post('guest_s_pay_data'),
                     'guest_s_group' => $this->input->post('guest_s_group'),
                     'guest_name' => $this->input->post('guest_name'),
                     'guest_sex' => $this->input->post('guest_sex'),
@@ -271,59 +223,55 @@ class Guest_info extends CI_Controller {
         if ($this->input->server('REQUEST_METHOD') === 'POST')
         {
             //form validation
-            $this->form_validation->set_rules('tour_code', 'tour_code', 'required');
-            $this->form_validation->set_rules('tour_name', 'tour_name', 'required');
-            $this->form_validation->set_rules('tour_price', 'tour_price', 'required|numeric');
-            $this->form_validation->set_rules('tour_duration', 'tour_duration', 'required|numeric');
-            $this->form_validation->set_rules('location_link', 'location_link', 'required');
+            $this->form_validation->set_rules('guest_phone', 'guest_phone', 'required');
+            $this->form_validation->set_rules('guest_name', 'guest_name', 'required');
+            $this->form_validation->set_rules('guest_cmnd', 'guest_cmnd', 'required|numeric');
+            $this->form_validation->set_rules('guest_passport', 'guest_passport', 'required|numeric');
+            $this->form_validation->set_rules('guest_address', 'guest_address', 'required');
             $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
             //if the form has passed through the validation
             if ($this->form_validation->run())
             {
-                $startdate = date("Y-m-d", strtotime($this->input->post('start_date')));
-                $location_link = $this->input->post('location_link');
+                $birthday = date("Y-m-d", strtotime($this->input->post('guest_birthday')));
                 $data_to_tour = array(
-                    'tour_code' => $this->input->post('tour_code'),
-                    'tour_name' => $this->input->post('tour_name'),
-                    'tour_price' => $this->input->post('tour_price'),
-                    'tour_price_min' => $this->input->post('tour_price_min'),
-                    'tour_duration' => $this->input->post('tour_duration'),
-                    'start_date' => $startdate,
-                    'tour_gift' => $this->input->post('tour_gift'),
-                    'group_size' => $this->input->post('group_size'),
-                    'tour_description' => $this->input->post('tour_description'),
-                    'tour_guide_info' => $this->input->post('tour_guide_info'),
-                    'tour_color' => $this->input->post('tour_color'),
-                    'modify_date' => date('Y-m-d H:i:s'),
-                    'modify_by' => $this->session->userdata('user_id'),
+                    'guest_s_type' => $this->input->post('guest_s_type'),
+                    'guest_s_visa' => $this->input->post('guest_s_visa'),
+                    'guest_s_group' => $this->input->post('guest_s_group'),
+                    'guest_name' => $this->input->post('guest_name'),
+                    'guest_sex' => $this->input->post('guest_sex'),
+                    'guest_address' => $this->input->post('guest_address'),
+                    'guest_phone' => $this->input->post('guest_phone'),
+                    'guest_email' => $this->input->post('guest_email'),
+                    'guest_birthday' => $birthday,
+                    'guest_cmnd' => $this->input->post('guest_cmnd'),
+                    'guest_passport' => $this->input->post('guest_passport'),
+                    'guest_country' => $this->input->post('guest_country'),
+                    'guest_power' => $this->input->post('guest_power'),
+                    'guest_com_location' => $this->input->post('guest_com_location'),
+                    'guest_modify_date' => date('Y-m-d H:i:s'),
+                    'guest_modify_by' => $this->session->userdata('user_id'),
                 );
                 $dataImage = uploadImage('tour_image');
                 $dataImageName = $dataImage['uploadInfo'];
                 if(!empty($dataImage)){
-                    $data_to_tour['tour_image'] = $dataImageName['file_name'];
-                    $data_to_tour['tour_image_thumb'] = $dataImage['thumbnail_name'];
+                    $data_to_tour['guest_images'] = $dataImageName['file_name'];
+                    $data_to_tour['guest_thumb'] = $dataImage['thumbnail_name'];
                 }
                 //if the insert has returned true then we show the flash message
-                if($this->tour_info_model->update_tour_info($id, $data_to_tour, $location_link) == TRUE){
+                if($this->guest_info_model->update_guest_info($id, $data_to_tour) == TRUE){
                     $this->session->set_flashdata('flash_message', 'updated');
                 }else{
                     $this->session->set_flashdata('flash_message', 'not_updated');
                 }
-                redirect('tour/info/update/'.$id.'');
+                redirect('guest/info/update/'.$id.'');
 
             }//validation run
 
         }
 
-        $data_field_tour_location = $this->tour_location_model->get_data_field_tour_location();
-        foreach ($data_field_tour_location as $value){
-            $field_tour_location[$value['id']] = $value['country'];
-        }
-        $data['field_tour_location'] = $field_tour_location;
-        $data['tour_info_data'] = $this->tour_info_model->get_tour_info_by_id($id);
-        $data['tour_location_link'] = $this->tour_info_model->get_tour_location_link_by_tour_info_id($id);
+        $data['guest_info_data'] = $this->guest_info_model->get_guest_info_by_id($id);
         //load the view
-        $data['main_content'] = 'tour/info/edit';
+        $data['main_content'] = 'guest/info/edit';
         $this->load->view('includes/template', $data);
 
     }//update
@@ -340,7 +288,74 @@ class Guest_info extends CI_Controller {
         redirect('admin/products');
     }//edit
 
+    public function addInfoTour(){
+        $this->load->model('Users_model');
+        $this->load->model('tour_info_model');
+        $guest_id = $this->uri->segment(4);
+        $month_select = $this->uri->segment(5);
+        $guest_tour_sale_id = $this->uri->segment(6);
+        $all_users_arr = $this->Users_model->get_all_users();
+        foreach ($all_users_arr as $value){
+            $all_users[$value['id']] = $value['first_name'];
+        }
+        $data['all_users'] = $all_users;
+        if($month_select == 'mnow' || $month_select ==''){
+            $month_tour = date('m');
+            $year_tour = date('Y');
+        }elseif($month_select == 'mnowst'){
+            $month_tour = date('m', strtotime('+1 month', strtotime(date("Y-m-01"))));
+            $year_tour = date('Y', strtotime('+1 month', strtotime(date("Y-m-01"))));
+        }elseif($month_select == 'mnownd'){
+            $month_tour = date('m', strtotime('+2 month', strtotime(date("Y-m-01"))));
+            $year_tour = date('Y', strtotime('+1 month', strtotime(date("Y-m-01"))));
+        }elseif($month_select == 'mnowrd'){
+            $month_tour = date('m', strtotime('+3 month', strtotime(date("Y-m-01"))));
+            $year_tour = date('Y', strtotime('+1 month', strtotime(date("Y-m-01"))));
+        }
 
+        $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_tour, $year_tour, '', '', '', '', 'Asc', '','');
+        $data['guest_info_data'] = $this->guest_info_model->get_guest_info_by_id($guest_id);
+        $data['guest_sale_tour_info_data'] = $this->guest_info_model->get_sale_and_tour_toguest($guest_id);
+        $id = null;
+        if($guest_tour_sale_id){
+            $data['get_guest_tour_sale_data'] = $this->guest_info_model->get_guest_tour_sale_data($guest_tour_sale_id);
+            $id = $guest_tour_sale_id;
+        }
+
+        if ($this->input->server('REQUEST_METHOD') === 'POST'){
+            //form validation
+            $this->form_validation->set_rules('tour_id', 'Select Tour', 'required');
+            $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+
+            //if the form has passed through the validation
+            if ($this->form_validation->run()){
+                $sale_id = $this->input->post('sale_id');
+                $tour_id = $this->input->post('tour_id');
+                $data_to_tour = array(
+                    'guest_info_id' => $guest_id,
+                    'tour_info_id' => $tour_id,
+                    'user_sale_id' => $sale_id,
+                );
+                //if the insert has returned true then we show the flash message
+                if($this->guest_info_model->add_sale_and_tour_toguest($data_to_tour, $id) == TRUE){
+                    $this->session->set_flashdata('flash_message', 'updated');
+                }else{
+                    $this->session->set_flashdata('flash_message', 'not_updated');
+                }
+                redirect('guest/link/tour/'.$guest_id.'/'.$month_select);
+            }
+
+        }
+
+        $data['main_content'] = 'guest/update/add';
+        $this->load->view('includes/template', $data);
+    }
+
+    public function addPayment(){
+
+    }
+
+//ajax
     public function ajaxViewTour(){
         $this->load->helper('true_function');
         $id = $this->input->post('id');

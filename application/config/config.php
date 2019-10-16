@@ -367,7 +367,10 @@ $config['user_sex'] = array(
     'male'=>'Male',
     'female'=>'Female',
 );
-
+$config['user_sex_text'] = array(
+    'male'=>'Mr',
+    'female'=>'Ms',
+);
 $config['color_table'] = array(
     ''=>'Default',
     'success'=>'success',
