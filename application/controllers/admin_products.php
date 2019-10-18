@@ -172,7 +172,7 @@ class Admin_products extends CI_Controller {
             $this->form_validation->set_rules('cost_price', 'cost_price', 'required|numeric');
             $this->form_validation->set_rules('sell_price', 'sell_price', 'required|numeric');
             $this->form_validation->set_rules('manufacture_id', 'manufacture_id', 'required');
-            $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
 
             //if the form has passed through the validation
             if ($this->form_validation->run())
@@ -219,7 +219,7 @@ class Admin_products extends CI_Controller {
             $this->form_validation->set_rules('cost_price', 'cost_price', 'required|numeric');
             $this->form_validation->set_rules('sell_price', 'sell_price', 'required|numeric');
             $this->form_validation->set_rules('manufacture_id', 'manufacture_id', 'required');
-            $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
             //if the form has passed through the validation
             if ($this->form_validation->run())
             {

@@ -204,7 +204,7 @@ class Tour_info extends CI_Controller {
             $this->form_validation->set_rules('tour_price', 'tour_price', 'required|numeric');
             $this->form_validation->set_rules('tour_duration', 'tour_duration', 'required|numeric');
             $this->form_validation->set_rules('location_link', 'location_link', 'required');
-            $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
 
             //if the form has passed through the validation
             if ($this->form_validation->run())
@@ -267,7 +267,7 @@ class Tour_info extends CI_Controller {
             $this->form_validation->set_rules('tour_price', 'tour_price', 'required|numeric');
             $this->form_validation->set_rules('tour_duration', 'tour_duration', 'required|numeric');
             $this->form_validation->set_rules('location_link', 'location_link', 'required');
-            $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
             //if the form has passed through the validation
             if ($this->form_validation->run())
             {

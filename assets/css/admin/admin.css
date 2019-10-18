@@ -126,3 +126,8 @@ form label:first-child{
 .bottom-block{
   margin-bottom: 20px !important;
 }
+.fix-control input[type="checkbox"]{
+  height: 15px;
+  width: 15px;
+  margin: 10px;
+}

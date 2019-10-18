@@ -81,7 +81,7 @@
                     echo '<td>'.$row['guest_cmnd'].'</td>';
                     echo '<td>'.convertDateDMY($row['guest_birthday']).'</td>';
                     echo '<td class="crud-actions">
-                  <a href="'.site_url("guest").'/link/tour/'.$row['guest_id'].'/mnow'.'" class="btn btn-info btn-xs">add tour</a>  
+                  <a href="'.site_url("guest").'/link/tour/gid_'.$row['guest_id'].'/mnow'.'" class="btn btn-info btn-xs">add tour</a>  
                   <a href="'.site_url("guest").'/info/update/'.$row['guest_id'].'" class="btn btn-info btn-xs">edit</a>  
                   <a href="'.site_url("guest").'/info/delete/'.'" class="btn btn-danger btn-xs">delete</a>
                 </td>';

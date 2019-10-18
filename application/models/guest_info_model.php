@@ -99,6 +99,26 @@ class Guest_info_model extends CI_Model {
      * @param array $data - associative array with data to store
      * @return boolean
      */
+    function add_payment_toguest($data)
+    {
+        $insert = $this->db->insert('guest_pay', $data);
+        return $insert;
+    }
+
+    public function get_all_payment_toguest($guest_id, $guest_tour_sale_id)
+    {
+        $this->db->select('*');
+        $this->db->from('guest_pay');
+
+        $this->db->where('guest_info_id', $guest_id);
+        $this->db->where('guest_tour_sale_id', $guest_tour_sale_id);
+
+        $this->db->group_by('id');
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
     function add_guest_info($data)
     {
         $insert = $this->db->insert('guest_info', $data);

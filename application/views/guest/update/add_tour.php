@@ -29,7 +29,7 @@
         $sex_show = $user_sex_text[$guest_info_data['0']['guest_sex']];
     }
     $guest_birthday = $guest_info_data['0']['guest_birthday'];
-    $guestbirthday = date("d-m-Y", strtotime($guest_birthday));
+    $guest_birthdays = date("d-m-Y", strtotime($guest_birthday));
 
 
     echo '<div class="row">';
@@ -40,7 +40,7 @@
     echo '<div class="row bottom-block"><label>Guest Email: </label>'.$guest_info_data['0']['guest_email'].'</div>';
     echo '</div>';
     echo '<div class="col-md-6">';
-    echo '<div class="row bottom-block"><label>Guest Birthday: </label>'.$guestbirthday.'</div>';
+    echo '<div class="row bottom-block"><label>Guest Birthday: </label>'.$guest_birthdays.'</div>';
     echo '<div class="row bottom-block"><label>Guest ID: </label>'.$guest_info_data['0']['guest_cmnd'].'</div>';
     echo '<div class="row bottom-block"><label>Guest Passport: </label>'.$guest_info_data['0']['guest_passport'].'</div>';
     echo '<div class="row bottom-block"><label>Guest Country: </label>'.$guest_info_data['0']['guest_country'].'</div>';
@@ -61,7 +61,6 @@
             </thead>
             <tbody>
             <?php
-            $this->load->helper('true_function');
             foreach($guest_sale_tour_info_data as $row)
             {
                 $select_date = checkDateData($row['start_date']);
@@ -69,7 +68,7 @@
                 echo '<td>'.$row['guest_name'].'</td>';
                 echo '<td>'.$row['tour_name'].'</td>';
                 echo '<td>'.$row['user_name'].'</td>';
-                echo '<td><a href="'.site_url("guest").'/link/tour/'.$row['tour_id'].'" class="btn btn-success">Update Payment</a></td>';
+                echo '<td><a href="'.site_url("guest").'/add/payment/'.$this->uri->segment(4).'/'.$row['guest_tour_link_id'].'" class="btn btn-success">Update Payment</a></td>';
                 echo '<td class="crud-actions">
                   <a href="'.site_url("guest").'/link/tour/'.$this->uri->segment(4).'/'.$select_date.'/'.$row['guest_tour_link_id'].'" class="btn btn-info">edit</a>  
                 </td>';

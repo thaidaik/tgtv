@@ -398,10 +398,14 @@ $config['guest_s_visa'] = array(
 	'1'=>'Khách đã có visa',
 );
 $config['guest_s_pay'] = array(
-	'0'=>'Thanh toán hết', //success
-	'1'=>'Thanh toán trên 50%', //info
-	'2'=>'Thanh toán dưới 50%', //danger
-	'3'=>'Nợ', //warning
+	'0'=>'Chưa thanh toán', //success
+	'1'=>'Thanh toán lần 1', //info
+	'2'=>'Thanh toán lần 2', //danger
+	'3'=>'Thanh toán lần 3', //warning
+);
+$config['guest_s_pay_type'] = array(
+	'1'=>'Chuyển khoản ngân hàng', //info
+	'2'=>'Thu tiền mặt trực tiếp', //danger
 );
 $config['guest_s_group'] = array(
 	'0'=>'Cá nhân',

@@ -173,7 +173,7 @@ class Admin_manufacturers extends CI_Controller {
 
             //form validation
             $this->form_validation->set_rules('name', 'name', 'required');
-            $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
             
 
             //if the form has passed through the validation
@@ -211,7 +211,7 @@ class Admin_manufacturers extends CI_Controller {
         {
             //form validation
             $this->form_validation->set_rules('name', 'name', 'required');
-            $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
             //if the form has passed through the validation
             if ($this->form_validation->run())
             {

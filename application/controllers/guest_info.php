@@ -157,7 +157,7 @@ class Guest_info extends CI_Controller {
             $this->form_validation->set_rules('guest_cmnd', 'guest_cmnd', 'required|numeric');
             $this->form_validation->set_rules('guest_passport', 'guest_passport', 'required|numeric');
             $this->form_validation->set_rules('guest_address', 'guest_address', 'required');
-            $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
 
             //if the form has passed through the validation
             if ($this->form_validation->run())
@@ -228,7 +228,7 @@ class Guest_info extends CI_Controller {
             $this->form_validation->set_rules('guest_cmnd', 'guest_cmnd', 'required|numeric');
             $this->form_validation->set_rules('guest_passport', 'guest_passport', 'required|numeric');
             $this->form_validation->set_rules('guest_address', 'guest_address', 'required');
-            $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
             //if the form has passed through the validation
             if ($this->form_validation->run())
             {
@@ -291,7 +291,7 @@ class Guest_info extends CI_Controller {
     public function addInfoTour(){
         $this->load->model('Users_model');
         $this->load->model('tour_info_model');
-        $guest_id = $this->uri->segment(4);
+        $guest_id = substr($this->uri->segment(4),'4'); // cat text gid_ de lay id
         $month_select = $this->uri->segment(5);
         $guest_tour_sale_id = $this->uri->segment(6);
         $all_users_arr = $this->Users_model->get_all_users();
@@ -325,7 +325,7 @@ class Guest_info extends CI_Controller {
         if ($this->input->server('REQUEST_METHOD') === 'POST'){
             //form validation
             $this->form_validation->set_rules('tour_id', 'Select Tour', 'required');
-            $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
 
             //if the form has passed through the validation
             if ($this->form_validation->run()){
@@ -347,12 +347,71 @@ class Guest_info extends CI_Controller {
 
         }
 
-        $data['main_content'] = 'guest/update/add';
+        $data['main_content'] = 'guest/update/add_tour';
         $this->load->view('includes/template', $data);
     }
 
     public function addPayment(){
+        $this->load->model('Users_model');
+        $this->load->model('tour_info_model');
+        $guest_id = substr($this->uri->segment(4),'4'); // cat text gid_ de lay id
+        $guest_tour_sale_id = $this->uri->segment(5);
+        $all_users_arr = $this->Users_model->get_all_users();
+        foreach ($all_users_arr as $value){
+            $all_users[$value['id']] = $value['first_name'];
+        }
+        $data['all_users'] = $all_users;
 
+        $data['guest_info_data'] = $this->guest_info_model->get_guest_info_by_id($guest_id);
+        if($guest_tour_sale_id) {
+            $data['get_guest_tour_sale_data'] = $this->guest_info_model->get_guest_tour_sale_data($guest_tour_sale_id);
+            $data['get_all_payment_toguest'] = $this->guest_info_model->get_all_payment_toguest($guest_id, $guest_tour_sale_id);
+        }
+
+
+        if ($this->input->server('REQUEST_METHOD') === 'POST'){
+            //form validation
+            $this->form_validation->set_rules('guest_pay_price', 'Số tiền thu', 'required');
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+            $guest_pay_time = date("Y-m-d", strtotime($this->input->post('guest_pay_time')));
+            //if the form has passed through the validation
+            if ($this->form_validation->run()){
+                $guest_pay_status = $this->input->post('guest_pay_status');
+                $guest_pay_by_user_id = $this->input->post('guest_pay_by_user_id');
+                $guest_pay_price = $this->input->post('guest_pay_price');
+                $guest_pay_by_type = $this->input->post('guest_pay_by_type');
+                $guest_pay_finish = $this->input->post('guest_pay_finish');
+                $user_sale_id = $this->input->post('user_sale_id');
+                $tour_info_id = $this->input->post('tour_info_id');
+                $data_to_tour = array(
+                    'guest_info_id' => $guest_id,
+                    'tour_info_id' => $tour_info_id,
+                    'user_sale_id' => $user_sale_id,
+                    'guest_tour_sale_id' => $guest_tour_sale_id,
+                    'guest_pay_status' => $guest_pay_status,
+                    'guest_pay_by_user_id' => $guest_pay_by_user_id,
+                    'guest_pay_price' => $guest_pay_price,
+                    'guest_pay_time' => $guest_pay_time,
+                    'guest_pay_by_type' => $guest_pay_by_type,
+                    'guest_pay_finish' => $guest_pay_finish,
+                    'create_date' => date('Y-m-d H:i:s'),
+                    'modify_date' => date('Y-m-d H:i:s'),
+                    'modify_by' => $this->session->userdata('user_id'),
+                );
+
+                //if the insert has returned true then we show the flash message
+                if($this->guest_info_model->add_payment_toguest($data_to_tour) == TRUE){
+                    $this->session->set_flashdata('flash_message', 'updated');
+                }else{
+                    $this->session->set_flashdata('flash_message', 'not_updated');
+                }
+                redirect('guest/add/payment/'.$this->uri->segment(4).'/'.$this->uri->segment(5));
+            }
+
+        }
+
+        $data['main_content'] = 'guest/update/add_payment';
+        $this->load->view('includes/template', $data);
     }
 
 //ajax
