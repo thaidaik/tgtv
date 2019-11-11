@@ -363,7 +363,7 @@ $config['proxy_ips'] = '';
 //$user_sex = $this->config->item('user_sex');
 // 'female', 'male'
 $config['user_sex'] = array(
-    ''=>'Select',
+    ''=>'Chọn',
     'male'=>'Male',
     'female'=>'Female',
 );
@@ -431,5 +431,33 @@ $config['guest_com_location'] = array(
 $config['text_add_well_done_1'] = "<strong>Well done!</strong> ";
 $config['text_add_well_done_2'] = " created with success.";
 $config['text_add_alert'] = '<strong>Oh snap!</strong> change a few things up and try submitting again.';
-$config['text_save_changes'] = 'Save changes';
-$config['text_cancel'] = 'Cancel';
+$config['text_save_changes'] = 'Lưu';
+
+$config['text_adding'] = 'Tạo mới';
+$config['text_updating'] = 'Sửa';
+$config['text_edit'] = 'Sửa';
+$config['text_delete'] = 'Xóa';
+$config['text_cancel'] = 'Hủy';
+$config['text_select'] = 'Chọn';
+$config['text_asc'] = 'Tăng dần';
+$config['text_desc'] = 'Giảm dần';
+$config['text_add_a_new'] = 'Tạo mới';
+$config['text_role'] = 'Nhóm';
+$config['text_search'] = 'Tìm kiếm:';
+$config['text_go'] = 'Tìm kiếm';
+$config['text_size'] = 'Size:';
+$config['text_order_by'] = 'Xếp theo:';
+
+$config['text_name'] = 'Tên';
+$config['text_date'] = 'Ngày';
+$config['text_birthday'] = 'Ngày sinh';
+$config['text_create_date'] = 'Ngày tạo';
+$config['text_modify_date'] = 'Ngày sửa';
+$config['text_image'] = 'Ảnh';
+$config['text_username'] = 'Tài khoản';
+$config['text_sex'] = 'Giới tính';
+$config['text_address'] = 'Địa chỉ';
+$config['text_identificatio'] = 'CMND';
+$config['text_passport'] = 'Hộ chiếu';
+
+

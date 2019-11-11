@@ -7,18 +7,16 @@
             </a>
         </li>
         <li>
-            <a href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>">
-            <?php echo ucfirst($this->uri->segment(2));?>
-            </a>
+            <a href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>">Quản lý nhóm nhân viên</a>
         </li>
         <li class="active">
-            <a href="#">New</a>
+            <a href="#">Tạo mới</a>
         </li>
     </ul>
 
     <div class="page-header">
         <h2>
-            Adding <?php echo ucfirst($this->uri->segment(2));?>
+            <?php echo $this->config->item('text_adding'); ?> nhóm nhân viên
         </h2>
     </div>
 
@@ -53,7 +51,7 @@
             ?>
             <fieldset>
                 <div class="control-group">
-                    <label for="inputError" class="control-label">Role</label>
+                    <label for="inputError" class="control-label">Tên nhóm</label>
                     <div class="controls">
                     <input type="text" id="" name="name" value="<?php echo set_value('name'); ?>" class="form-control">
                     <!--<span class="help-inline">Woohoo!</span>-->

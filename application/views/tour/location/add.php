@@ -16,7 +16,7 @@
     </ul>
     <div class="page-header">
         <h2>
-            Adding <?php echo ucfirst($this->uri->segment(2));?>
+            <?php echo $this->config->item('text_adding'); ?> <?php echo ucfirst($this->uri->segment(2));?>
         </h2>
     </div>
     <?php

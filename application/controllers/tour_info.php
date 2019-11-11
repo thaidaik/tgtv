@@ -80,6 +80,8 @@ class Tour_info extends CI_Controller {
         $data['order_type_selected'] = $order_type;
 
         $data_field_tour_location = $this->tour_location_model->get_data_field_tour_location();
+        $field_tour_location = array();
+        $field_tour_location['0'] = 'Tất cả';
         foreach ($data_field_tour_location as $value){
             $field_tour_location[$value['id']] = $value['country'];
         }
@@ -240,6 +242,8 @@ class Tour_info extends CI_Controller {
             }
         }
         $data_field_tour_location = $this->tour_location_model->get_data_field_tour_location();
+        $field_tour_location = array();
+        $field_tour_location['0'] = 'Tất cả';
         foreach ($data_field_tour_location as $value){
             $field_tour_location[$value['id']] = $value['country'];
         }
@@ -307,6 +311,8 @@ class Tour_info extends CI_Controller {
         }
 
         $data_field_tour_location = $this->tour_location_model->get_data_field_tour_location();
+        $field_tour_location = array();
+        $field_tour_location['0'] = 'Tất cả';
         foreach ($data_field_tour_location as $value){
             $field_tour_location[$value['id']] = $value['country'];
         }

@@ -3,7 +3,7 @@
     <div class="page-header users-header">
         <h2>
             <?php echo ucfirst($this->uri->segment(1));?>
-            <a  href="<?php echo site_url("admin"); ?>/signup" class="btn btn-success">Add a new</a>
+            <a  href="<?php echo site_url("admin"); ?>/signup" class="btn btn-success"><?php echo $this->config->item('text_add_a_new'); ?></a>
         </h2>
     </div>
 
@@ -29,7 +29,7 @@
                     '30-39' => '30-39',
                     '40-49' => '40-49',
                 );
-                $options_order_type = array('Asc' => 'Asc', 'Desc' => 'Desc');
+                $options_order_type = array('Asc' => $this->config->item('text_asc'), 'Desc' => $this->config->item('text_desc'));
                 $options_duration = array('5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10','11'=>'11','12'=>'12','13'=>'13');
                 $options_month = array('all'=>'all','1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10','11'=>'11','12'=>'12');
                 $options_year = array('all'=>'all','2019'=>'2019','2020'=>'2020','2021'=>'2021');
@@ -38,13 +38,14 @@
                 echo '<div class="row">';
                     echo '<div class="col-md-3">';
                         echo form_label('Tour:', 'location_link');
-                        echo form_multiselect('location_link[]', $field_tour_location, $location_link_selected, 'class="form-control" id="location_link"');
+                        //echo form_multiselect('location_link[]', $field_tour_location, $location_link_selected, 'class="form-control" id="location_link"');
+                        echo form_dropdown('location_link[]', $field_tour_location, $location_link_selected, 'class="form-control"');
                     echo '</div>';
                     echo '<div class="col-md-7">';
                         echo '<div class="row bottom-block" >';
-                            echo form_label('Search:', 'search_string');
+                            echo form_label($this->config->item('text_search'), 'search_string');
                             echo form_input('search_string', $search_string_selected, 'class="form-control" id="search_field"');
-                            echo form_label('Size:', 'order');
+                            echo form_label($this->config->item('text_size'), 'order');
                             echo form_dropdown('group_size', $options_sizes, $sizes_selected, 'class="form-control"');
                         echo '</div>';
                         echo '<div class="row bottom-block">';
@@ -54,14 +55,13 @@
                             echo form_dropdown('start_year', $options_year, $year_selected, 'class="form-control"');
                         echo '</div>';
                         echo '<div class="row">';
-                            echo form_label('Order by:', 'order');
+                            echo form_label($this->config->item('text_order_by'), 'order');
                             echo form_dropdown('order', $options_tours, $order, 'class="form-control"');
-                            echo form_label('Order type:', 'order');
                             echo form_dropdown('order_type', $options_order_type, $order_type_selected, 'class="form-control"');
                         echo '</div>';
                     echo '</div>';
                     echo '<div class="col-md-2">';
-                        $data_submit = array('name' => 'mysubmit', 'class' => 'btn btn-primary', 'value' => 'Go');
+                        $data_submit = array('name' => 'mysubmit', 'class' => 'btn btn-primary', 'value' => $this->config->item('text_go'));
                         echo '<div class="row bottom-block" >';
                         echo form_submit($data_submit);
                 echo '</div>';
@@ -79,7 +79,7 @@
                 <thead>
                 <tr>
                     <th class="">Code</th>
-                    <th class="">Name</th>
+                    <th class=""><?php echo $this->config->item('text_name'); ?></th>
                     <th class="">Price</th>
                     <th class="">Duration</th>
                     <th class="">Size</th>
@@ -100,8 +100,8 @@
                     echo '<td>'.$row['group_size'].' p</td>';
                     echo '<td>'.convertDateDMY($row['start_date']).'</td>';
                     echo '<td class="crud-actions">
-                  <a href="'.site_url("tour").'/info/update/'.$row['tour_id'].'" class="btn btn-info">edit</a>  
-                  <a href="'.site_url("tour").'/info/delete/'.$row['tour_id'].'" class="btn btn-danger">delete</a>
+                  <a href="'.site_url("tour").'/info/update/'.$row['tour_id'].'" class="btn btn-info">'.$this->config->item('text_edit').'</a>  
+                  <a href="'.site_url("tour").'/info/delete/'.$row['tour_id'].'" class="btn btn-danger">'.$this->config->item('text_delete').'</a>
                 </td>';
                     echo '</tr>';
                 }

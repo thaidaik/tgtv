@@ -18,7 +18,7 @@
 
         <div class="page-header">
         <h2>
-          Adding <?php echo ucfirst($this->uri->segment(2));?>
+          <?php echo $this->config->item('text_adding'); ?> <?php echo ucfirst($this->uri->segment(2));?>
         </h2>
         </div>
 
@@ -44,7 +44,7 @@
             <?php
         //form data
         $attributes = array('class' => 'form-horizontal', 'id' => '');
-        $options_manufacture = array('' => "Select");
+        $options_manufacture = array('' => $this->config->item('text_select'));
         foreach ($manufactures as $row)
         {
         $options_manufacture[$row['id']] = $row['name'];
@@ -101,8 +101,8 @@
                 echo '</div">';
                 ?>
                 <div class="form-actions">
-                    <button class="btn btn-primary" type="submit">Save changes</button>
-                    <button class="btn" type="reset">Cancel</button>
+                    <button class="btn btn-primary" type="submit"><?php echo $this->config->item('text_save_changes'); ?></button>
+                    <button class="btn" type="reset"><?php echo $this->config->item('text_cancel'); ?></button>
                 </div>
             </fieldset>
             <?php echo form_close(); ?>

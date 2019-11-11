@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="91703b58-40d6-4d6c-b436-65e47fd4571d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/application/views/guest/update/add_payment.php" afterDir="false" />
+    <list default="true" id="91703b58-40d6-4d6c-b436-65e47fd4571d" name="Default Changelist" comment="update guest + payment">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/config/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/admin_manufacturers.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/admin_manufacturers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/admin_products.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/admin_products.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/guest_info.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/guest_info.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/tour_info.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/tour_info.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/tour_location.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/tour_location.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/guest_info_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/guest_info_model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/users_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/users_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/tour_info_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/tour_info_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/admin/manufacturers/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/admin/manufacturers/add.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/admin/manufacturers/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/admin/manufacturers/edit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/admin/manufacturers/list.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/admin/manufacturers/list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/admin/member_edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/admin/member_edit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/admin/member_list.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/admin/member_list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/admin/products/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/admin/products/add.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/admin/products/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/admin/products/edit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/admin/products/list.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/admin/products/list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/admin/signup_form.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/admin/signup_form.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/guest/info/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/guest/info/add.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/guest/info/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/guest/info/edit.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/guest/info/list.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/guest/info/list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/guest/update/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/guest/update/add_tour.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/guest/update/add_tour.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/guest/update/add_tour.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/tour/info/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/tour/info/add.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/tour/info/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/tour/info/edit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/tour/info/list.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/tour/info/list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/tour/location/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/tour/location/add.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/tour/location/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/tour/location/edit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/tour/location/list.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/tour/location/list.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/admin/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/admin/admin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/language/english/form_validation_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/language/english/form_validation_lang.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +38,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/guest_info.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4080">
+            <state relative-caret-position="829">
               <caret line="367" column="42" selection-start-line="367" selection-start-column="19" selection-end-line="367" selection-end-column="42" />
               <folding>
                 <element signature="n#update#0;n#Guest_info#0;n#!!top" />
@@ -41,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/guest/update/add_payment.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="113" column="17" selection-start-line="113" selection-start-column="17" selection-end-line="113" selection-end-column="17" />
+            <state relative-caret-position="34">
+              <caret line="107" column="45" selection-start-line="107" selection-start-column="45" selection-end-line="107" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -62,7 +72,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/guest_info_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1207">
+            <state relative-caret-position="829">
               <caret line="94" column="5" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
               <folding>
                 <element signature="n#count_guest_infos#0;n#Guest_info_model#0;n#!!top" />
@@ -74,8 +84,42 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/css/admin/admin.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2176">
-              <caret line="128" column="36" selection-start-line="128" selection-start-column="36" selection-end-line="128" selection-end-column="36" />
+            <state relative-caret-position="47">
+              <caret line="97" column="20" lean-forward="true" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/tour/info/list.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="697">
+              <caret line="41" column="82" selection-start-line="41" selection-start-column="62" selection-end-line="41" selection-end-column="82" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/tour_info.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="533">
+              <caret line="146" column="146" selection-start-line="146" selection-start-column="132" selection-end-line="146" selection-end-column="146" />
+              <folding>
+                <element signature="n#delete#0;n#Tour_info#0;n#!!top" />
+                <element signature="n#ajaxRequestPost#0;n#Tour_info#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/models/tour_info_model.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="383">
+              <caret line="118" column="84" selection-start-line="118" selection-start-column="84" selection-end-line="118" selection-end-column="84" />
+              <folding>
+                <element signature="n#add_tour_info#0;n#Tour_info_model#0;n#!!top" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -83,44 +127,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/config/config.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6885">
-              <caret line="405" column="25" selection-start-line="405" selection-start-column="9" selection-end-line="405" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/config/routes.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1615">
-              <caret line="95" column="25" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/helpers/form_helper.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6375">
-              <caret line="375" column="45" selection-start-line="375" selection-start-column="39" selection-end-line="375" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/guest/update/add_tour.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1054">
-              <caret line="62" column="17" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/guest/info/list.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1411">
-              <caret line="83" column="59" selection-start-line="83" selection-start-column="59" selection-end-line="83" selection-end-column="63" />
+            <state relative-caret-position="141">
+              <caret line="365" column="8" lean-forward="true" selection-start-line="365" selection-start-column="8" selection-end-line="365" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -129,58 +137,77 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>$objPHPExcel-&gt;getActiveSheet()</find>
-      <find>add_tour_info</find>
-      <find>The image you are attempting to upload exceedes the maximum height or width.</find>
-      <find>flash_message</find>
-      <find>alert-err</find>
-      <find>alert-error</find>
-      <find>get_tour_info_by_id</find>
-      <find>$tour_info_data</find>
-      <find>tour_location_model</find>
-      <find>update_tour_info</find>
-      <find>update_guest_info</find>
-      <find>limit</find>
+      <find>&gt;Birthday&lt;</find>
+      <find>&gt;Identificatio ID&lt;</find>
+      <find>&gt;Passport&lt;</find>
+      <find>&gt;Select Role&lt;</find>
+      <find>create_date</find>
+      <find>$this-&gt;config-&gt;item('text_name').</find>
+      <find>&lt;?php echo $this-&gt;config-&gt;item('text_adding'); ?&gt;</find>
+      <find>Adding</find>
+      <find>Updating</find>
+      <find>&gt;edit&lt;</find>
+      <find>'.$this-&gt;config-&gt;item('text_edit').'</find>
+      <find>$this-&gt;config-&gt;item('text_name')</find>
+      <find>Save changes</find>
+      <find>Cancel</find>
+      <find>s</find>
+      <find>text_edit</find>
+      <find>text_date</find>
+      <find>'field_tour_location'</find>
+      <find>$data_field_tour_location</find>
+      <find>text_name</find>
+      <find>foreach ($data_field_tour_location</find>
+      <find>$field_tour_location</find>
+      <find>$field_tour_location['']</find>
+      <find>tour_location_link.tour_location_id</find>
+      <find>Chọn</find>
+      <find>$this-&gt;db-&gt;where('tour_location_link.tour_location_id', $value);</find>
+      <find>$location_link</find>
+      <find>count_tour_infos</find>
       <find>get_tour_infos</find>
-      <find>block-fix</find>
-      <find>bottom-block</find>
-      <find>add_sale_and_tour_toguest</find>
-      <find>guest_sale_tour_info_data</find>
-      <find>get_sale_and_tour_toguest</find>
-      <find>get_guest_infos</find>
-      <find>$guest_id</find>
-      <find>$guestbirthday</find>
-      <find>check</find>
-      <find>$all_users</find>
-      <find>get_guest_tour_sale_data</find>
-      <find>radio</find>
-      <find>set_error_delimiters</find>
-      <find>field is required</find>
-      <find>alert alert-error</find>
-      <find>true_</find>
-      <find>true_function</find>
+      <find>location_link</find>
     </findStrings>
     <replaceStrings>
       <replace />
-      <replace>tour_location_model</replace>
-      <replace>tour_location</replace>
-      <replace>count_tour_location</replace>
-      <replace>get_tour_location</replace>
-      <replace>update_tour_location</replace>
-      <replace>$tour_info_data[0][</replace>
-      <replace>truncateWords</replace>
-      <replace>$sheet</replace>
-      <replace>alert-danger</replace>
-      <replace>alert alert-danger</replace>
+      <replace>$this-&gt;config-&gt;item('text_order_by')</replace>
+      <replace>$this-&gt;config-&gt;item('text_order_type')</replace>
+      <replace>$this-&gt;config-&gt;item('text_search')</replace>
+      <replace>$this-&gt;config-&gt;item('text_go')</replace>
+      <replace>$this-&gt;config-&gt;item('text_add_a_new')</replace>
+      <replace>&lt;?php echo $this-&gt;config-&gt;item('text_add_a_new'); ?&gt;</replace>
+      <replace>'Asc' =&gt; $this-&gt;config-&gt;item('text_asc')</replace>
+      <replace>'Desc' =&gt; $this-&gt;config-&gt;item('text_desc')</replace>
+      <replace>$this-&gt;config-&gt;item('text_select')</replace>
+      <replace>&gt;$this-&gt;config-&gt;item('text_delete')&lt;</replace>
+      <replace>'.$this-&gt;config-&gt;item('text_delete').'</replace>
+      <replace>&gt;'.$this-&gt;config-&gt;item('text_image').'&lt;</replace>
+      <replace>&gt;'.$this-&gt;config-&gt;item('text_username').'&lt;</replace>
+      <replace>&gt;&lt;?php echo $this-&gt;config-&gt;item('text_name'); ?&gt;&lt;</replace>
+      <replace>&gt;'.$this-&gt;config-&gt;item('text_sex').'&lt;</replace>
+      <replace>&gt;'.$this-&gt;config-&gt;item('text_address').'&lt;</replace>
+      <replace>&gt;&lt;?php echo $this-&gt;config-&gt;item('text_birthday'); ?&gt;&lt;</replace>
+      <replace>&gt;&lt;?php echo $this-&gt;config-&gt;item('text_passport'); ?&gt;&lt;</replace>
+      <replace>&gt;&lt;?php echo $this-&gt;config-&gt;item('text_role'); ?&gt;&lt;</replace>
+      <replace>&lt;?php echo $this-&gt;config-&gt;item('text_role'); ?&gt;</replace>
+      <replace>&lt;?php echo $this-&gt;config-&gt;item('text_adding'); ?&gt;</replace>
+      <replace>&lt;?php echo $this-&gt;config-&gt;item('text_updating'); ?&gt;</replace>
+      <replace>'.$this-&gt;config-&gt;item('text_edit').'</replace>
+      <replace>&gt;'.$this-&gt;config-&gt;item('text_edit').'&lt;</replace>
+      <replace>&lt;?php echo $this-&gt;config-&gt;item('text_edit'); ?&gt;</replace>
+      <replace>&lt;?php echo $this-&gt;config-&gt;item('text_save_changes'); ?&gt;</replace>
+      <replace>&lt;?php echo $this-&gt;config-&gt;item('text_cancel'); ?&gt;</replace>
+      <replace>$field_tour_location['0']</replace>
+      <replace>Tất cả</replace>
     </replaceStrings>
     <dirStrings>
       <dir>G:\xampp\htdocs\tgtv</dir>
-      <dir>G:\xampp\htdocs\tgtv\application\views</dir>
       <dir>G:\xampp\htdocs\tgtv\application\controllers</dir>
       <dir>G:\xampp\htdocs\tgtv\application\models</dir>
       <dir>G:\xampp\htdocs\tgtv\application\views\tour</dir>
       <dir>G:\xampp\htdocs\tgtv\system</dir>
       <dir>G:\xampp\htdocs\tgtv\application</dir>
+      <dir>G:\xampp\htdocs\tgtv\application\views</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -192,17 +219,12 @@
         <option value="$PROJECT_DIR$/assets/css/admin/global.css" />
         <option value="$PROJECT_DIR$/application/views/admin/upload_view.php" />
         <option value="$PROJECT_DIR$/application/controllers/upload.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/products/list.php" />
         <option value="$PROJECT_DIR$/application/models/products_model.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/member_list.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/member_edit.php" />
         <option value="$PROJECT_DIR$/application/controllers/tour.php" />
         <option value="$PROJECT_DIR$/application/controllers/admin_manufacturers.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/manufacturers/add.php" />
         <option value="$PROJECT_DIR$/application/views/tour/location/edit.php" />
         <option value="$PROJECT_DIR$/application/views/tour/location/add.php" />
         <option value="$PROJECT_DIR$/application/controllers/tours.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/signup_form.php" />
         <option value="$PROJECT_DIR$/application/controllers/admin_products.php" />
         <option value="$PROJECT_DIR$/application/views/admin/products/edit.php" />
         <option value="$PROJECT_DIR$/application/views/tour/info/add.php" />
@@ -212,17 +234,12 @@
         <option value="$PROJECT_DIR$/application/helpers/convert_milion_helper.php" />
         <option value="$PROJECT_DIR$/application/views/itemlist.php" />
         <option value="$PROJECT_DIR$/assets/js/admin.js" />
-        <option value="$PROJECT_DIR$/application/views/admin/manufacturers/list.php" />
         <option value="$PROJECT_DIR$/application/models/manufacturers_model.php" />
         <option value="$PROJECT_DIR$/application/controllers/tour_location.php" />
         <option value="$PROJECT_DIR$/application/models/tour_location_model.php" />
         <option value="$PROJECT_DIR$/application/views/tour/location/list.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/manufacturers/edit.php" />
         <option value="$PROJECT_DIR$/application/views/tour/info/edit.php" />
         <option value="$PROJECT_DIR$/application/libraries/Excel.php" />
-        <option value="$PROJECT_DIR$/application/views/tour/info/list.php" />
-        <option value="$PROJECT_DIR$/application/models/tour_info_model.php" />
-        <option value="$PROJECT_DIR$/application/controllers/tour_info.php" />
         <option value="$PROJECT_DIR$/application/controllers/user.php" />
         <option value="$PROJECT_DIR$/application/views/includes/header.php" />
         <option value="$PROJECT_DIR$/application/helpers/upload_helper.php" />
@@ -232,14 +249,24 @@
         <option value="$PROJECT_DIR$/application/helpers/true_function_helper.php" />
         <option value="$PROJECT_DIR$/application/config/routes.php" />
         <option value="$PROJECT_DIR$/application/views/guest/update/add.php" />
-        <option value="$PROJECT_DIR$/application/views/guest/info/list.php" />
-        <option value="$PROJECT_DIR$/application/config/config.php" />
-        <option value="$PROJECT_DIR$/assets/css/admin/admin.css" />
         <option value="$PROJECT_DIR$/system/language/english/form_validation_lang.php" />
         <option value="$PROJECT_DIR$/application/controllers/guest_info.php" />
         <option value="$PROJECT_DIR$/application/models/guest_info_model.php" />
-        <option value="$PROJECT_DIR$/application/views/guest/update/add_tour.php" />
         <option value="$PROJECT_DIR$/application/views/guest/update/add_payment.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/products/list.php" />
+        <option value="$PROJECT_DIR$/application/views/guest/info/list.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/member_edit.php" />
+        <option value="$PROJECT_DIR$/assets/css/admin/admin.css" />
+        <option value="$PROJECT_DIR$/application/views/guest/update/add_tour.php" />
+        <option value="$PROJECT_DIR$/application/config/config.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/manufacturers/add.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/manufacturers/list.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/manufacturers/edit.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/signup_form.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/member_list.php" />
+        <option value="$PROJECT_DIR$/application/views/tour/info/list.php" />
+        <option value="$PROJECT_DIR$/application/controllers/tour_info.php" />
+        <option value="$PROJECT_DIR$/application/models/tour_info_model.php" />
       </list>
     </option>
   </component>
@@ -272,7 +299,61 @@
               <item name="tgtv" type="b2602c69:ProjectViewProjectNode" />
               <item name="tgtv" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tgtv" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tgtv" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tgtv" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tgtv" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="helpers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tgtv" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tgtv" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tgtv" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tgtv" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tgtv" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tgtv" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="guest" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tgtv" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tgtv" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="guest" type="462c0819:PsiDirectoryNode" />
+              <item name="info" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tgtv" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tgtv" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="tour" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tgtv" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tgtv" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="tour" type="462c0819:PsiDirectoryNode" />
+              <item name="info" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tgtv" type="b2602c69:ProjectViewProjectNode" />
@@ -387,7 +468,9 @@
       <workItem from="1571210063784" duration="9949000" />
       <workItem from="1571282573487" duration="4448000" />
       <workItem from="1571297098275" duration="8656000" />
-      <workItem from="1571369380906" duration="599000" />
+      <workItem from="1571369380906" duration="658000" />
+      <workItem from="1573118276451" duration="22000" />
+      <workItem from="1573437437799" duration="7358000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1569580313505</created>
@@ -459,17 +542,24 @@
       <option name="project" value="LOCAL" />
       <updated>1571219704432</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="update guest + payment">
+      <created>1571370012748</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1571370012748</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="255165000" />
+    <option name="totallyTimeSpent" value="262604000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1603" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15100454" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15489307" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -545,7 +635,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/application/models/tour_info_model.php</url>
-          <line>94</line>
+          <line>98</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -562,28 +652,11 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/config/constants.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/config/hooks.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/application/config/autoload.php">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/member_edit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1394">
-          <caret line="82" column="4" selection-start-line="82" selection-start-column="4" selection-end-line="86" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/products/list.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="33" column="71" lean-forward="true" selection-end-line="101" selection-end-column="10" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/admin_products.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -592,13 +665,6 @@
           <folding>
             <element signature="n#delete#0;n#Admin_products#0;n#!!top" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/manufacturers/add.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="730">
-          <caret line="63" column="111" selection-start-line="63" selection-start-column="111" selection-end-line="63" selection-end-column="111" />
         </state>
       </provider>
     </entry>
@@ -635,20 +701,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="90" column="59" lean-forward="true" selection-start-line="90" selection-start-column="59" selection-end-line="90" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/manufacturers/list.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="41" column="16" lean-forward="true" selection-start-line="41" selection-start-column="16" selection-end-line="46" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/manufacturers/edit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="47" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -762,13 +814,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/signup_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-289">
-          <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/tour/info/edit.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-119">
@@ -783,32 +828,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/tour_info.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4845">
-          <caret line="355" column="22" selection-start-line="342" selection-start-column="8" selection-end-line="355" selection-end-column="22" />
-          <folding>
-            <element signature="n#update#0;n#Tour_info#0;n#!!top" />
-            <element signature="n#delete#0;n#Tour_info#0;n#!!top" />
-            <element signature="n#ajaxRequestPost#0;n#Tour_info#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/includes/header.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="697">
           <caret line="41" column="136" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="136" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/tour_info_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1343">
-          <caret line="79" column="23" selection-start-line="79" selection-start-column="11" selection-end-line="79" selection-end-column="23" />
-          <folding>
-            <element signature="n#add_tour_info#0;n#Tour_info_model#0;n#!!top" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -826,13 +849,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/tour/info/list.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="72" column="34" selection-start-line="72" selection-start-column="34" selection-end-line="72" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/guest/info/add.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1734">
@@ -844,13 +860,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/member_list.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/system/language/english/form_validation_lang.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -858,9 +867,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/helpers/true_function_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="27" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/guest/update/add_payment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="107" column="45" selection-start-line="107" selection-start-column="45" selection-end-line="107" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/guest_info.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4080">
+        <state relative-caret-position="829">
           <caret line="367" column="42" selection-start-line="367" selection-start-column="19" selection-end-line="367" selection-end-column="42" />
           <folding>
             <element signature="n#update#0;n#Guest_info#0;n#!!top" />
@@ -872,16 +895,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/helpers/true_function_helper.php">
+    <entry file="file://$PROJECT_DIR$/application/views/guest/update/add_tour.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="27" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="27" />
+        <state relative-caret-position="829">
+          <caret line="62" column="17" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/helpers/form_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="829">
+          <caret line="375" column="45" selection-start-line="375" selection-start-column="39" selection-end-line="375" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="829">
+          <caret line="95" column="25" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/guest_info_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
+        <state relative-caret-position="829">
           <caret line="94" column="5" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
           <folding>
             <element signature="n#count_guest_infos#0;n#Guest_info_model#0;n#!!top" />
@@ -889,52 +926,104 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/guest/info/list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="38" column="92" selection-start-line="38" selection-start-column="92" selection-end-line="38" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/manufacturers/list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="31" column="24" lean-forward="true" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/manufacturers/add.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="82" selection-start-line="9" selection-start-column="82" selection-end-line="9" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/manufacturers/edit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="61" column="43" lean-forward="true" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/products/list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-102">
+          <caret line="36" column="50" lean-forward="true" selection-start-line="36" selection-start-column="50" selection-end-line="36" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/login.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/member_edit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-374">
+          <caret line="20" column="23" lean-forward="true" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/signup_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="659">
+          <caret line="86" column="31" lean-forward="true" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/member_list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="35" column="104" lean-forward="true" selection-start-line="35" selection-start-column="104" selection-end-line="35" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/assets/css/admin/admin.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2176">
-          <caret line="128" column="36" selection-start-line="128" selection-start-column="36" selection-end-line="128" selection-end-column="36" />
+        <state relative-caret-position="47">
+          <caret line="97" column="20" lean-forward="true" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/tour/info/list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="41" column="82" selection-start-line="41" selection-start-column="62" selection-end-line="41" selection-end-column="82" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/config/config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6885">
-          <caret line="405" column="25" selection-start-line="405" selection-start-column="9" selection-end-line="405" selection-end-column="25" />
+        <state relative-caret-position="141">
+          <caret line="365" column="8" lean-forward="true" selection-start-line="365" selection-start-column="8" selection-end-line="365" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/config/routes.php">
+    <entry file="file://$PROJECT_DIR$/application/controllers/tour_info.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1615">
-          <caret line="95" column="25" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="25" />
+        <state relative-caret-position="533">
+          <caret line="146" column="146" selection-start-line="146" selection-start-column="132" selection-end-line="146" selection-end-column="146" />
+          <folding>
+            <element signature="n#delete#0;n#Tour_info#0;n#!!top" />
+            <element signature="n#ajaxRequestPost#0;n#Tour_info#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system/helpers/form_helper.php">
+    <entry file="file://$PROJECT_DIR$/application/models/tour_info_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6375">
-          <caret line="375" column="45" selection-start-line="375" selection-start-column="39" selection-end-line="375" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/guest/update/add_tour.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="62" column="17" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/guest/info/list.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1411">
-          <caret line="83" column="59" selection-start-line="83" selection-start-column="59" selection-end-line="83" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/guest/update/add_payment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="113" column="17" selection-start-line="113" selection-start-column="17" selection-end-line="113" selection-end-column="17" />
+        <state relative-caret-position="383">
+          <caret line="118" column="84" selection-start-line="118" selection-start-column="84" selection-end-line="118" selection-end-column="84" />
+          <folding>
+            <element signature="n#add_tour_info#0;n#Tour_info_model#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>

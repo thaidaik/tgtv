@@ -7,18 +7,16 @@
             </a>
         </li>
         <li>
-            <a href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>">
-            <?php echo ucfirst($this->uri->segment(2));?>
-            </a>
+            <a href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>">Quản lý nhóm nhân viên</a>
         </li>
         <li class="active">
-            <a href="#">Update</a>
+            <a href="#">Sửa nhóm nhân viên</a>
         </li>
     </ul>
 
     <div class="page-header">
         <h2>
-        Updating <?php echo ucfirst($this->uri->segment(2));?>
+        <?php echo $this->config->item('text_updating'); ?>  nhóm nhân viên
         </h2>
     </div>
 
@@ -54,7 +52,7 @@
             ?>
             <fieldset>
                 <div class="control-group">
-                    <label for="inputError" class="control-label">Role</label>
+                    <label for="inputError" class="control-label">Tên nhóm nhân viên</label>
                     <div class="controls">
                     <input type="text" id="" name="name" value="<?php echo $manufacture[0]['name']; ?>" class="form-control">
                     <!--<span class="help-inline">Woohoo!</span>-->
@@ -62,8 +60,8 @@
                 </div>
                 <br/>
                 <div class="control-group">
-                    <button class="btn btn-primary" type="submit">Save changes</button>
-                    <button class="btn" type="reset">Cancel</button>
+                    <button class="btn btn-primary" type="submit"><?php echo $this->config->item('text_save_changes'); ?></button>
+                    <button class="btn" type="reset"><?php echo $this->config->item('text_cancel'); ?></button>
                 </div>
             </fieldset>
 

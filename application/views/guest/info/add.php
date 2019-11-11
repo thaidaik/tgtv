@@ -18,7 +18,7 @@
 
     <div class="page-header">
         <h2>
-            Adding <?php echo ucfirst($this->uri->segment(2));?>
+            <?php echo $this->config->item('text_adding'); ?> <?php echo ucfirst($this->uri->segment(2));?>
         </h2>
     </div>
     <?php
@@ -62,13 +62,13 @@
         echo form_open_multipart('guest/info/add', $attributes);
 
         echo '<div class="col-sm-6">';
-        echo '<div class="control-group"><label class="control-label required" for="tour_image">Image</label>';
+        echo '<div class="control-group"><label class="control-label required" for="tour_image">'.$this->config->item('text_image').'</label>';
         echo form_upload('tour_image', set_value('tour_image'), 'placeholder="Image" class="form-control"');
         echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="guest_name">guest_name</label>';
         echo form_input('guest_name', set_value('guest_name'), 'placeholder="guest_name" class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="sex">Sex</label>';
+        echo '<div class="control-group"><label class="control-label required" for="sex">'.$this->config->item('text_sex').'</label>';
         echo form_dropdown('sex', $user_sex, set_value('sex'), 'class="form-control"');
         echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="guest_phone">guest_phone</label>';

@@ -70,7 +70,7 @@
                 echo '<td>'.$row['user_name'].'</td>';
                 echo '<td><a href="'.site_url("guest").'/add/payment/'.$this->uri->segment(4).'/'.$row['guest_tour_link_id'].'" class="btn btn-success">Update Payment</a></td>';
                 echo '<td class="crud-actions">
-                  <a href="'.site_url("guest").'/link/tour/'.$this->uri->segment(4).'/'.$select_date.'/'.$row['guest_tour_link_id'].'" class="btn btn-info">edit</a>  
+                  <a href="'.site_url("guest").'/link/tour/'.$this->uri->segment(4).'/'.$select_date.'/'.$row['guest_tour_link_id'].'" class="btn btn-info">'.$this->config->item('text_edit').'</a>  
                 </td>';
                 echo '</tr>';
             }
@@ -88,7 +88,7 @@
             if(isset($get_guest_tour_sale_data) && count($get_guest_tour_sale_data)){
                 echo 'Edit Sale and Tour';
             }else{
-                echo 'Adding Data To Guest';
+                echo $this->config->item('text_adding').' Data To Guest';
             }
             ?>
 
@@ -132,7 +132,7 @@
             <tr>
                 <th class="">#</th>
                 <th class="">Code</th>
-                <th class="">Name</th>
+                <th class=""><?php echo $this->config->item('text_name'); ?></th>
                 <th class="">Price</th>
                 <th class="">Duration</th>
                 <th class="">Size</th>

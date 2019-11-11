@@ -53,7 +53,11 @@ class Tour_info_model extends CI_Model {
             $str_query = '(';
             foreach ($location_link as $key=>$value){
                 if($key == 0){
-                    $str_query .= 'tour_location_link.tour_location_id = '.$value;
+                    if($value != 0){
+                        $str_query .= 'tour_location_link.tour_location_id = '.$value;
+                    }else{
+                        $str_query .= 'tour_location_link.tour_location_id != 0';
+                    }
                     //$this->db->where('tour_location_link.tour_location_id', $value);
                 }else{
                     $str_query .= ' OR tour_location_link.tour_location_id = '.$value;
@@ -109,7 +113,11 @@ class Tour_info_model extends CI_Model {
         if($location_link != null && count($location_link) != 0){
             foreach ($location_link as $key=>$value){
                 if($key == 0){
-                    $this->db->where('tour_location_link.tour_location_id', $value);
+                    if($value != 0){
+                        $this->db->where('tour_location_link.tour_location_id', $value);
+                    }else{
+                        $this->db->where('tour_location_link.tour_location_id !=', 0);
+                    }
                 }else{
                     $this->db->or_where('tour_location_link.tour_location_id', $value);
                 }

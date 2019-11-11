@@ -14,7 +14,7 @@
       <div class="page-header users-header">
         <h2>
           <?php echo ucfirst($this->uri->segment(2));?> 
-          <a  href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>/add" class="btn btn-success">Add a new</a>
+          <a  href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>/add" class="btn btn-success"><?php echo $this->config->item('text_add_a_new'); ?></a>
         </h2>
       </div>
       
@@ -42,18 +42,18 @@
 
             echo form_open('admin/products', $attributes);
      
-              echo form_label('Search:', 'search_string');
+              echo form_label($this->config->item('text_search'), 'search_string');
               echo form_input('search_string', $search_string_selected, 'class="form-control"');
 
               echo form_label('Manufacturer:', 'manufacture_id');
               echo form_dropdown('manufacture_id', $options_manufacture, $manufacture_selected, 'class="form-control"');
 
-              echo form_label('Order by:', 'order');
+              echo form_label($this->config->item('text_order_by'), 'order');
               echo form_dropdown('order', $options_products, $order, 'class="form-control"');
 
-              $data_submit = array('name' => 'mysubmit', 'class' => 'btn btn-primary', 'value' => 'Go');
+              $data_submit = array('name' => 'mysubmit', 'class' => 'btn btn-primary', 'value' => $this->config->item('text_go'));
 
-              $options_order_type = array('Asc' => 'Asc', 'Desc' => 'Desc');
+              $options_order_type = array('Asc' => $this->config->item('text_asc'), 'Desc' => $this->config->item('text_desc'));
               echo form_dropdown('order_type', $options_order_type, $order_type_selected, 'class="form-control"');
 
               echo form_submit($data_submit);
@@ -88,7 +88,7 @@
                 echo '<td>'.$row['manufacture_name'].'</td>';
                 echo '<td class="crud-actions">
                   <a href="'.site_url("admin").'/products/update/'.$row['id'].'" class="btn btn-info">view & edit</a>  
-                  <a href="'.site_url("admin").'/products/delete/'.$row['id'].'" class="btn btn-danger">delete</a>
+                  <a href="'.site_url("admin").'/products/delete/'.$row['id'].'" class="btn btn-danger">'.$this->config->item('text_delete').'</a>
                 </td>';
                 echo '</tr>';
               }

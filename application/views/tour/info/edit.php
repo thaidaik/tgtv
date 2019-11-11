@@ -18,7 +18,7 @@
 
     <div class="page-header">
         <h2>
-            Adding <?php echo ucfirst($this->uri->segment(2));?>
+            <?php echo $this->config->item('text_adding'); ?> <?php echo ucfirst($this->uri->segment(2));?>
         </h2>
     </div>
     <?php
@@ -54,7 +54,7 @@
         echo form_open_multipart('tour/info/update/'.$this->uri->segment(4), $attributes);
 
         echo '<div class="col-sm-6">';
-        echo '<div class="control-group"><label class="control-label required" for="tour_image">Image</label>';
+        echo '<div class="control-group"><label class="control-label required" for="tour_image">'.$this->config->item('text_image').'</label>';
         echo form_upload('tour_image', $tour_info_data[0]['tour_image'], 'placeholder="Image" class="form-control"');
         echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="tour_code">Tour Code</label>';

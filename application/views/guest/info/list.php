@@ -3,7 +3,7 @@
     <div class="page-header users-header">
         <h2>
             <?php echo ucfirst($this->uri->segment(1));?>
-            <a  href="<?php echo site_url("admin"); ?>/signup" class="btn btn-success">Add a new</a>
+            <a  href="<?php echo site_url("admin"); ?>/signup" class="btn btn-success"><?php echo $this->config->item('text_add_a_new'); ?></a>
         </h2>
     </div>
 
@@ -15,7 +15,7 @@
 
                 $attributes = array('class' => 'form-inline reset-margin', 'id' => 'myform');
                 //save the columns names in a array that we will use as filter
-                $options_order_type = array('Asc' => 'Asc', 'Desc' => 'Desc');
+                $options_order_type = array('Asc' => $this->config->item('text_asc'), 'Desc' => $this->config->item('text_desc'));
                 $options_tours = array(
                     'tour_id' => 'ID',
                     'tour_code' => 'Code',
@@ -29,22 +29,21 @@
                 echo '<div class="col-md-10">';
 
                 echo '<div class="row bottom-block" >';
-                echo form_label('Search:', 'search_string');
+                echo form_label($this->config->item('text_search'), 'search_string');
                 echo form_input('search_string', $search_string_selected, 'class="form-control" id="search_field"');
-                echo form_label('Size:', 'order');
+                echo form_label($this->config->item('text_size'), 'order');
                 echo '</div>';
 
                 echo '<div class="row">';
-                echo form_label('Order by:', 'order');
+                echo form_label($this->config->item('text_order_by'), 'order');
                 echo form_dropdown('order', $options_tours, $order, 'class="form-control"');
-                echo form_label('Order type:', 'order');
                 echo form_dropdown('order_type', $options_order_type, $order_type_selected, 'class="form-control"');
                 echo '</div>';
 
                 echo '</div>';
 
                 echo '<div class="col-md-2">';
-                $data_submit = array('name' => 'mysubmit', 'class' => 'btn btn-primary', 'value' => 'Go');
+                $data_submit = array('name' => 'mysubmit', 'class' => 'btn btn-primary', 'value' => $this->config->item('text_go'));
                 echo '<div class="row bottom-block" >';
                 echo form_submit($data_submit);
                 echo '</div>';
@@ -60,11 +59,11 @@
                 <thead>
                 <tr>
                     <th class="">Code</th>
-                    <th class="">Name</th>
+                    <th class=""><?php echo $this->config->item('text_name'); ?></th>
                     <th class="">Phone</th>
                     <th class="">Email</th>
                     <th class="">CMND</th>
-                    <th class="">Birthday</th>
+                    <th class=""><?php echo $this->config->item('text_birthday'); ?></th>
                     <th class="">Actions</th>
                 </tr>
                 </thead>
@@ -82,8 +81,8 @@
                     echo '<td>'.convertDateDMY($row['guest_birthday']).'</td>';
                     echo '<td class="crud-actions">
                   <a href="'.site_url("guest").'/link/tour/gid_'.$row['guest_id'].'/mnow'.'" class="btn btn-info btn-xs">add tour</a>  
-                  <a href="'.site_url("guest").'/info/update/'.$row['guest_id'].'" class="btn btn-info btn-xs">edit</a>  
-                  <a href="'.site_url("guest").'/info/delete/'.'" class="btn btn-danger btn-xs">delete</a>
+                  <a href="'.site_url("guest").'/info/update/'.$row['guest_id'].'" class="btn btn-info btn-xs">'.$this->config->item('text_edit').'</a>  
+                  <a href="'.site_url("guest").'/info/delete/'.'" class="btn btn-danger btn-xs">'.$this->config->item('text_delete').'</a>
                 </td>';
                     echo '</tr>';
                 }
