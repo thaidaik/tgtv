@@ -7,16 +7,16 @@
         </li>
         <li>
             <a href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>">
-                <?php echo ucfirst($this->uri->segment(2));?>
+                Quản lý điểm tham quan
             </a>
         </li>
         <li class="active">
-            <a href="#">New</a>
+            <a href="#">Thêm mới</a>
         </li>
     </ul>
     <div class="page-header">
         <h2>
-            <?php echo $this->config->item('text_adding'); ?> <?php echo ucfirst($this->uri->segment(2));?>
+            <?php echo $this->config->item('text_adding'); ?> điểm tham quan
         </h2>
     </div>
     <?php
@@ -49,14 +49,14 @@
             ?>
             <fieldset>
                 <div class="control-group">
-                    <label for="inputError" class="control-label">Country</label>
+                    <label for="inputError" class="control-label">Quốc gia</label>
                     <div class="controls">
                         <input type="text" id="" name="country" value="<?php echo set_value('country'); ?>" class="form-control">
                         <!--<span class="help-inline">Woohoo!</span>-->
                     </div>
                 </div>
                 <div class="control-group">
-                    <label for="inputError" class="control-label">Continent</label>
+                    <label for="inputError" class="control-label">Khu vực</label>
                         <?php echo form_dropdown('continent', $tour_continent, set_value('europe'), 'class="form-control"'); ?>
                 </div>
                 <div class="form-actions block-fix">

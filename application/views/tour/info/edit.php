@@ -8,17 +8,17 @@
         </li>
         <li>
             <a href="<?php echo site_url("tour").'/'.$this->uri->segment(2); ?>">
-                <?php echo ucfirst($this->uri->segment(2));?>
+                Danh sách Tour
             </a>
         </li>
         <li class="active">
-            <a href="#">New</a>
+            <a href="#">Cập nhật thông tin Tour</a>
         </li>
     </ul>
 
     <div class="page-header">
         <h2>
-            <?php echo $this->config->item('text_adding'); ?> <?php echo ucfirst($this->uri->segment(2));?>
+            <?php echo $this->config->item('text_updating'); ?> Thông tin Tour
         </h2>
     </div>
     <?php
@@ -63,38 +63,38 @@
         echo '<div class="control-group"><label class="control-label required" for="tour_name">Tour Name</label>';
         echo form_input('tour_name', $tour_info_data[0]['tour_name'], 'placeholder="tour_name" class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="phone">Tour Duraction</label>';
-        echo form_input('tour_duration', $tour_info_data[0]['tour_duration'], 'placeholder="tour_duration" class="form-control"');
+        echo '<div class="control-group"><label class="control-label required" for="phone">Số ngày đi tour</label>';
+        echo form_input('tour_duration', $tour_info_data[0]['tour_duration'], 'placeholder="Số ngày đi tour" class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="group_size">Group Size</label>';
-        echo form_input('group_size', $tour_info_data[0]['group_size'], 'placeholder="group_size" class="form-control"');
+        echo '<div class="control-group"><label class="control-label required" for="group_size">Số khách sẽ nhận</label>';
+        echo form_input('group_size', $tour_info_data[0]['group_size'], 'placeholder="Số khách sẽ nhận" class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="tourtour_description_gift">Tour Description</label>';
-        echo form_textarea('tour_description', $tour_info_data[0]['tour_description'], 'placeholder="tour_description" class="form-control editor"');
+        echo '<div class="control-group"><label class="control-label required" for="tourtour_description_gift">Mô tả tóm tắt Tour</label>';
+        echo form_textarea('tour_description', $tour_info_data[0]['tour_description'], 'placeholder="Mô tả tóm tắt Tour" class="form-control editor"');
         echo '</div>';
 
         echo '</div>';
         echo '<div class="col-sm-6">';
-        echo '<div class="control-group"><label class="control-label required" for="tour_image">Select Location</label>';
+        echo '<div class="control-group"><label class="control-label required" for="tour_image">Chọn tuyến tham quan</label>';
         echo form_multiselect('location_link[]', $field_tour_location, $tour_location, 'class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="start_date">Start Date</label>';
+        echo '<div class="control-group"><label class="control-label required" for="start_date">Ngày khởi hành</label>';
         echo '<div class="input-group datepicker">';
         echo form_input('start_date', $startdate, 'class="form-control" readonly');
         echo '<span class="input-group-addon"><span class="fa fa-calendar"></span></span>';
         echo '</div>';
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="tour_gift">Tour Gift</label>';
-        echo form_input('tour_gift', $tour_info_data[0]['tour_gift'], 'placeholder="tour_gift" class="form-control"');
+        echo '<div class="control-group"><label class="control-label required" for="tour_gift">Quà tặng khuyến mãi</label>';
+        echo form_input('tour_gift', $tour_info_data[0]['tour_gift'], 'placeholder="Quà tặng khuyến mãi" class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="tour_price">Tour Price</label>';
-        echo form_input('tour_price', $tour_info_data[0]['tour_price'], 'placeholder="tour_price" class="form-control"');
+        echo '<div class="control-group"><label class="control-label required" for="tour_price">Giá Tour</label>';
+        echo form_input('tour_price', $tour_info_data[0]['tour_price'], 'placeholder="Giá Tour" class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="tour_price_min">Tour Price Min</label>';
-        echo form_input('tour_price_min', $tour_info_data[0]['tour_price_min'], 'placeholder="tour_price_min" class="form-control"');
+        echo '<div class="control-group"><label class="control-label required" for="tour_price_min">Giá Tour thấp nhất</label>';
+        echo form_input('tour_price_min', $tour_info_data[0]['tour_price_min'], 'placeholder="Giá thấp nhất" class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="tour_gift">Tour Guide Info</label>';
-        echo form_input('tour_guide_info', $tour_info_data[0]['tour_guide_info'], 'placeholder="tour_guide_info" class="form-control"');
+        echo '<div class="control-group"><label class="control-label required" for="tour_gift">Thông tin hướng dẫn viên</label>';
+        echo form_input('tour_guide_info', $tour_info_data[0]['tour_guide_info'], 'placeholder="Thông tin hướng dẫn viên" class="form-control"');
         echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="tour_color">Select Color</label>';
         echo form_dropdown('tour_color', $color_table, $tour_info_data[0]['tour_color'], 'class="form-control"');

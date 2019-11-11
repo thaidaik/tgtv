@@ -2,7 +2,7 @@
 
     <div class="page-header">
         <h2>
-            Guest Information
+            Thông tin khách hàng
         </h2>
     </div>
     <?php
@@ -39,24 +39,24 @@
 
     echo '<div class="row">';
     echo '<div class="col-md-6">';
-    echo '<div class="row bottom-block"><label>Guest Name: </label>'.$sex_show.' '.$guest_info_data['0']['guest_name'].'</div>';
-    echo '<div class="row bottom-block"><label>Guest Phone: </label>'.$guest_info_data['0']['guest_phone'].' days</div>';
-    echo '<div class="row bottom-block"><label>Guest Adress: </label>'.$guest_info_data['0']['guest_address'].'</div>';
-    echo '<div class="row bottom-block"><label>Guest Email: </label>'.$guest_info_data['0']['guest_email'].'</div>';
+    echo '<div class="row bottom-block"><label>Tên: </label>'.$sex_show.' '.$guest_info_data['0']['guest_name'].'</div>';
+    echo '<div class="row bottom-block"><label>Phone: </label>'.$guest_info_data['0']['guest_phone'].'</div>';
+    echo '<div class="row bottom-block"><label>Địa chỉ: </label>'.$guest_info_data['0']['guest_address'].'</div>';
+    echo '<div class="row bottom-block"><label>Email: </label>'.$guest_info_data['0']['guest_email'].'</div>';
     echo '</div>';
     echo '<div class="col-md-6">';
-    echo '<div class="row bottom-block"><label>Guest Birthday: </label>'.$guestbirthday.'</div>';
-    echo '<div class="row bottom-block"><label>Guest ID: </label>'.$guest_info_data['0']['guest_cmnd'].'</div>';
-    echo '<div class="row bottom-block"><label>Guest Passport: </label>'.$guest_info_data['0']['guest_passport'].'</div>';
-    echo '<div class="row bottom-block"><label>Guest Country: </label>'.$guest_info_data['0']['guest_country'].'</div>';
+    echo '<div class="row bottom-block"><label>Sinh nhật: </label>'.$guestbirthday.'</div>';
+    echo '<div class="row bottom-block"><label>CMND: </label>'.$guest_info_data['0']['guest_cmnd'].'</div>';
+    echo '<div class="row bottom-block"><label>Hộ chiếu: </label>'.$guest_info_data['0']['guest_passport'].'</div>';
+    echo '<div class="row bottom-block"><label>Nguyên quán: </label>'.$guest_info_data['0']['guest_country'].'</div>';
     echo '</div>';
     echo '</div>';
-    echo '<hr class="style1">';
+
 
     ?>
     <div class="page-header">
         <h2>
-            Payment Info
+            Thông tin thanh toán
         </h2>
     </div>
     <div class="row">
@@ -65,10 +65,10 @@
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
-                    <th class="">Guest name</th>
+                    <th class="">Tên khách hàng</th>
                     <th class="">Tour name</th>
-                    <th class="">Sale name</th>
-                    <th class="">Update Payment</th>
+                    <th class="">Tên Sale</th>
+                    <th class="">Cập nhật thanh toán</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -80,7 +80,7 @@
                     echo '<td>'.$row['guest_name'].'</td>';
                     echo '<td>'.$row['tour_name'].'</td>';
                     echo '<td>'.$row['user_name'].'</td>';
-                    echo '<td>Updating...</td>';
+                    echo '<td>Đang chỉnh sửa...</td>';
                     echo '</tr>';
                 }
                 ?>
@@ -94,9 +94,9 @@
     <?php
     if(isset($get_all_payment_toguest)){ ?>
     <div class="page-header">
-        <h4>
-            Payment Listing
-        </h4>
+        <h3>
+            Danh sách thanh toán
+        </h3>
     </div>
     <div class="row">
         <table class="table table-striped table-hover">
@@ -121,19 +121,18 @@
                 echo '<td>'.$all_users[$row['guest_pay_by_user_id']].'</td>';
                 echo '<td>'.$guest_pay_by_type[$row['guest_pay_by_type']].'</td>';
                 echo '<td>'.$select_date.'</td>';
-                echo '<td>Updating...</td>';
+                echo '<td><a href="'.site_url("guest").'/add/payment/'.'" class="btn btn-success btn-xs">Sửa</a></td>';
                 echo '</tr>';
             }
             ?>
             </tbody>
         </table>
-        <hr class="style1">
     </div>
     <?php } ?>
     <div class="page-header">
-        <h4>
-            Add Payment
-        </h4>
+        <h3>
+            Thêm thanh toán
+        </h3>
     </div>
     <div class="row">
 

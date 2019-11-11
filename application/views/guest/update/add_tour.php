@@ -2,7 +2,7 @@
 
     <div class="page-header">
         <h2>
-            Guest Information
+            Thông tin khách hàng
         </h2>
     </div>
     <?php
@@ -34,61 +34,69 @@
 
     echo '<div class="row">';
     echo '<div class="col-md-6">';
-    echo '<div class="row bottom-block"><label>Guest Name: </label>'.$sex_show.' '.$guest_info_data['0']['guest_name'].'</div>';
-    echo '<div class="row bottom-block"><label>Guest Phone: </label>'.$guest_info_data['0']['guest_phone'].' days</div>';
-    echo '<div class="row bottom-block"><label>Guest Adress: </label>'.$guest_info_data['0']['guest_address'].'</div>';
-    echo '<div class="row bottom-block"><label>Guest Email: </label>'.$guest_info_data['0']['guest_email'].'</div>';
+    echo '<div class="row bottom-block"><label>Tên: </label>'.$sex_show.' '.$guest_info_data['0']['guest_name'].'</div>';
+    echo '<div class="row bottom-block"><label>Phone: </label>'.$guest_info_data['0']['guest_phone'].'</div>';
+    echo '<div class="row bottom-block"><label>Địa chỉ: </label>'.$guest_info_data['0']['guest_address'].'</div>';
+    echo '<div class="row bottom-block"><label>Email: </label>'.$guest_info_data['0']['guest_email'].'</div>';
     echo '</div>';
     echo '<div class="col-md-6">';
-    echo '<div class="row bottom-block"><label>Guest Birthday: </label>'.$guest_birthdays.'</div>';
-    echo '<div class="row bottom-block"><label>Guest ID: </label>'.$guest_info_data['0']['guest_cmnd'].'</div>';
-    echo '<div class="row bottom-block"><label>Guest Passport: </label>'.$guest_info_data['0']['guest_passport'].'</div>';
-    echo '<div class="row bottom-block"><label>Guest Country: </label>'.$guest_info_data['0']['guest_country'].'</div>';
+    echo '<div class="row bottom-block"><label>Sinh nhật: </label>'.$guest_birthdays.'</div>';
+    echo '<div class="row bottom-block"><label>CMND: </label>'.$guest_info_data['0']['guest_cmnd'].'</div>';
+    echo '<div class="row bottom-block"><label>Hộ chiếu: </label>'.$guest_info_data['0']['guest_passport'].'</div>';
+    echo '<div class="row bottom-block"><label>Nguyên quán: </label>'.$guest_info_data['0']['guest_country'].'</div>';
     echo '</div>';
     echo '</div>';
-    echo '<hr class="style1">';
 
-    if(isset($guest_sale_tour_info_data)){ ?>
-        <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-                <th class="">Guest name</th>
-                <th class="">Tour name</th>
-                <th class="">Sale name</th>
-                <th class="">Update Payment</th>
-                <th class="">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            foreach($guest_sale_tour_info_data as $row)
-            {
-                $select_date = checkDateData($row['start_date']);
-                echo '<tr>';
-                echo '<td>'.$row['guest_name'].'</td>';
-                echo '<td>'.$row['tour_name'].'</td>';
-                echo '<td>'.$row['user_name'].'</td>';
-                echo '<td><a href="'.site_url("guest").'/add/payment/'.$this->uri->segment(4).'/'.$row['guest_tour_link_id'].'" class="btn btn-success">Update Payment</a></td>';
-                echo '<td class="crud-actions">
-                  <a href="'.site_url("guest").'/link/tour/'.$this->uri->segment(4).'/'.$select_date.'/'.$row['guest_tour_link_id'].'" class="btn btn-info">'.$this->config->item('text_edit').'</a>  
+
+    if(isset($get_guest_tour_sale_data) && count($get_guest_tour_sale_data)){
+
+    }else{
+        echo '<h2>Danh sách Tour sử dụng</h2>';
+        echo '<hr class="style1">';
+        if(isset($guest_sale_tour_info_data)){ ?>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th class="">Khách hàng</th>
+                    <th class="">Tour name</th>
+                    <th class="">Sale</th>
+                    <th class="">Số lần thanh toán</th>
+                    <th class="">Cập nhật thanh toán</th>
+                    <th class="">Sửa</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                foreach($guest_sale_tour_info_data as $row)
+                {
+                    $select_date = checkDateData($row['start_date']);
+                    echo '<tr>';
+                    echo '<td>'.$row['guest_name'].'</td>';
+                    echo '<td>'.$row['tour_name'].'</td>';
+                    echo '<td>'.$row['user_name'].'</td>';
+                    echo '<td>2</td>';
+                    echo '<td><a href="'.site_url("guest").'/add/payment/'.$this->uri->segment(4).'/'.$row['guest_tour_link_id'].'" class="btn btn-success btn-xs">Cập nhật thanh toán</a></td>';
+                    echo '<td class="crud-actions"><a href="'.site_url("guest").'/link/tour/'.$this->uri->segment(4).'/'.$select_date.'/'.$row['guest_tour_link_id'].'" class="btn btn-info btn-xs">'.$this->config->item('text_edit').'</a>  
                 </td>';
-                echo '</tr>';
-            }
-            ?>
-            </tbody>
-        </table>
-        <hr class="style1">
-    <?php
+                    echo '</tr>';
+                }
+                ?>
+                </tbody>
+            </table>
+
+            <?php
+        }
     }
+
 
     ?>
     <div class="page-header">
         <h2>
             <?php
             if(isset($get_guest_tour_sale_data) && count($get_guest_tour_sale_data)){
-                echo 'Edit Sale and Tour';
+                echo 'Edit booking tour';
             }else{
-                echo $this->config->item('text_adding').' Data To Guest';
+                echo 'Booking tour';
             }
             ?>
 
@@ -112,11 +120,14 @@
         }
 
         echo '<div class="col-sm-12">';
-
-        echo '<div class="control-group"><label class="control-label required bottom-block" for="sale_id">Select Sale</label>';
-        echo form_dropdown('sale_id', $all_users, $select_sale, 'class="form-control"');
+            echo '<div class="row">';
+                echo '<div class="col-md-6">';
+                    echo '<div class="control-group"><label class="control-label required bottom-block" for="sale_id">Chọn Sale đang chăm sóc khách hàng</label>';
+                    echo form_dropdown('sale_id', $all_users, $select_sale, 'class="form-control"');
+                echo '</div>';
+            echo '</div>';
         echo '</div>'; ?>
-        <div class="control-group"><label class="control-label required" for="sale_id">Choose Tour</label></div>
+        <div class="control-group"><label class="control-label required" for="sale_id">Chọn Tour khách hàng đăng ký</label></div>
         <ul class="nav nav-tabs">
                 <li <?php if($this->uri->segment(5) == 'mnow' || $this->uri->segment(5) == ''){echo 'class="active"';}?> >
                     <a href="<?php echo site_url("guest").'/link/tour/'.$this->uri->segment(4).'/mnow'; if(isset($get_guest_tour_sale_data) && count($get_guest_tour_sale_data)){echo '/'.$this->uri->segment(6);} ?>"><?php echo date('m/Y');?></a></li>

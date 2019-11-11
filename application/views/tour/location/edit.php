@@ -49,13 +49,13 @@
             ?>
             <fieldset>
                 <div class="control-group">
-                    <label for="inputError" class="control-label">Country</label>
+                    <label for="inputError" class="control-label">Quốc gia</label>
                     <div class="controls">
                         <input type="text" id="" name="country" value="<?php echo $tour_location[0]['country']; ?>" class="form-control">
                     </div>
                 </div>
                 <div class="control-group">
-                    <label for="inputError" class="control-label">Continent</label>
+                    <label for="inputError" class="control-label">Khu vực</label>
                     <?php echo form_dropdown('continent', $tour_continent, $tour_location[0]['continent'], 'class="form-control"'); ?>
                 </div>
                 <div class="form-actions block-fix">

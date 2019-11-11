@@ -3,22 +3,17 @@
     <ul class="breadcrumb">
         <li>
             <a href="<?php echo site_url("admin"); ?>">
-                <?php echo ucfirst($this->uri->segment(1));?>
-            </a>
-        </li>
-        <li>
-            <a href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>">
-                <?php echo ucfirst($this->uri->segment(2));?>
+                Quản lý Tour
             </a>
         </li>
         <li class="active">
-            <a href="#">New</a>
+            <a href="#">Tạo mới Tour</a>
         </li>
     </ul>
 
     <div class="page-header">
         <h2>
-            <?php echo $this->config->item('text_adding'); ?> <?php echo ucfirst($this->uri->segment(2));?>
+            <?php echo $this->config->item('text_adding'); ?> Tour
         </h2>
     </div>
     <?php
@@ -52,43 +47,43 @@
         echo form_upload('tour_image', set_value('tour_image'), 'placeholder="Image" class="form-control"');
         echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="tour_code">Tour Code</label>';
-        echo form_input('tour_code', set_value('tour_code'), 'placeholder="tour_code" class="form-control"');
+        echo form_input('tour_code', set_value('tour_code'), 'placeholder="Tour Code" class="form-control"');
         echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="tour_name">Tour Name</label>';
-        echo form_input('tour_name', set_value('tour_name'), 'placeholder="tour_name" class="form-control"');
+        echo form_input('tour_name', set_value('tour_name'), 'placeholder="Tour Name" class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="phone">Tour Duraction</label>';
-        echo form_input('tour_duration', set_value('tour_duration'), 'placeholder="tour_duration" class="form-control"');
+        echo '<div class="control-group"><label class="control-label required" for="phone">Số ngày đi tour</label>';
+        echo form_input('tour_duration', set_value('tour_duration'), 'placeholder="Số ngày đi tour" class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="group_size">Group Size</label>';
+        echo '<div class="control-group"><label class="control-label required" for="group_size">Số khách sẽ nhận</label>';
         echo form_input('group_size', set_value('group_size'), 'placeholder="group_size" class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="tourtour_description_gift">Tour Description</label>';
-        echo form_textarea('tour_description', set_value('tour_description'), 'placeholder="tour_description" class="form-control"');
+        echo '<div class="control-group"><label class="control-label required" for="tourtour_description_gift">Mô tả tóm tắt Tour</label>';
+        echo form_textarea('tour_description', set_value('tour_description'), 'placeholder="Mô tả tóm tắt Tour" class="form-control"');
         echo '</div>';
 
         echo '</div>';
         echo '<div class="col-sm-6">';
-        echo '<div class="control-group"><label class="control-label required" for="tour_image">Select Location</label>';
+        echo '<div class="control-group"><label class="control-label required" for="tour_image">Chọn tuyến tham quan</label>';
         echo form_multiselect('location_link[]', $field_tour_location, '1', 'class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="start_date">Start Date</label>';
+        echo '<div class="control-group"><label class="control-label required" for="start_date">Ngày khởi hành</label>';
         echo '<div class="input-group datepicker">';
         echo form_input('start_date', set_value('start_date'), 'class="form-control" readonly');
         echo '<span class="input-group-addon"><span class="fa fa-calendar"></span></span>';
         echo '</div>';
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="tour_gift">Tour Gift</label>';
+        echo '<div class="control-group"><label class="control-label required" for="tour_gift">Quà tặng khuyến mãi</label>';
         echo form_input('tour_gift', set_value('tour_gift'), 'placeholder="tour_gift" class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="tour_price">Tour Price</label>';
-        echo form_input('tour_price', set_value('tour_price'), 'placeholder="tour_price" class="form-control"');
+        echo '<div class="control-group"><label class="control-label required" for="tour_price">Giá Tour</label>';
+        echo form_input('tour_price', set_value('tour_price'), 'placeholder="Giá Tour" class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="tour_price_min">Tour Price Min</label>';
-        echo form_input('tour_price_min', set_value('tour_price_min'), 'placeholder="tour_price_min" class="form-control"');
+        echo '<div class="control-group"><label class="control-label required" for="tour_price_min">Giá Tour thấp nhất</label>';
+        echo form_input('tour_price_min', set_value('tour_price_min'), 'placeholder="Giá thấp nhất" class="form-control"');
         echo '</div>';
-        echo '<div class="control-group"><label class="control-label required" for="tour_gift">Tour Guide Info</label>';
-        echo form_input('tour_guide_info', set_value('tour_guide_info'), 'placeholder="tour_guide_info" class="form-control"');
+        echo '<div class="control-group"><label class="control-label required" for="tour_gift">Thông tin hướng dẫn viên</label>';
+        echo form_input('tour_guide_info', set_value('tour_guide_info'), 'placeholder="Thông tin hướng dẫn viên" class="form-control"');
         echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="tour_color">Select Color</label>';
         echo form_dropdown('tour_color', $color_table, set_value('tour_color'), 'class="form-control"');

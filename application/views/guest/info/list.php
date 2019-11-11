@@ -2,8 +2,8 @@
 
     <div class="page-header users-header">
         <h2>
-            <?php echo ucfirst($this->uri->segment(1));?>
-            <a  href="<?php echo site_url("admin"); ?>/signup" class="btn btn-success"><?php echo $this->config->item('text_add_a_new'); ?></a>
+            Danh sách khách hàng
+            <a  href="<?php echo site_url("guest"); ?>/info/add" class="btn btn-success"><?php echo $this->config->item('text_add_a_new'); ?></a>
         </h2>
     </div>
 
@@ -17,35 +17,34 @@
                 //save the columns names in a array that we will use as filter
                 $options_order_type = array('Asc' => $this->config->item('text_asc'), 'Desc' => $this->config->item('text_desc'));
                 $options_tours = array(
-                    'tour_id' => 'ID',
-                    'tour_code' => 'Code',
-                    'group_size' => 'Group Size',
-                    'start_date' => 'Start Date',
-                    'create_date' => 'Create date',
+                    'guest_code' => 'Mã khách hàng',
+                    'guest_name' => 'Tên khách hàng',
                 );
 
                 echo form_open('tour/info', $attributes);
                 echo '<div class="row">';
                 echo '<div class="col-md-10">';
 
-                echo '<div class="row bottom-block" >';
-                echo form_label($this->config->item('text_search'), 'search_string');
+                echo '<div class="row " >';
+                echo form_label('Tên khách hàng:', 'search_string');
                 echo form_input('search_string', $search_string_selected, 'class="form-control" id="search_field"');
-                echo form_label($this->config->item('text_size'), 'order');
+                echo form_label('Mã khách hàng:', 'search_code'); // new field xxx
+                echo form_input('search_code', $search_string_selected, 'class="form-control" id="search_field"');
                 echo '</div>';
 
-                echo '<div class="row">';
+                /*echo '<div class="row">';
                 echo form_label($this->config->item('text_order_by'), 'order');
                 echo form_dropdown('order', $options_tours, $order, 'class="form-control"');
                 echo form_dropdown('order_type', $options_order_type, $order_type_selected, 'class="form-control"');
-                echo '</div>';
+                echo '</div>';*/
 
                 echo '</div>';
 
                 echo '<div class="col-md-2">';
                 $data_submit = array('name' => 'mysubmit', 'class' => 'btn btn-primary', 'value' => $this->config->item('text_go'));
-                echo '<div class="row bottom-block" >';
+                echo '<div class="row " >';
                 echo form_submit($data_submit);
+                echo ' <a class="btn btn-success" href="'.base_url().'tour_info/createXLS">Export XLS</a>';
                 echo '</div>';
                 echo '</div>';
 
@@ -64,7 +63,7 @@
                     <th class="">Email</th>
                     <th class="">CMND</th>
                     <th class=""><?php echo $this->config->item('text_birthday'); ?></th>
-                    <th class="">Actions</th>
+                    <th class=""></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -80,7 +79,7 @@
                     echo '<td>'.$row['guest_cmnd'].'</td>';
                     echo '<td>'.convertDateDMY($row['guest_birthday']).'</td>';
                     echo '<td class="crud-actions">
-                  <a href="'.site_url("guest").'/link/tour/gid_'.$row['guest_id'].'/mnow'.'" class="btn btn-info btn-xs">add tour</a>  
+                  <a href="'.site_url("guest").'/link/tour/gid_'.$row['guest_id'].'/mnow'.'" class="btn btn-success btn-xs">Quản lý tour</a>  
                   <a href="'.site_url("guest").'/info/update/'.$row['guest_id'].'" class="btn btn-info btn-xs">'.$this->config->item('text_edit').'</a>  
                   <a href="'.site_url("guest").'/info/delete/'.'" class="btn btn-danger btn-xs">'.$this->config->item('text_delete').'</a>
                 </td>';

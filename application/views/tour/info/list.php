@@ -15,6 +15,11 @@
 
                 $attributes = array('class' => 'form-inline reset-margin', 'id' => 'myform');
                 //save the columns names in a array that we will use as filter
+                $options_location_group = array(
+                    'eu' => 'Châu Âu',
+                    'us' => 'Châu Mỹ',
+                    'asia' => 'Châu Á',
+                );
                 $options_tours = array(
                     'tour_id' => 'ID',
                     'tour_code' => 'Code',
@@ -31,27 +36,39 @@
                 );
                 $options_order_type = array('Asc' => $this->config->item('text_asc'), 'Desc' => $this->config->item('text_desc'));
                 $options_duration = array('5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10','11'=>'11','12'=>'12','13'=>'13');
-                $options_month = array('all'=>'all','1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10','11'=>'11','12'=>'12');
-                $options_year = array('all'=>'all','2019'=>'2019','2020'=>'2020','2021'=>'2021');
+                $options_month = array('all'=>'Tất cả','1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10','11'=>'11','12'=>'12');
+                $options_year = array('all'=>'Tất cả','2019'=>'2019','2020'=>'2020','2021'=>'2021');
 
                 echo form_open('tour/info', $attributes);
                 echo '<div class="row">';
                     echo '<div class="col-md-3">';
-                        echo form_label('Tour:', 'location_link');
-                        //echo form_multiselect('location_link[]', $field_tour_location, $location_link_selected, 'class="form-control" id="location_link"');
-                        echo form_dropdown('location_link[]', $field_tour_location, $location_link_selected, 'class="form-control"');
+                        echo '<div class="row bottom-block" >';
+                            echo form_label('Khu vưc :', 'location_link'); // new field xxx
+                            echo form_dropdown('location_group', $options_location_group, $location_link_selected, 'class="form-control" id="location_link_3"');
+                        echo '</div>';
+                        echo '<div class="row bottom-block" >';
+                            echo form_label('Quốc gia :', 'location_link');
+                            //echo form_multiselect('location_link[]', $field_tour_location, $location_link_selected, 'class="form-control" id="location_link"');
+                            echo form_dropdown('location_link[]', $field_tour_location, $location_link_selected, 'class="form-control" id="location_link_2"');
+                        echo '</div>';
+                        echo '<div class="row bottom-block">';
+                            echo form_label($this->config->item('text_search_code'), 'search_code');
+                            echo form_input('search_code', $search_string_selected, 'class="form-control" id="search_field_code"');
+                        echo '</div>';
                     echo '</div>';
                     echo '<div class="col-md-7">';
                         echo '<div class="row bottom-block" >';
-                            echo form_label($this->config->item('text_search'), 'search_string');
+                            echo form_label('Tour name:', 'search_string');
                             echo form_input('search_string', $search_string_selected, 'class="form-control" id="search_field"');
-                            echo form_label($this->config->item('text_size'), 'order');
-                            echo form_dropdown('group_size', $options_sizes, $sizes_selected, 'class="form-control"');
+                            /*echo form_label($this->config->item('text_size'), 'order');
+                            echo form_dropdown('group_size', $options_sizes, $sizes_selected, 'class="form-control"');*/ // old field xxx
                         echo '</div>';
                         echo '<div class="row bottom-block">';
-                            echo form_label('Select month:', 'start_month');
+                            echo form_label('Khởi hành:  Ngày', 'start_day'); // new field xxx
+                            echo form_dropdown('start_day', $options_month, $month_selected, 'class="form-control"');
+                            echo form_label('Tháng', 'start_month');
                             echo form_dropdown('start_month', $options_month, $month_selected, 'class="form-control"');
-                            echo form_label('Select year:', 'start_year');
+                            echo form_label('Năm:', 'start_year');
                             echo form_dropdown('start_year', $options_year, $year_selected, 'class="form-control"');
                         echo '</div>';
                         echo '<div class="row">';
@@ -68,6 +85,9 @@
                 echo '<div class="row bottom-block" >';
                         echo '<a class="btn btn-danger" href="'.base_url().'tour/info">Reset</a>';
                 echo '</div>';
+                echo '<div class="row bottom-block" >';
+                        echo '<a class="btn btn-success" href="'.base_url().'tour_info/createXLS">Export XLS</a>';
+                echo '</div>';
                     echo '</div>';
                 echo '</div>';
                 echo form_close();
@@ -78,13 +98,14 @@
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
-                    <th class="">Code</th>
-                    <th class=""><?php echo $this->config->item('text_name'); ?></th>
-                    <th class="">Price</th>
-                    <th class="">Duration</th>
-                    <th class="">Size</th>
-                    <th class="">Start Date</th>
-                    <th class="">Actions</th>
+                    <th class="">Tour Code</th>
+                    <th class="">Tour Name</th>
+                    <th class="">Giá Tour</th>
+                    <th class="">Số ngày</th>
+                    <th class="">Số khách</th>
+                    <th class="">Còn nhận</th>
+                    <th class="">Khởi hành</th>
+                    <th class=""></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -92,13 +113,20 @@
                 $this->load->helper('true_function');
                 foreach($tour_infos as $row)
                 {
-                    echo '<tr class="'.$row['tour_color'].'">';
+                    //echo '<tr class="'.$row['tour_color'].'">';
+                    $night = $row['tour_duration'] - 1;
+                    $random = rand(0,4);
+                    $random_hour = rand(10,24);
+                    $random_min = rand(1,3)*15;
+                    $slot = $row['tour_duration'] - 1;
+                    echo '<tr>';
                     echo '<td><a href="#" class="view-tour" data-id="'.$row['tour_id'].'" data-title="'.$row['tour_name'].'" data-toggle="modal" data-target="#myModal">'.$row['tour_code'].'</a></td>';
                     echo '<td><span class="tooltip-showname" data-toggle="tooltip" data-placement="right" id="tooltip-top" data-original-title="'.$row['tour_name'].'">'.truncateWords($row['tour_name'], 15).'</span></td>';
-                    echo '<td>'.convertMilion($row['tour_price']).'</td>';
-                    echo '<td>'.$row['tour_duration'].' d</td>';
-                    echo '<td>'.$row['group_size'].' p</td>';
-                    echo '<td>'.convertDateDMY($row['start_date']).'</td>';
+                    echo '<td>'.number_format($row['tour_price']).'</td>';
+                    echo '<td>'.$row['tour_duration'].'N'.$night.'Đ</td>';
+                    echo '<td>'.$row['group_size'].'</td>';
+                    echo '<td>'.$random.'</td>';
+                    echo '<td>'.convertDateDMY($row['start_date']).' '.$random_hour.':'.$random_min.' VN'.rand(200,600).'</td>';
                     echo '<td class="crud-actions">
                   <a href="'.site_url("tour").'/info/update/'.$row['tour_id'].'" class="btn btn-info">'.$this->config->item('text_edit').'</a>  
                   <a href="'.site_url("tour").'/info/delete/'.$row['tour_id'].'" class="btn btn-danger">'.$this->config->item('text_delete').'</a>

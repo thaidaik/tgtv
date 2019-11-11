@@ -7,14 +7,14 @@
             </a>
         </li>
         <li class="active">
-            <?php echo ucfirst($this->uri->segment(2));?>
+            Danh sách điểm tham quan
         </li>
     </ul>
 
     <div class="page-header users-header">
         <h2>
-            <?php echo ucfirst($this->uri->segment(2));?>
-            <a  href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>/add" class="btn btn-success"><?php echo $this->config->item('text_add_a_new'); ?></a>
+            Điểm tham quan
+            <a  href="<?php echo site_url("tour").'/'; ?>/location/add" class="btn btn-success"><?php echo $this->config->item('text_add_a_new'); ?></a>
         </h2>
     </div>
 

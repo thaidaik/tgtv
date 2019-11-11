@@ -16,50 +16,50 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">TGTV</a>
+                <a class="navbar-brand" href="#">TG Travel Application</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >User <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >Quản lý nhân viên <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li <?php if($this->uri->segment(2) == 'signup'){echo 'class="active"';}?>>
-                                <a href="<?php echo base_url(); ?>admin/signup">New User</a>
+                                <a href="<?php echo base_url(); ?>admin/signup">Tạo nhân viên mới</a>
                             </li>
                             <li <?php if($this->uri->segment(2) == 'list'){echo 'class="active"';}?>>
-                                <a href="<?php echo base_url(); ?>admin/list">List User</a>
+                                <a href="<?php echo base_url(); ?>admin/list">Danh sách nhân viên</a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li <?php if($this->uri->segment(2) == 'role'){echo 'class="active"';}?>>
-                                <a href="<?php echo base_url(); ?>admin/role">List Role</a>
+                                <a href="<?php echo base_url(); ?>admin/role">Danh sách nhóm</a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >Tours Manager<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >Quản lý Tour<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li <?php if($this->uri->segment(2) == 'tour' && $this->uri->segment(3) == 'list'){echo 'class="active"';}?>>
-                                <a href="<?php echo base_url(); ?>tour/info">List Tour</a>
+                                <a href="<?php echo base_url(); ?>tour/info">Danh sách Tour</a>
                             </li>
                             <li <?php if($this->uri->segment(2) == 'tour' && $this->uri->segment(2) == 'info'){echo 'class="active"';}?>>
-                                <a href="<?php echo base_url(); ?>tour/info/add">Add New Tour</a>
+                                <a href="<?php echo base_url(); ?>tour/info/add">Thêm mới Tour</a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li <?php if($this->uri->segment(2) == 'tour' && $this->uri->segment(3) == 'location'){echo 'class="active"';}?>>
-                                <a href="<?php echo base_url(); ?>tour/location">List Location</a>
+                                <a href="<?php echo base_url(); ?>tour/location">Danh sách điểm tham quan</a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >Guest Manager<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >Quản lý khách hàng<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li <?php if($this->uri->segment(2) == 'guest' && $this->uri->segment(3) == 'list'){echo 'class="active"';}?>>
-                                <a href="<?php echo base_url(); ?>guest/info">List Tour</a>
+                                <a href="<?php echo base_url(); ?>guest/info">Danh sách khách hàng</a>
                             </li>
                             <li <?php if($this->uri->segment(2) == 'guest' && $this->uri->segment(2) == 'info'){echo 'class="active"';}?>>
-                                <a href="<?php echo base_url(); ?>guest/info/add">Add New Tour</a>
+                                <a href="<?php echo base_url(); ?>guest/info/add">Thêm mới khách hàng</a>
                             </li>
                         </ul>
                     </li>

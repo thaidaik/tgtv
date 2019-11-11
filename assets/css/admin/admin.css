@@ -120,6 +120,15 @@ form label:first-child{
 #location_link{
   height: 155px;
 }
+#location_link_3{
+  width: 171px;
+}
+#location_link_2{
+  width: 166px;
+}
+#search_field_code{
+  width: 163px;
+}
 #search_field{
   width: 253px;
 }
@@ -131,13 +140,13 @@ form label:first-child{
   width: 15px;
   margin: 10px;
 }
-.table-condensed > thead > tr > th{
+table > thead > tr > th{
   font-weight:600;
   font-size:15px;
 }
-.table-condensed > tbody > tr > td{
+table > tbody > tr > td{
   font-weight: 500;
 }
-.table-condensed > tbody > tr > td a{
+table > tbody > tr > td a{
   font-weight: bold;
 }

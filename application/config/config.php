@@ -444,6 +444,7 @@ $config['text_desc'] = 'Giảm dần';
 $config['text_add_a_new'] = 'Tạo mới';
 $config['text_role'] = 'Nhóm';
 $config['text_search'] = 'Tìm kiếm:';
+$config['text_search_code'] = 'Tour code:';
 $config['text_go'] = 'Tìm kiếm';
 $config['text_size'] = 'Size:';
 $config['text_order_by'] = 'Xếp theo:';

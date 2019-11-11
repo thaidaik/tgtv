@@ -45,7 +45,12 @@ if ( ! function_exists('checkDateData'))
         $checkDateArray[$month_tour_3] = 'mnowrd';
 
         $month_tour_check = date('m_Y', strtotime($date));
-        $get_checkdate = $checkDateArray[$month_tour_check];
+        if(isset($checkDateArray[$month_tour_check])){
+            $get_checkdate = $checkDateArray[$month_tour_check];
+        }else{
+            $get_checkdate = 'mnow';
+        }
+
         return $get_checkdate;
     }
 
