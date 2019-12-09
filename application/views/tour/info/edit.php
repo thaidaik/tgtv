@@ -66,6 +66,12 @@
         echo '<div class="control-group"><label class="control-label required" for="phone">Số ngày đi tour</label>';
         echo form_input('tour_duration', $tour_info_data[0]['tour_duration'], 'placeholder="Số ngày đi tour" class="form-control"');
         echo '</div>';
+        echo '<div class="control-group"><label class="control-label required" for="departs">Giờ khởi hành</label>';
+        echo '<div class="input-group timepicker">';
+        echo form_input('departs', $tour_info_data[0]['departs'], 'class="form-control" readonly');
+        echo '<span class="input-group-addon"><span class="fa fa-calendar"></span></span>';
+        echo '</div>';
+        echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="group_size">Số khách sẽ nhận</label>';
         echo form_input('group_size', $tour_info_data[0]['group_size'], 'placeholder="Số khách sẽ nhận" class="form-control"');
         echo '</div>';
@@ -83,6 +89,9 @@
         echo form_input('start_date', $startdate, 'class="form-control" readonly');
         echo '<span class="input-group-addon"><span class="fa fa-calendar"></span></span>';
         echo '</div>';
+        echo '</div>';
+        echo '<div class="control-group"><label class="control-label required" for="flight">Chuyến bay</label>';
+        echo form_input('flight', $tour_info_data[0]['flight'], 'placeholder="flight" class="form-control"');
         echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="tour_gift">Quà tặng khuyến mãi</label>';
         echo form_input('tour_gift', $tour_info_data[0]['tour_gift'], 'placeholder="Quà tặng khuyến mãi" class="form-control"');

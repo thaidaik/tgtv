@@ -103,8 +103,8 @@
             <thead>
             <tr>
                 <th class="">Trạng thái</th>
-                <th class="">Người thu</th>
                 <th class="">Số tiền</th>
+                <th class="">Người thu</th>
                 <th class="">Phương thức</th>
                 <th class="">Ngày</th>
                 <th class=""></th>
@@ -114,6 +114,7 @@
             <?php
             foreach($get_all_payment_toguest as $row)
             {
+                $url = site_url("guest").'/add/payment/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/pid_'.$row['id'];
                 $select_date = convertDateDMY($row['guest_pay_time']);
                 echo '<tr>';
                 echo '<td>'.$guest_pay_status[$row['guest_pay_status']].'</td>';
@@ -121,7 +122,11 @@
                 echo '<td>'.$all_users[$row['guest_pay_by_user_id']].'</td>';
                 echo '<td>'.$guest_pay_by_type[$row['guest_pay_by_type']].'</td>';
                 echo '<td>'.$select_date.'</td>';
-                echo '<td><a href="'.site_url("guest").'/add/payment/'.'" class="btn btn-success btn-xs">Sửa</a></td>';
+                if(isset($get_payment_toguest_by_id)&& $get_payment_toguest_by_id[0]['id'] == $row['id']){
+                    echo '<td>Đang chỉnh sửa...</td>';
+                }else{
+                    echo '<td><a href="'.$url.'" class="btn btn-success btn-xs">Sửa</a></td>';
+                }
                 echo '</tr>';
             }
             ?>
@@ -131,7 +136,13 @@
     <?php } ?>
     <div class="page-header">
         <h3>
-            Thêm thanh toán
+            <?php
+            if(isset($get_payment_toguest_by_id)&& $get_payment_toguest_by_id){
+                echo 'Edit payment: '. $guest_pay_status[$get_payment_toguest_by_id[0]['guest_pay_status']];
+            }else{
+                echo 'Thêm thanh toán';
+            }
+            ?>
         </h3>
     </div>
     <div class="row">
@@ -141,26 +152,37 @@
         //form validation
         echo validation_errors();
         $attributes = array('class' => 'form-signin');
-        echo form_open_multipart('guest/add/payment/'.$this->uri->segment(4).'/'.$this->uri->segment(5), $attributes);
+        if(isset($get_payment_toguest_by_id)&& $get_payment_toguest_by_id){
+            echo form_open_multipart('guest/add/payment/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6), $attributes);
+            $start_date = $get_payment_toguest_by_id['0']['guest_pay_time'];
+            $guest_pay_time = date("d-m-Y", strtotime($start_date));
+        }else{
+            echo form_open_multipart('guest/add/payment/'.$this->uri->segment(4).'/'.$this->uri->segment(5), $attributes);
+            $get_payment_toguest_by_id[0]['guest_pay_status'] = '';
+            $get_payment_toguest_by_id[0]['guest_pay_by_user_id'] = '';
+            $get_payment_toguest_by_id[0]['guest_pay_price'] = '';
+            $get_payment_toguest_by_id[0]['guest_pay_by_type'] = '';
+            $guest_pay_time ='';
+        }
 
         echo '<div class="col-sm-6">';
         echo '<div class="control-group"><label class="control-label required" for="guest_pay_status">Trạng thái thanh toán</label>';
-        echo form_dropdown('guest_pay_status', $guest_pay_status, set_value('guest_pay_status'), 'class="form-control"');
+        echo form_dropdown('guest_pay_status', $guest_pay_status, $get_payment_toguest_by_id[0]['guest_pay_status'], 'class="form-control"');
         echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="guest_pay_by_user_id">Người thu tiền</label>';
-        echo form_dropdown('guest_pay_by_user_id', $all_users, set_value('guest_pay_by_user_id'), 'class="form-control"');
+        echo form_dropdown('guest_pay_by_user_id', $all_users, $get_payment_toguest_by_id[0]['guest_pay_by_user_id'], 'class="form-control"');
         echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="guest_pay_price">Tổng số tiền thu</label>';
-        echo form_input('guest_pay_price', set_value('guest_pay_price'), 'placeholder="" class="form-control"');
+        echo form_input('guest_pay_price', $get_payment_toguest_by_id[0]['guest_pay_price'], 'placeholder="" class="form-control"');
         echo '</div>';
         echo '</div>';
 
         echo '<div class="col-sm-6">';
         echo '<div class="control-group"><label class="control-label required" for="guest_pay_by_type">Phương thức thu tiền</label>';
-        echo form_dropdown('guest_pay_by_type', $guest_pay_by_type, set_value('guest_pay_by_type'), 'class="form-control"');
+        echo form_dropdown('guest_pay_by_type', $guest_pay_by_type, $get_payment_toguest_by_id[0]['guest_pay_by_type'], 'class="form-control"');
         echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="guest_pay_time">Thời gian thu tiền</label><div class="input-group datepicker">';
-        echo form_input('guest_pay_time', set_value('guest_pay_time'), 'class="form-control" readonly');
+        echo form_input('guest_pay_time', $guest_pay_time, 'class="form-control" readonly');
         echo '<span class="input-group-addon"><span class="fa fa-calendar"></span></span>';
         echo '</div></div>';
         echo '<div class="control-group"><label class="control-label required" for="guest_pay_finish">Hoàn thành thanh toán</label>';
@@ -175,6 +197,8 @@
         echo '<div><input type="hidden" name="user_sale_id" value="'.$get_guest_tour_sale_data[0]["user_id"].'"></div>';
         echo '<div><input type="hidden" name="tour_info_id" value="'.$get_guest_tour_sale_data[0]["tour_id"].'"></div>';
         echo form_submit('submit', 'submit', 'class="btn btn-large btn-primary"');
+        $backurl = site_url("guest").'/link/tour/'.$this->uri->segment(4).'/mnow';
+        echo '<a href="'.$backurl.'" class="btn btn-large btn-primary">Back</a>';
         echo form_close();
         echo '</div>';
         ?>

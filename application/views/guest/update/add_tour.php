@@ -61,8 +61,9 @@
                     <th class="">Tour name</th>
                     <th class="">Sale</th>
                     <th class="">Số lần thanh toán</th>
+                    <th class="">Đã thanh toán</th>
+                    <th class="">Trang thái</th>
                     <th class="">Cập nhật thanh toán</th>
-                    <th class="">Sửa</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -75,9 +76,10 @@
                     echo '<td>'.$row['tour_name'].'</td>';
                     echo '<td>'.$row['user_name'].'</td>';
                     echo '<td>2</td>';
-                    echo '<td><a href="'.site_url("guest").'/add/payment/'.$this->uri->segment(4).'/'.$row['guest_tour_link_id'].'" class="btn btn-success btn-xs">Cập nhật thanh toán</a></td>';
-                    echo '<td class="crud-actions"><a href="'.site_url("guest").'/link/tour/'.$this->uri->segment(4).'/'.$select_date.'/'.$row['guest_tour_link_id'].'" class="btn btn-info btn-xs">'.$this->config->item('text_edit').'</a>  
-                </td>';
+                    echo '<td>'.number_format($row['tour_price']).'</td>';
+                    echo '<td>Đã hoàn thành</td>';
+                    echo '<td><a href="'.site_url("guest").'/add/payment/'.$this->uri->segment(4).'/'.$row['guest_tour_link_id'].'" class="btn btn-success btn-xs">Cập nhật thanh toán</a>';
+                    echo '<a href="'.site_url("guest").'/link/tour/'.$this->uri->segment(4).'/'.$select_date.'/'.$row['guest_tour_link_id'].'" class="btn btn-info btn-xs">'.$this->config->item('text_edit').'</a></td>';
                     echo '</tr>';
                 }
                 ?>
@@ -142,12 +144,13 @@
             <thead>
             <tr>
                 <th class="">#</th>
-                <th class="">Code</th>
+                <th class="">Tour Code</th>
                 <th class=""><?php echo $this->config->item('text_name'); ?></th>
-                <th class="">Price</th>
-                <th class="">Duration</th>
-                <th class="">Size</th>
-                <th class="">Start Date</th>
+                <th class="">Giá</th>
+                <th class="">Số ngày</th>
+                <th class="">Số khách</th>
+                <th class="">Còn nhận</th>
+                <th class="">Khởi hành</th>
             </tr>
             </thead>
             <tbody>
@@ -155,6 +158,12 @@
 
             foreach($tour_infos as $row)
             {
+                $night = $row['tour_duration'] - 1;
+                $random = rand(0,4);
+                $random_hour = rand(10,24);
+                $random_min = rand(1,3)*15;
+                $slot = $row['tour_duration'] - 1;
+
                 echo '<tr class="'.$row['tour_color'].'">';
                 echo '<td><input type="radio" name="tour_id" value="'.$row['tour_id'].'"';
                 if($select_tour == $row['tour_id']){
@@ -164,9 +173,10 @@
                 echo '<td><a href="#" class="view-tour" data-id="'.$row['tour_id'].'" data-title="'.$row['tour_name'].'" data-toggle="modal" data-target="#myModal">'.$row['tour_code'].'</a></td>';
                 echo '<td><span class="tooltip-showname" data-toggle="tooltip" data-placement="right" id="tooltip-top" data-original-title="'.$row['tour_name'].'">'.truncateWords($row['tour_name'], 15).'</span></td>';
                 echo '<td>'.convertMilion($row['tour_price']).'</td>';
-                echo '<td>'.$row['tour_duration'].' d</td>';
-                echo '<td>'.$row['group_size'].' p</td>';
-                echo '<td>'.convertDateDMY($row['start_date']).'</td>';
+                echo '<td>'.$row['tour_duration'].'N'.$night.'Đ</td>';
+                echo '<td>'.$row['group_size'].'</td>';
+                echo '<td>'.$random.'</td>';
+                echo '<td>'.convertDateDMY($row['start_date']).' '.$random_hour.':'.$random_min.' VN'.rand(200,600).'</td>';
                 echo '</tr>';
             }
             ?>
@@ -180,6 +190,8 @@
         echo '<div class="row">';
         echo '<div class="col-sm-6">';
         echo form_submit('submit', 'submit', 'class="btn btn-large btn-primary"');
+        $backurl = site_url("guest").'/info';
+        echo '<a href="'.$backurl.'" class="btn btn-large btn-primary">Back</a>';
         echo form_close();
         echo '</div>';
         ?>

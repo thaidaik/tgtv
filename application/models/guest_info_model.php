@@ -104,6 +104,28 @@ class Guest_info_model extends CI_Model {
         $insert = $this->db->insert('guest_pay', $data);
         return $insert;
     }
+    function update_payment_toguest($id, $data)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('guest_pay', $data);
+        $report = array();
+        $report['error'] = $this->db->_error_number();
+        $report['message'] = $this->db->_error_message();
+        if($report !== 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function get_payment_toguest_by_id($id)
+    {
+        $this->db->select('*');
+        $this->db->from('guest_pay');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
     public function get_all_payment_toguest($guest_id, $guest_tour_sale_id)
     {
@@ -166,7 +188,7 @@ class Guest_info_model extends CI_Model {
 
     function get_sale_and_tour_toguest($guestid)
     {
-        $this->db->select('guest_tour_link.id as guest_tour_link_id, guest_info.guest_name as guest_name, membership.id as user_id, membership.first_name as user_name, tour_info.tour_id as tour_id, tour_info.tour_name as tour_name, tour_info.start_date as start_date');
+        $this->db->select('guest_tour_link.id as guest_tour_link_id, guest_info.guest_name as guest_name, membership.id as user_id, membership.first_name as user_name, tour_info.tour_id as tour_id, tour_info.tour_name as tour_name, tour_info.start_date as start_date, tour_info.tour_price as tour_price');
         $this->db->from('guest_tour_link');
         $this->db->join('membership', 'membership.id = guest_tour_link.user_sale_id', 'inner');
         $this->db->join('tour_info', 'tour_info.tour_id = guest_tour_link.tour_info_id', 'inner');

@@ -356,6 +356,7 @@ class Guest_info extends CI_Controller {
         $this->load->model('tour_info_model');
         $guest_id = substr($this->uri->segment(4),'4'); // cat text gid_ de lay id
         $guest_tour_sale_id = $this->uri->segment(5);
+        $payment_id = substr($this->uri->segment(6),'4'); // cat text gid_ de lay id
         $all_users_arr = $this->Users_model->get_all_users();
         foreach ($all_users_arr as $value){
             $all_users[$value['id']] = $value['first_name'];
@@ -366,6 +367,9 @@ class Guest_info extends CI_Controller {
         if($guest_tour_sale_id) {
             $data['get_guest_tour_sale_data'] = $this->guest_info_model->get_guest_tour_sale_data($guest_tour_sale_id);
             $data['get_all_payment_toguest'] = $this->guest_info_model->get_all_payment_toguest($guest_id, $guest_tour_sale_id);
+        }
+        if($payment_id) {
+            $data['get_payment_toguest_by_id'] = $this->guest_info_model->get_payment_toguest_by_id($payment_id);
         }
 
 
@@ -383,28 +387,48 @@ class Guest_info extends CI_Controller {
                 $guest_pay_finish = $this->input->post('guest_pay_finish');
                 $user_sale_id = $this->input->post('user_sale_id');
                 $tour_info_id = $this->input->post('tour_info_id');
-                $data_to_tour = array(
-                    'guest_info_id' => $guest_id,
-                    'tour_info_id' => $tour_info_id,
-                    'user_sale_id' => $user_sale_id,
-                    'guest_tour_sale_id' => $guest_tour_sale_id,
-                    'guest_pay_status' => $guest_pay_status,
-                    'guest_pay_by_user_id' => $guest_pay_by_user_id,
-                    'guest_pay_price' => $guest_pay_price,
-                    'guest_pay_time' => $guest_pay_time,
-                    'guest_pay_by_type' => $guest_pay_by_type,
-                    'guest_pay_finish' => $guest_pay_finish,
-                    'create_date' => date('Y-m-d H:i:s'),
-                    'modify_date' => date('Y-m-d H:i:s'),
-                    'modify_by' => $this->session->userdata('user_id'),
-                );
+
 
                 //if the insert has returned true then we show the flash message
-                if($this->guest_info_model->add_payment_toguest($data_to_tour) == TRUE){
-                    $this->session->set_flashdata('flash_message', 'updated');
+                if($payment_id){
+                    $data_to_tour = array(
+                        'guest_pay_status' => $guest_pay_status,
+                        'guest_pay_by_user_id' => $guest_pay_by_user_id,
+                        'guest_pay_price' => $guest_pay_price,
+                        'guest_pay_time' => $guest_pay_time,
+                        'guest_pay_by_type' => $guest_pay_by_type,
+                        'guest_pay_finish' => $guest_pay_finish,
+                        'modify_date' => date('Y-m-d H:i:s'),
+                        'modify_by' => $this->session->userdata('user_id'),
+                    );
+                    if($this->guest_info_model->update_payment_toguest($payment_id, $data_to_tour) == TRUE){
+                        $this->session->set_flashdata('flash_message', 'updated');
+                    }else{
+                        $this->session->set_flashdata('flash_message', 'not_updated');
+                    }
                 }else{
-                    $this->session->set_flashdata('flash_message', 'not_updated');
+                    $data_to_tour = array(
+                        'guest_info_id' => $guest_id,
+                        'tour_info_id' => $tour_info_id,
+                        'user_sale_id' => $user_sale_id,
+                        'guest_tour_sale_id' => $guest_tour_sale_id,
+                        'guest_pay_status' => $guest_pay_status,
+                        'guest_pay_by_user_id' => $guest_pay_by_user_id,
+                        'guest_pay_price' => $guest_pay_price,
+                        'guest_pay_time' => $guest_pay_time,
+                        'guest_pay_by_type' => $guest_pay_by_type,
+                        'guest_pay_finish' => $guest_pay_finish,
+                        'create_date' => date('Y-m-d H:i:s'),
+                        'modify_date' => date('Y-m-d H:i:s'),
+                        'modify_by' => $this->session->userdata('user_id'),
+                    );
+                    if($this->guest_info_model->add_payment_toguest($data_to_tour) == TRUE){
+                        $this->session->set_flashdata('flash_message', 'updated');
+                    }else{
+                        $this->session->set_flashdata('flash_message', 'not_updated');
+                    }
                 }
+
                 redirect('guest/add/payment/'.$this->uri->segment(4).'/'.$this->uri->segment(5));
             }
 
