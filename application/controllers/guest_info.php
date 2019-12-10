@@ -315,7 +315,29 @@ class Guest_info extends CI_Controller {
 
         $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_tour, $year_tour, '', '', '', '', 'Asc', '','');
         $data['guest_info_data'] = $this->guest_info_model->get_guest_info_by_id($guest_id);
-        $data['guest_sale_tour_info_data'] = $this->guest_info_model->get_sale_and_tour_toguest($guest_id);
+        $data_get_sale_and_tour_toguest = $this->guest_info_model->get_sale_and_tour_toguest($guest_id);
+
+        $new_data_get_sale_and_tour_toguest = array();
+        foreach ($data_get_sale_and_tour_toguest as $key=>$value){
+            $data_payment = array();
+            $total_price = $total_finish = $total_number_price = 0;
+            $new_guest_info_id = $value['guest_info_id'];
+            $new_tour_info_id = $value['tour_info_id'];
+            $new_user_sale_id = $value['user_sale_id'];
+            $data_payment = $this->guest_info_model->get_payment_toguest_by_id_tour_id($new_guest_info_id, $new_tour_info_id, $new_user_sale_id);
+
+            if($data_payment && count($data_payment)){
+                $total_price = $data_payment[0]['total_price'];
+                $total_finish = $data_payment[0]['total_finish'];
+                $total_number_price = $data_payment[0]['total_number_price'];
+            }
+            $new_data_get_sale_and_tour_toguest[$key] = $value;
+            $new_data_get_sale_and_tour_toguest[$key]['total_number_price'] = $total_number_price;
+            $new_data_get_sale_and_tour_toguest[$key]['total_price'] = $total_price;
+            $new_data_get_sale_and_tour_toguest[$key]['total_finish'] = $total_finish;
+        }
+        $data['guest_sale_tour_info_data'] = $new_data_get_sale_and_tour_toguest;
+
         $id = null;
         if($guest_tour_sale_id){
             $data['get_guest_tour_sale_data'] = $this->guest_info_model->get_guest_tour_sale_data($guest_tour_sale_id);
@@ -342,7 +364,7 @@ class Guest_info extends CI_Controller {
                 }else{
                     $this->session->set_flashdata('flash_message', 'not_updated');
                 }
-                redirect('guest/link/tour/'.$guest_id.'/'.$month_select);
+                redirect('guest/link/tour/gid_'.$guest_id.'/'.$month_select);
             }
 
         }

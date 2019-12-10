@@ -53,7 +53,7 @@
     }else{
         echo '<h2>Danh sách Tour sử dụng</h2>';
         echo '<hr class="style1">';
-        if(isset($guest_sale_tour_info_data)){ ?>
+        if(isset($guest_sale_tour_info_data) && count($guest_sale_tour_info_data)){ ?>
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
@@ -62,6 +62,7 @@
                     <th class="">Sale</th>
                     <th class="">Số lần thanh toán</th>
                     <th class="">Đã thanh toán</th>
+                    <th class="">Tổng tiền</th>
                     <th class="">Trang thái</th>
                     <th class="">Cập nhật thanh toán</th>
                 </tr>
@@ -75,9 +76,14 @@
                     echo '<td>'.$row['guest_name'].'</td>';
                     echo '<td>'.$row['tour_name'].'</td>';
                     echo '<td>'.$row['user_name'].'</td>';
-                    echo '<td>2</td>';
+                    echo '<td>'.$row['total_number_price'].'</td>';
+                    echo '<td>'.number_format($row['total_price']).'</td>';
                     echo '<td>'.number_format($row['tour_price']).'</td>';
-                    echo '<td>Đã hoàn thành</td>';
+                    if($row['total_finish'] != '0'){
+                        echo '<td>Done</td>';
+                    }else{
+                        echo '<td>Not</td>';
+                    }
                     echo '<td><a href="'.site_url("guest").'/add/payment/'.$this->uri->segment(4).'/'.$row['guest_tour_link_id'].'" class="btn btn-success btn-xs">Cập nhật thanh toán</a>';
                     echo '<a href="'.site_url("guest").'/link/tour/'.$this->uri->segment(4).'/'.$select_date.'/'.$row['guest_tour_link_id'].'" class="btn btn-info btn-xs">'.$this->config->item('text_edit').'</a></td>';
                     echo '</tr>';

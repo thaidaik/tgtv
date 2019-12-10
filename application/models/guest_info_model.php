@@ -127,6 +127,18 @@ class Guest_info_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function get_payment_toguest_by_id_tour_id($guest_info_id, $tour_info_id, $user_sale_id)
+    {
+        $this->db->select('id, guest_info_id, tour_info_id, user_sale_id , SUM(guest_pay_price) as total_price, SUM(guest_pay_finish) as total_finish, COUNT(id) as total_number_price');
+        $this->db->from('guest_pay');
+        $this->db->where('guest_info_id', $guest_info_id);
+        $this->db->where('tour_info_id', $tour_info_id);
+        $this->db->where('user_sale_id', $user_sale_id);
+        $this->db->group_by('guest_info_id, tour_info_id, user_sale_id');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function get_all_payment_toguest($guest_id, $guest_tour_sale_id)
     {
         $this->db->select('*');
@@ -188,7 +200,7 @@ class Guest_info_model extends CI_Model {
 
     function get_sale_and_tour_toguest($guestid)
     {
-        $this->db->select('guest_tour_link.id as guest_tour_link_id, guest_info.guest_name as guest_name, membership.id as user_id, membership.first_name as user_name, tour_info.tour_id as tour_id, tour_info.tour_name as tour_name, tour_info.start_date as start_date, tour_info.tour_price as tour_price');
+        $this->db->select('guest_tour_link.id as guest_tour_link_id, guest_tour_link.guest_info_id as guest_info_id, guest_tour_link.tour_info_id as tour_info_id, guest_tour_link.user_sale_id as user_sale_id, guest_info.guest_name as guest_name, membership.id as user_id, membership.first_name as user_name, tour_info.tour_id as tour_id, tour_info.tour_name as tour_name, tour_info.start_date as start_date, tour_info.tour_price as tour_price');
         $this->db->from('guest_tour_link');
         $this->db->join('membership', 'membership.id = guest_tour_link.user_sale_id', 'inner');
         $this->db->join('tour_info', 'tour_info.tour_id = guest_tour_link.tour_info_id', 'inner');

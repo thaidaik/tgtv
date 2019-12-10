@@ -162,6 +162,7 @@
             $get_payment_toguest_by_id[0]['guest_pay_by_user_id'] = '';
             $get_payment_toguest_by_id[0]['guest_pay_price'] = '';
             $get_payment_toguest_by_id[0]['guest_pay_by_type'] = '';
+            $get_payment_toguest_by_id[0]['guest_pay_finish'] = '';
             $guest_pay_time ='';
         }
 
@@ -186,7 +187,11 @@
         echo '<span class="input-group-addon"><span class="fa fa-calendar"></span></span>';
         echo '</div></div>';
         echo '<div class="control-group"><label class="control-label required" for="guest_pay_finish">Hoàn thành thanh toán</label>';
-        echo '<div class="fix-control"><input type="checkbox" name="guest_pay_finish" value="1" > Đã thanh toán hết </div>';
+        echo '<div class="fix-control"><input type="checkbox" name="guest_pay_finish" value="1" ';
+        if($get_payment_toguest_by_id[0]['guest_pay_finish'] == 1){
+            echo 'checked';
+        }
+        echo '> Đã thanh toán hết </div>';
         echo '</div>';
         echo '</div>';
 
