@@ -359,7 +359,7 @@ class Guest_info extends CI_Controller {
                     'user_sale_id' => $sale_id,
                 );
                 //if the insert has returned true then we show the flash message
-                if($this->guest_info_model->add_sale_and_tour_toguest($data_to_tour, $id) == TRUE){
+                if($this->guest_info_model->add_sale_and_tour_toguest($data_to_tour, $tour_id, $id) == TRUE){
                     $this->session->set_flashdata('flash_message', 'updated');
                 }else{
                     $this->session->set_flashdata('flash_message', 'not_updated');

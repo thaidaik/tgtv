@@ -318,6 +318,7 @@ class User extends CI_Controller {
                     'identificatio_id'  => $this->input->post('identificatio_id'),
                     'passport'          => $this->input->post('passport'),
                     'role'              => $this->input->post('role'),
+                    'block'             => $this->input->post('block'),
                     'color'             => $this->input->post('color'),
                     'modify_date'       => date('Y-m-d H:i:s'),
                     'modify_by'         => $this->session->userdata('user_id'),

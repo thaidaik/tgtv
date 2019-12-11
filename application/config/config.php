@@ -367,6 +367,10 @@ $config['user_sex'] = array(
     'male'=>'Male',
     'female'=>'Female',
 );
+$config['user_block'] = array(
+    '0'=>'Active',
+    '1'=>'Block account',
+);
 $config['user_sex_text'] = array(
     'male'=>'Mr',
     'female'=>'Ms',
@@ -460,5 +464,6 @@ $config['text_sex'] = 'Giới tính';
 $config['text_address'] = 'Địa chỉ';
 $config['text_identificatio'] = 'CMND';
 $config['text_passport'] = 'Hộ chiếu';
+$config['text_block_select'] = 'Trạng thái tài khoản';
 
 

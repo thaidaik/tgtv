@@ -72,7 +72,11 @@
                     $birthday = date("d-m-Y", strtotime($bdate));
                     echo '<tr>';
                     echo '<td>'.$row['id'].'</td>';
-                    echo '<td><a href="'.site_url("admin").'/edit_member/'.$row['id'].'" >'.$row['first_name'].'</a></td>';
+                    echo '<td><a href="'.site_url("admin").'/edit_member/'.$row['id'].'" ';
+                    if($row['block'] == '1'){
+                        echo 'class="text_gach"';
+                    }
+                    echo '>'.$row['first_name'].'</a></td>';
                     echo '<td>'.$row['email_address'].'</td>';
                     echo '<td>'.$row['phone'].'</td>';
                     echo '<td>'.$birthday.'</td>';

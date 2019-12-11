@@ -115,18 +115,16 @@
                 {
                     //echo '<tr class="'.$row['tour_color'].'">';
                     $night = $row['tour_duration'] - 1;
-                    $random = rand(0,4);
-                    $random_hour = rand(10,24);
-                    $random_min = rand(1,3)*15;
-                    $slot = $row['tour_duration'] - 1;
+                    $slot = $row['group_size'] - $row['group_slot'];
+
                     echo '<tr>';
                     echo '<td><a href="#" class="view-tour" data-id="'.$row['tour_id'].'" data-title="'.$row['tour_name'].'" data-toggle="modal" data-target="#myModal">'.$row['tour_code'].'</a></td>';
                     echo '<td><span class="tooltip-showname" data-toggle="tooltip" data-placement="right" id="tooltip-top" data-original-title="'.$row['tour_name'].'">'.truncateWords($row['tour_name'], 15).'</span></td>';
                     echo '<td>'.number_format($row['tour_price']).'</td>';
                     echo '<td>'.$row['tour_duration'].'N'.$night.'Đ</td>';
                     echo '<td>'.$row['group_size'].'</td>';
-                    echo '<td>'.$random.'</td>';
-                    echo '<td>'.convertDateDMY($row['start_date']).' '.$random_hour.':'.$random_min.' VN'.rand(200,600).'</td>';
+                    echo '<td>'.$slot.'</td>';
+                    echo '<td>'.convertDateDMY($row['start_date']).'<br/> '.$row['departs'].' '.$row['flight'].'</td>';
                     echo '<td class="crud-actions">
                   <a href="'.site_url("tour").'/info/update/'.$row['tour_id'].'" class="btn btn-info">'.$this->config->item('text_edit').'</a>  
                   <a href="'.site_url("tour").'/info/delete/'.$row['tour_id'].'" class="btn btn-danger">'.$this->config->item('text_delete').'</a>

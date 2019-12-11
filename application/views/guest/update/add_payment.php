@@ -80,7 +80,7 @@
                     echo '<td>'.$row['guest_name'].'</td>';
                     echo '<td>'.$row['tour_name'].'</td>';
                     echo '<td>'.$row['user_name'].'</td>';
-                    echo '<td>Đang chỉnh sửa...</td>';
+                    echo '<td class="text-nhapnhay">Đang chỉnh sửa...</td>';
                     echo '</tr>';
                 }
                 ?>
@@ -123,7 +123,7 @@
                 echo '<td>'.$guest_pay_by_type[$row['guest_pay_by_type']].'</td>';
                 echo '<td>'.$select_date.'</td>';
                 if(isset($get_payment_toguest_by_id)&& $get_payment_toguest_by_id[0]['id'] == $row['id']){
-                    echo '<td>Đang chỉnh sửa...</td>';
+                    echo '<td class="text-nhapnhay">Đang chỉnh sửa...</td>';
                 }else{
                     echo '<td><a href="'.$url.'" class="btn btn-success btn-xs">Sửa</a></td>';
                 }

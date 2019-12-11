@@ -46,6 +46,7 @@
     $attributes = array('class' => 'form-signin');
     echo form_open_multipart('admin/edit_member/'.$this->uri->segment(3).'', $attributes);
     $user_sex = $this->config->item('user_sex');
+    $user_block = $this->config->item('user_block');
     //$user_role = $this->config->item('user_role');
     $options_role = array('' => $this->config->item('text_select'));
     foreach ($roles as $row)
@@ -74,6 +75,9 @@
     </div>
     <div class="control-group"><label class="control-label required" for="address"><?php echo $this->config->item('text_address'); ?></label>
         <input type="text" name="address" value="<?php echo $member['0']['address']; ?>" placeholder="Address" class="form-control">
+    </div>
+    <div class="control-group"><label class="control-label required" for="sex"><?php echo $this->config->item('text_block_select'); ?></label>
+        <?php echo form_dropdown('block', $user_block, $member['0']['block'], 'class="form-control"'); ?>
     </div>
     </div>
         <div class="col-sm-6">
