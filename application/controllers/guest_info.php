@@ -23,13 +23,17 @@ class Guest_info extends CI_Controller {
 
         //all the posts sent by the view
         $search_string = $this->input->post('search_string');
+        $search_phone = $this->input->post('search_phone');
+        $search_code = $this->input->post('search_code');
+        $start_month = $this->input->post('start_month');
+        $start_day = $this->input->post('start_day');
         $order = $this->input->post('order');
         $order_type = $this->input->post('order_type');
-
+        $filter_session_data = array();
         //pagination settings
         $config['per_page'] = 10;
 
-        $config['base_url'] = base_url().'tour/info';
+        $config['base_url'] = base_url().'guest/info';
         $config['use_page_numbers'] = TRUE;
         $config['num_links'] = 10;
         $config['full_tag_open'] = '<ul class="pagination">';
@@ -75,14 +79,43 @@ class Guest_info extends CI_Controller {
 
         //filtered && || paginated
 
-        if($search_string !== false && $order !== false || $this->uri->segment(3) == true){
-
+        if($search_string !== false || $search_phone !== false || $search_code !== false || $start_month !== false || $start_day !== false || $this->uri->segment(3) == true){
             if($search_string){
                 $filter_session_data['search_string_selected'] = $search_string;
             }else{
                 $search_string = $this->session->userdata('search_string_selected');
             }
             $data['search_string_selected'] = $search_string;
+
+            if($search_phone){
+                $filter_session_data['search_phone_selected'] = $search_phone;
+            }else{
+                $search_phone = $this->session->userdata('search_phone_selected');
+            }
+            $data['search_phone_selected'] = $search_phone;
+
+            if($search_code){
+                $filter_session_data['search_code_selected'] = $search_code;
+            }else{
+                $search_code = $this->session->userdata('search_code_selected');
+            }
+            $data['search_code_selected'] = $search_code;
+
+            if($start_month){
+                $filter_session_data['month_selected'] = $start_month;
+            }else{
+                $start_month = $this->session->userdata('month_selected');
+            }
+            $data['month_selected'] = $start_month;
+
+            if($start_day){
+                $filter_session_data['day_selected'] = $start_day;
+            }else{
+                $start_day = $this->session->userdata('day_selected');
+            }
+            $data['day_selected'] = $start_day;
+
+
 
             if($order){
                 $filter_session_data['order'] = $order;
@@ -95,39 +128,37 @@ class Guest_info extends CI_Controller {
             $this->session->set_userdata($filter_session_data);
 
 
-            $data['count_tour_infos']= $this->guest_info_model->count_guest_infos($search_string, $order);
+            $data['count_tour_infos']= $this->guest_info_model->count_guest_infos($search_string, $search_phone, $search_code,  $start_month,  $start_day, $order);
             $config['total_rows'] = $data['count_tour_infos'];
 
             //fetch sql data into arrays
-            if($search_string){
-                if($order){
-                    $data['tour_infos'] = $this->guest_info_model->get_guest_infos($search_string, $order, $order_type, $config['per_page'],$limit_end);
-                }else{
-                    $data['tour_infos'] = $this->guest_info_model->get_guest_infos($search_string, '', $order_type, $config['per_page'],$limit_end);
-                }
+            if($search_string || $search_phone || $search_code || $start_month || $start_day ){
+                $data['tour_infos'] = $this->guest_info_model->get_guest_infos($search_string, $search_phone, $search_code,  $start_month,  $start_day, '', $order_type, $config['per_page'],$limit_end);
             }else{
-                if($order){
-                    $data['tour_infos'] = $this->guest_info_model->get_guest_infos('', $order, $order_type, $config['per_page'],$limit_end);
-                }else{
-                    $data['tour_infos'] = $this->guest_info_model->get_guest_infos('', '', $order_type, $config['per_page'],$limit_end);
-                }
+                $data['tour_infos'] = $this->guest_info_model->get_guest_infos('', '', '', '', '', '', $order_type, $config['per_page'],$limit_end);
             }
 
         }else{
 
             //clean filter data inside section
-
             $filter_session_data['search_string_selected'] = null;
+            $filter_session_data['search_phone_selected'] = null;
+            $filter_session_data['month_selected'] = null;
+            $filter_session_data['day_selected'] = null;
+            $filter_session_data['search_code_selected'] = null;
             $filter_session_data['order'] = null;
             $filter_session_data['order_type'] = null;
             $this->session->set_userdata($filter_session_data);
 
             //pre selected options
             $data['search_string_selected'] = '';
+            $data['search_phone_selected'] = '';
+            $data['search_code_selected'] = '';
+            $data['month_selected'] = $data['day_selected'] =  'all';
             $data['order'] = 'id';
 
             $data['count_tour_infos']= $this->guest_info_model->count_guest_infos();
-            $data['tour_infos'] = $this->guest_info_model->get_guest_infos('', '', $order_type, $config['per_page'],$limit_end);
+            $data['tour_infos'] = $this->guest_info_model->get_guest_infos('', '', '', '', '', '', $order_type, $config['per_page'],$limit_end);
             $config['total_rows'] = $data['count_tour_infos'];
 
         }//!isset($location_link) && !isset($search_string) && !isset($order)
@@ -359,7 +390,7 @@ class Guest_info extends CI_Controller {
                     'user_sale_id' => $sale_id,
                 );
                 //if the insert has returned true then we show the flash message
-                if($this->guest_info_model->add_sale_and_tour_toguest($data_to_tour, $tour_id, $id) == TRUE){
+                if($this->guest_info_model->add_sale_and_tour_toguest($data_to_tour, $guest_id, $tour_id, $id) == TRUE){
                     $this->session->set_flashdata('flash_message', 'updated');
                 }else{
                     $this->session->set_flashdata('flash_message', 'not_updated');

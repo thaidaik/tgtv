@@ -42,13 +42,26 @@ class Guest_info_model extends CI_Model {
      * @param int $limit_end
      * @return array
      */
-    public function get_guest_infos($search_string=null, $order=null, $order_type='Asc', $limit_start=null, $limit_end)
+    public function get_guest_infos($search_string=null, $search_phone=null, $search_code=null, $month_selected=null, $day_selected=null, $order=null, $order_type='Asc', $limit_start=null, $limit_end)
     {
         $this->db->select('*');
         $this->db->from('guest_info');
 
+        if($month_selected != false && $month_selected != null && $month_selected != 'all'){
+            $this->db->where('MONTH(tour_info.start_date)',$month_selected);
+        }
+        if($day_selected != false && $day_selected != null && $day_selected != 'all'){
+            $this->db->where('DAY(tour_info.start_date)',$day_selected);
+        }
+
         if($search_string){
             $this->db->like('guest_name', $search_string);
+        }
+        if($search_phone){
+            $this->db->like('guest_phone', $search_phone);
+        }
+        if($search_code){
+            $this->db->like('guest_code', $search_code);
         }
 
         $this->db->group_by('guest_id');
@@ -74,13 +87,26 @@ class Guest_info_model extends CI_Model {
      * @param int $order
      * @return int
      */
-    function count_guest_infos($search_string=null, $order=null)
+    function count_guest_infos($search_string=null, $search_phone=null, $search_code=null, $month_selected=null, $day_selected=null, $order=null)
     {
         $this->db->select('*');
         $this->db->from('guest_info');
 
+        if($month_selected != false && $month_selected != null && $month_selected != 'all'){
+            $this->db->where('MONTH(tour_info.start_date)',$month_selected);
+        }
+        if($day_selected != false && $day_selected != null && $day_selected != 'all'){
+            $this->db->where('DAY(tour_info.start_date)',$day_selected);
+        }
+
         if($search_string){
             $this->db->like('guest_name', $search_string);
+        }
+        if($search_phone){
+            $this->db->like('guest_phone', $search_phone);
+        }
+        if($search_code){
+            $this->db->like('guest_code', $search_code);
         }
 
         $this->db->group_by('guest_id');
@@ -216,7 +242,7 @@ class Guest_info_model extends CI_Model {
     }
 
     public function get_tour_info_id_by_id($id){
-        $this->db->select('tour_info_id');
+        $this->db->select('tour_info_id, guest_info_id');
         $this->db->from('guest_tour_link');
         $this->db->where('id', $id);
         $query = $this->db->get();
@@ -241,33 +267,40 @@ class Guest_info_model extends CI_Model {
         return $query->row();
     }
 
-    function add_sale_and_tour_toguest($data, $tour_id, $id=null)
+    public function update_data_slot($guest_id, $tour_id, $check_slot){
+        $dataslot_usedtour = $this->get_guest_info_used_tour_by_id($guest_id);
+        $slot_usedtour = $dataslot_usedtour->guest_used_tour;
+        if($check_slot == true){
+            $slot_usedtour = $slot_usedtour+1;
+        }else{
+            $slot_usedtour = $slot_usedtour-1;
+        }
+        $data_slot_usedtour=array( 'guest_used_tour'=> $slot_usedtour );
+        $this->update_guest_info_used_tour($guest_id, $data_slot_usedtour);
+
+        $dataslot = $this->get_tour_info_slot_by_id($tour_id);
+        $slot = $dataslot->group_slot;
+        if($check_slot == true){
+            $slot = $slot+1;
+        }else{
+            $slot = $slot-1;
+        }
+        $data_slot=array( 'group_slot'=> $slot );
+        $this->update_tour_info_slot($tour_id, $data_slot);
+    }
+
+    function add_sale_and_tour_toguest($data, $guest_id, $tour_id, $id=null)
     {
         if($id){
             $tour_info_data = $this->get_tour_info_id_by_id($id);
             $tour_info_id = $tour_info_data->tour_info_id;
-// check here contiune
-            $dataslot = $this->get_tour_info_slot_by_id($tour_info_id);
-            $slot = $dataslot->group_slot;
-            $slot = $slot-1;
-            $data_slot=array( 'group_slot'=> $slot );
-            $this->update_tour_info_slot($tour_info_id, $data_slot);
-
+            $guest_info_id = $tour_info_data->guest_info_id;
+            $this->update_data_slot($guest_info_id, $tour_info_id, false);
             $this->db->where('id', $id);
             $this->db->delete('guest_tour_link');
         }
         if($tour_id){
-            $dataslot_usedtour = $this->get_guest_info_used_tour_by_id($tour_id);
-            $slot_usedtour = $dataslot_usedtour->group_slot;
-            $slot_usedtour = $slot_usedtour+1;
-            $data_slot_usedtour=array( 'guest_used_tour'=> $slot_usedtour );
-            $this->update_guest_info_used_tour($tour_id, $data_slot_usedtour);
-
-            $dataslot = $this->get_tour_info_slot_by_id($tour_id);
-            $slot = $dataslot->group_slot;
-            $slot = $slot+1;
-            $data_slot=array( 'group_slot'=> $slot );
-            $this->update_tour_info_slot($tour_id, $data_slot);
+            $this->update_data_slot($guest_id, $tour_id, true);
         }
         $insert = $this->db->insert('guest_tour_link', $data);
         return $insert;

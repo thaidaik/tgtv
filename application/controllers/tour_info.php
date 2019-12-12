@@ -231,6 +231,7 @@ class Tour_info extends CI_Controller {
                     'tour_image_thumb' => $dataImage['thumbnail_name'],
                     'tour_guide_info' => $this->input->post('tour_guide_info'),
                     'tour_color' => $this->input->post('tour_color'),
+                    'tour_link' => $this->input->post('tour_link'),
                     'create_date' => date('Y-m-d H:i:s'),
                     'modify_date' => date('Y-m-d H:i:s'),
                     'modify_by' => $this->session->userdata('user_id'),
@@ -293,6 +294,7 @@ class Tour_info extends CI_Controller {
                     'tour_description' => $this->input->post('tour_description'),
                     'tour_guide_info' => $this->input->post('tour_guide_info'),
                     'tour_color' => $this->input->post('tour_color'),
+                    'tour_link' => $this->input->post('tour_link'),
                     'modify_date' => date('Y-m-d H:i:s'),
                     'modify_by' => $this->session->userdata('user_id'),
                 );
@@ -381,12 +383,18 @@ class Tour_info extends CI_Controller {
 //Vertical alignment styles Can you use : VERTICAL_BOTTOM = 'bottom', VERTICAL_TOP = 'top', VERTICAL_CENTER = 'center', VERTICAL_JUSTIFY = 'justify' and HORIZONTAL_GENERAL = 'general'.
 
     public function createXLS() {
+        $location_link_selected = $this->session->userdata('location_link_selected');
+        $search_string_selected = $this->session->userdata('search_string_selected');
+        $month_selected = $this->session->userdata('month_selected');
+        $year_selected = $this->session->userdata('year_selected');
+        $sizes_selected = $this->session->userdata('sizes_selected');
+
         $this->load->helper('true_function');
         // create file name
         $fileName = 'data-'.time().'.xlsx';
         // load excel library
         $this->load->library('excel');
-        $empInfo = $this->tour_info_model->get_tour_infos('', '', '','', '', '', '', '20','');
+        $empInfo = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link_selected, $search_string_selected, '', '', '','');
 
 
         $objPHPExcel = new PHPExcel();

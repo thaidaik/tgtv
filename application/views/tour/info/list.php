@@ -3,7 +3,7 @@
     <div class="page-header users-header">
         <h2>
             <?php echo ucfirst($this->uri->segment(1));?>
-            <a  href="<?php echo site_url("admin"); ?>/signup" class="btn btn-success"><?php echo $this->config->item('text_add_a_new'); ?></a>
+            <a  href="<?php echo site_url("tour"); ?>/info/add" class="btn btn-success"><?php echo $this->config->item('text_add_a_new'); ?></a>
         </h2>
     </div>
 
@@ -119,7 +119,7 @@
 
                     echo '<tr>';
                     echo '<td><a href="#" class="view-tour" data-id="'.$row['tour_id'].'" data-title="'.$row['tour_name'].'" data-toggle="modal" data-target="#myModal">'.$row['tour_code'].'</a></td>';
-                    echo '<td><span class="tooltip-showname" data-toggle="tooltip" data-placement="right" id="tooltip-top" data-original-title="'.$row['tour_name'].'">'.truncateWords($row['tour_name'], 15).'</span></td>';
+                    echo '<td><a href="'.$row['tour_link'].'" target="_blank"><span class="tooltip-showname" data-toggle="tooltip" data-placement="right" id="tooltip-top" data-original-title="'.$row['tour_name'].'">'.truncateWords($row['tour_name'], 25).'</span></a></td>';
                     echo '<td>'.number_format($row['tour_price']).'</td>';
                     echo '<td>'.$row['tour_duration'].'N'.$night.'Đ</td>';
                     echo '<td>'.$row['group_size'].'</td>';

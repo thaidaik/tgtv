@@ -65,7 +65,7 @@
         echo form_input('group_size', set_value('group_size'), 'placeholder="group_size" class="form-control"');
         echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="tourtour_description_gift">Mô tả tóm tắt Tour</label>';
-        echo form_textarea('tour_description', set_value('tour_description'), 'placeholder="Mô tả tóm tắt Tour" class="form-control"');
+        echo form_textarea('tour_description', set_value('tour_description'), 'placeholder="Mô tả tóm tắt Tour" class="form-control editor"');
         echo '</div>';
 
         echo '</div>';
@@ -100,9 +100,15 @@
 
         echo '</div>';
         echo '</div>';
+        echo '<div class="row"><div class="col-sm-12">';
+        echo '<div class="control-group"><label class="control-label required" for="tour_link">Tour Link</label>';
+        echo form_input('tour_link', set_value('tour_link'), 'placeholder="tour_link" class="form-control"');
+        echo '<br/><br/></div></div></div>';
         echo '<div class="row">';
         echo '<div class="col-sm-6">';
         echo form_submit('submit', 'submit', 'class="btn btn-large btn-primary"');
+        $backurl = site_url("tour").'/info';
+        echo '  <a href="'.$backurl.'" class="btn btn-large btn-warning">Back</a>';
         echo form_close();
         echo '</div>';
         ?>
