@@ -25,6 +25,7 @@ class Tour_info extends CI_Controller {
 
         //all the posts sent by the view
         $location_link = $this->input->post('location_link');
+        $search_code = $this->input->post('search_code');
         $search_string = $this->input->post('search_string');
         $sizes_selected = $this->input->post('group_size');
         $month_selected = $this->input->post('start_month');
@@ -88,7 +89,7 @@ class Tour_info extends CI_Controller {
 
         //filtered && || paginated
 
-        if($search_string !== false && $order !== false || $this->uri->segment(3) == true){
+        if($search_string !== false && $search_code !== false && $order !== false || $this->uri->segment(3) == true){
 
             if($location_link !== 0){
                 $filter_session_data['location_link_selected'] = $location_link;
@@ -96,6 +97,13 @@ class Tour_info extends CI_Controller {
                 $location_link = $this->session->userdata('location_link_selected');
             }
             $data['location_link_selected'] = $location_link;
+
+            if($search_code){
+                $filter_session_data['search_code_selected'] = $search_code;
+            }else{
+                $search_code = $this->session->userdata('search_code_selected');
+            }
+            $data['search_code_selected'] = $search_code;
 
             if($search_string){
                 $filter_session_data['search_string_selected'] = $search_string;
@@ -163,6 +171,7 @@ class Tour_info extends CI_Controller {
             $filter_session_data['month_selected'] = null;
             $filter_session_data['year_selected'] = null;
             $filter_session_data['sizes_selected'] = null;
+            $filter_session_data['search_code_selected'] = null;
             $filter_session_data['search_string_selected'] = null;
             $filter_session_data['order'] = null;
             $filter_session_data['order_type'] = null;
@@ -170,6 +179,7 @@ class Tour_info extends CI_Controller {
 
             //pre selected options
             $data['search_string_selected'] = '';
+            $data['search_code_selected'] = '';
             $data['location_link_selected'] = array();
             $data['order'] = 'id';
             $data['sizes_selected'] = $data['month_selected'] = $data['year_selected'] = 'all';

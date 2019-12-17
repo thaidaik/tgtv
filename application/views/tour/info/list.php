@@ -53,7 +53,7 @@
                         echo '</div>';
                         echo '<div class="row bottom-block">';
                             echo form_label($this->config->item('text_search_code'), 'search_code');
-                            echo form_input('search_code', $search_string_selected, 'class="form-control" id="search_field_code"');
+                            echo form_input('search_code', $search_code_selected, 'class="form-control" id="search_field_code"');
                         echo '</div>';
                     echo '</div>';
                     echo '<div class="col-md-7">';
