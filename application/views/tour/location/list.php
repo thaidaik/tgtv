@@ -14,7 +14,7 @@
     <div class="page-header users-header">
         <h2>
             Điểm tham quan
-            <a  href="<?php echo site_url("tour").'/'; ?>/location/add" class="btn btn-success"><?php echo $this->config->item('text_add_a_new'); ?></a>
+            <a  href="<?php echo site_url("tour").'/'; ?>/location/add" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> <?php echo $this->config->item('text_add_a_new'); ?></a>
         </h2>
     </div>
 

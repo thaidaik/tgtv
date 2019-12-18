@@ -133,7 +133,7 @@ class Guest_info extends CI_Controller {
 
             //fetch sql data into arrays
             if($search_string || $search_phone || $search_code || $start_month || $start_day ){
-                $data['tour_infos'] = $this->guest_info_model->get_guest_infos($search_string, $search_phone, $search_code,  $start_month,  $start_day, '', $order_type, $config['per_page'],$limit_end);
+                $data['tour_infos'] = $this->guest_info_model->get_guest_infos($search_string, $search_phone, $search_code, $start_month, $start_day, '', $order_type, $config['per_page'],$limit_end);
             }else{
                 $data['tour_infos'] = $this->guest_info_model->get_guest_infos('', '', '', '', '', '', $order_type, $config['per_page'],$limit_end);
             }
@@ -344,7 +344,7 @@ class Guest_info extends CI_Controller {
             $year_tour = date('Y', strtotime('+1 month', strtotime(date("Y-m-01"))));
         }
 
-        $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_tour, $year_tour, '', '', '', '', 'Asc', '','');
+        $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_tour, $year_tour, '', '', '', '', '', 'Asc', '','');
         $data['guest_info_data'] = $this->guest_info_model->get_guest_info_by_id($guest_id);
         $data_get_sale_and_tour_toguest = $this->guest_info_model->get_sale_and_tour_toguest($guest_id);
 
@@ -531,26 +531,32 @@ class Guest_info extends CI_Controller {
 //Vertical alignment styles Can you use : VERTICAL_BOTTOM = 'bottom', VERTICAL_TOP = 'top', VERTICAL_CENTER = 'center', VERTICAL_JUSTIFY = 'justify' and HORIZONTAL_GENERAL = 'general'.
 
     public function createXLS() {
+        $search_phone_selected = $this->session->userdata('search_phone_selected');
+        $search_code_selected = $this->session->userdata('search_code_selected');
+        $search_string_selected = $this->session->userdata('search_string_selected');
+        $month_selected = $this->session->userdata('month_selected');
+        $day_selected = $this->session->userdata('day_selected');
+
         $this->load->helper('true_function');
         // create file name
-        $fileName = 'data-'.time().'.xlsx';
+        $fileName = 'data-guest-'.time().'.xlsx';
         // load excel library
         $this->load->library('excel');
-        $empInfo = $this->tour_info_model->get_tour_infos('', '', '','', '', '', '', '20','');
+        $empInfo = $this->guest_info_model->get_guest_infos($search_string_selected, $search_phone_selected, $search_code_selected, $month_selected, $day_selected, '', '', '100','');
 
 
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->setActiveSheetIndex(0);
         $sheet = $objPHPExcel->getActiveSheet();
         // set Header
-        $sheet->SetCellValue('A1', 'TGTV');
+        $sheet->SetCellValue('A1', 'TGTV GUEST');
         $sheet->mergeCells('A1:AA1');
-        $sheet->SetCellValue('A2', 'id');
-        $sheet->SetCellValue('B2', 'tour_name');
-        $sheet->SetCellValue('C2', 'tour_price');
-        $sheet->SetCellValue('D2', 'start_date');
-        $sheet->SetCellValue('E2', 'group_size');
-        $sheet->SetCellValue('F2', 'tour_code');
+        $sheet->SetCellValue('A2', '#');
+        $sheet->SetCellValue('B2', 'guest_code');
+        $sheet->SetCellValue('C2', 'guest_name');
+        $sheet->SetCellValue('D2', 'guest_birthday');
+        $sheet->SetCellValue('E2', 'guest_phone');
+        $sheet->SetCellValue('F2', 'guest_email');
         // set Row
         $rowCount = 3;
 
@@ -564,11 +570,11 @@ class Guest_info extends CI_Controller {
             );
 
             $sheet->SetCellValue('A' . $rowCount, $listID);
-            $sheet->SetCellValue('B' . $rowCount, $element['tour_name']);
-            $sheet->SetCellValue('C' . $rowCount, $element['tour_price']);
-            $sheet->SetCellValue('D' . $rowCount, convertDateDMY($element['start_date']));
-            $sheet->SetCellValue('E' . $rowCount, $element['group_size']);
-            $sheet->SetCellValue('F' . $rowCount, $element['tour_code']);
+            $sheet->SetCellValue('B' . $rowCount, $element['guest_code']);
+            $sheet->SetCellValue('C' . $rowCount, $element['guest_name']);
+            $sheet->SetCellValue('D' . $rowCount, convertDateDMY($element['guest_birthday']));
+            $sheet->SetCellValue('E' . $rowCount, $element['guest_phone']);
+            $sheet->SetCellValue('F' . $rowCount, $element['guest_email']);
             $rowCount++;
         }
 //        $sheet->getRowDimension('1')->setRowHeight(20);

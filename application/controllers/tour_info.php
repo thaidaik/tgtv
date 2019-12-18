@@ -146,21 +146,21 @@ class Tour_info extends CI_Controller {
             //fetch manufacturers data into arrays
             $data['field_tour_location'] = $field_tour_location;
 
-            $data['count_tour_infos']= $this->tour_info_model->count_tour_infos($month_selected, $year_selected, $sizes_selected, $location_link, $search_string, $order);
+            $data['count_tour_infos']= $this->tour_info_model->count_tour_infos($month_selected, $year_selected, $sizes_selected, $location_link, $search_string, $search_code, $order);
             $config['total_rows'] = $data['count_tour_infos'];
 
             //fetch sql data into arrays
-            if($search_string){
+            if($search_string || $search_code){
                 if($order){
-                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link, $search_string, $order, $order_type, $config['per_page'],$limit_end);
+                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link, $search_string, $search_code, $order, $order_type, $config['per_page'],$limit_end);
                 }else{
-                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link, $search_string, '', $order_type, $config['per_page'],$limit_end);
+                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link, $search_string, $search_code, '', $order_type, $config['per_page'],$limit_end);
                 }
             }else{
                 if($order){
-                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link, '', $order, $order_type, $config['per_page'],$limit_end);
+                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link, '', '', $order, $order_type, $config['per_page'],$limit_end);
                 }else{
-                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link, '', '', $order_type, $config['per_page'],$limit_end);
+                    $data['tour_infos'] = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link, '', '', '', $order_type, $config['per_page'],$limit_end);
                 }
             }
 
@@ -187,7 +187,7 @@ class Tour_info extends CI_Controller {
             //fetch sql data into arrays
             $data['field_tour_location'] = $field_tour_location;
             $data['count_tour_infos']= $this->tour_info_model->count_tour_infos();
-            $data['tour_infos'] = $this->tour_info_model->get_tour_infos('', '', '', '', '', '', $order_type, $config['per_page'],$limit_end);
+            $data['tour_infos'] = $this->tour_info_model->get_tour_infos('', '', '', '', '', '', '', $order_type, $config['per_page'],$limit_end);
             $config['total_rows'] = $data['count_tour_infos'];
 
         }//!isset($location_link) && !isset($search_string) && !isset($order)
@@ -394,6 +394,7 @@ class Tour_info extends CI_Controller {
 
     public function createXLS() {
         $location_link_selected = $this->session->userdata('location_link_selected');
+        $search_code_selected = $this->session->userdata('search_code_selected');
         $search_string_selected = $this->session->userdata('search_string_selected');
         $month_selected = $this->session->userdata('month_selected');
         $year_selected = $this->session->userdata('year_selected');
@@ -401,19 +402,19 @@ class Tour_info extends CI_Controller {
 
         $this->load->helper('true_function');
         // create file name
-        $fileName = 'data-'.time().'.xlsx';
+        $fileName = 'data-tour-'.time().'.xlsx';
         // load excel library
         $this->load->library('excel');
-        $empInfo = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link_selected, $search_string_selected, '', '', '','');
+        $empInfo = $this->tour_info_model->get_tour_infos($month_selected,  $year_selected, $sizes_selected, $location_link_selected, $search_string_selected, $search_code_selected, '', '', '','');
 
 
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->setActiveSheetIndex(0);
         $sheet = $objPHPExcel->getActiveSheet();
         // set Header
-        $sheet->SetCellValue('A1', 'TGTV');
+        $sheet->SetCellValue('A1', 'TGTV TOUR');
         $sheet->mergeCells('A1:AA1');
-        $sheet->SetCellValue('A2', 'id');
+        $sheet->SetCellValue('A2', '#');
         $sheet->SetCellValue('B2', 'tour_name');
         $sheet->SetCellValue('C2', 'tour_price');
         $sheet->SetCellValue('D2', 'start_date');

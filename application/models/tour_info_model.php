@@ -35,7 +35,7 @@ class Tour_info_model extends CI_Model {
      * @param int $limit_end
      * @return array
      */
-    public function get_tour_infos($month_selected=null,  $year_selected=null, $sizes_selected=null, $location_link=null, $search_string=null, $order=null, $order_type='Asc', $limit_start=null, $limit_end)
+    public function get_tour_infos($month_selected=null,  $year_selected=null, $sizes_selected=null, $location_link=null, $search_string=null, $search_code=null, $order=null, $order_type='Asc', $limit_start=null, $limit_end)
     {
         $this->db->select('tour_info.*');
         $this->db->from('tour_info');
@@ -70,6 +70,9 @@ class Tour_info_model extends CI_Model {
         if($search_string){
             $this->db->like('tour_info.tour_name', $search_string);
         }
+        if($search_code){
+            $this->db->like('tour_info.tour_code', $search_code);
+        }
 
         $this->db->join('tour_location_link', 'tour_info.tour_id = tour_location_link.tour_info_id', 'inner');
 
@@ -96,7 +99,7 @@ class Tour_info_model extends CI_Model {
      * @param int $order
      * @return int
      */
-    function count_tour_infos($month_selected=null,  $year_selected=null, $sizes_selected=null, $location_link=null, $search_string=null, $order=null)
+    function count_tour_infos($month_selected=null,  $year_selected=null, $sizes_selected=null, $location_link=null, $search_string=null, $search_code=null, $order=null)
     {
         $this->db->select('tour_info.*');
         $this->db->from('tour_info');
@@ -125,6 +128,9 @@ class Tour_info_model extends CI_Model {
         }
         if($search_string){
             $this->db->like('tour_info.tour_name', $search_string);
+        }
+        if($search_code){
+            $this->db->like('tour_info.tour_code', $search_code);
         }
         $this->db->join('tour_location_link', 'tour_info.tour_id = tour_location_link.tour_info_id', 'inner');
 

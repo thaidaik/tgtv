@@ -2,7 +2,7 @@
     <div class="page-header users-header">
         <h2>
             Danh sách nhân viên
-            <a  href="<?php echo site_url("admin"); ?>/signup" class="btn btn-success"><?php echo $this->config->item('text_add_a_new'); ?></a>
+            <a  href="<?php echo site_url("admin"); ?>/signup" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> <?php echo $this->config->item('text_add_a_new'); ?></a>
         </h2>
     </div>
 
@@ -28,7 +28,8 @@
 
 
                 echo form_open('admin/list', $attributes);
-
+                echo '<div class="row">';
+                echo '<div class="col-md-10">';
                 echo form_label($this->config->item('text_search'), 'search_string');
                 echo form_input('search_string', $search_string_selected, 'class="form-control"');
 
@@ -43,8 +44,10 @@
                 $options_order_type = array('Asc' => $this->config->item('text_asc'), 'Desc' => $this->config->item('text_desc'));
                 echo form_dropdown('order_type', $options_order_type, $order_type_selected, 'class="form-control"');
 
+                echo '</div>';
+                echo '<div class="col-md-2">';
                 echo form_submit($data_submit);
-
+                echo '</div></div>';
                 echo form_close();
                 ?>
 
@@ -85,10 +88,11 @@
                     echo '<td class="crud-actions">
                         <img alt="Image" src="'.base_url(). 'uploads/' .$row['thumb']. '" class="img-thumbnail">  <br/>
                         <a href="'.site_url("admin").'/edit_member/'.$row['id'].'" class="btn btn-primary">'.$this->config->item('text_edit').'</a>
-                        <a href="'.site_url("admin").'/delete_member/'.$row['id'].'" class="btn btn-danger">'.$this->config->item('text_delete').'</a>
+                        
                 </td>';
                     echo '</tr>';
                 }
+                //<a href="'.site_url("admin").'/delete_member/'.$row['id'].'" class="btn btn-danger">'.$this->config->item('text_delete').'</a> //delete user
                 ?>
                 </tbody>
             </table>

@@ -181,3 +181,6 @@ table > tbody > tr > td a{
   -o-animation: my 700ms infinite;
   animation: my 700ms infinite;
 }
+.main-menu .nav > li > a{
+  padding: 15px 25px;
+}

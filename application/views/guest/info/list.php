@@ -3,7 +3,7 @@
     <div class="page-header users-header">
         <h2>
             Danh sách khách hàng
-            <a  href="<?php echo site_url("guest"); ?>/info/add" class="btn btn-success"><?php echo $this->config->item('text_add_a_new'); ?></a>
+            <a  href="<?php echo site_url("guest"); ?>/info/add" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> <?php echo $this->config->item('text_add_a_new'); ?></a>
         </h2>
     </div>
 
@@ -68,7 +68,7 @@
                         echo ' <a class="btn btn-success" href="'.base_url().'guest/info">Reset</a>';
                         echo '</div>';
                         echo '<div class="row bottom-block" >';
-                        echo ' <a class="btn btn-success" href="'.base_url().'tour_info/createXLS">Export XLS</a>';
+                        echo ' <a class="btn btn-success" href="'.base_url().'guest_info/createXLS">Export XLS</a>';
                         echo '</div>';
                     echo '</div>';
 

@@ -48,10 +48,10 @@ class Guest_info_model extends CI_Model {
         $this->db->from('guest_info');
 
         if($month_selected != false && $month_selected != null && $month_selected != 'all'){
-            $this->db->where('MONTH(tour_info.start_date)',$month_selected);
+            $this->db->where('MONTH(guest_birthday)',$month_selected);
         }
         if($day_selected != false && $day_selected != null && $day_selected != 'all'){
-            $this->db->where('DAY(tour_info.start_date)',$day_selected);
+            $this->db->where('DAY(guest_birthday)',$day_selected);
         }
 
         if($search_string){
@@ -93,10 +93,10 @@ class Guest_info_model extends CI_Model {
         $this->db->from('guest_info');
 
         if($month_selected != false && $month_selected != null && $month_selected != 'all'){
-            $this->db->where('MONTH(tour_info.start_date)',$month_selected);
+            $this->db->where('MONTH(guest_birthday)',$month_selected);
         }
         if($day_selected != false && $day_selected != null && $day_selected != 'all'){
-            $this->db->where('DAY(tour_info.start_date)',$day_selected);
+            $this->db->where('DAY(guest_birthday)',$day_selected);
         }
 
         if($search_string){
