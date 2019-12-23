@@ -222,7 +222,16 @@ class Tour_info extends CI_Controller {
             if ($this->form_validation->run())
             {
                 $dataImage = uploadImage('tour_image');
-                $dataImageName = $dataImage['uploadInfo'];
+                $error_upload = '';
+                if(isset($dataImage['uploadInfo']) && $dataImage['uploadInfo'] != null){
+                    $dataImageName = $dataImage['uploadInfo'];
+                    $tour_images = $dataImageName['file_name'];
+                    $tour_thumb = $dataImage['thumbnail_name'];
+                }else{
+                    $tour_images = 'tgtvtour.jpg';
+                    $tour_thumb = 'tgtvtour_thumb.jpg';
+                    $error_upload = $dataImage;
+                }
                 $startdate = date("Y-m-d", strtotime($this->input->post('start_date')));
                 $location_link = $this->input->post('location_link');
                 $data_to_store = array(
@@ -237,8 +246,8 @@ class Tour_info extends CI_Controller {
                     'flight' => $this->input->post('flight'),
                     'group_size' => $this->input->post('group_size'),
                     'tour_description' => $this->input->post('tour_description'),
-                    'tour_image' => $dataImageName['file_name'],
-                    'tour_image_thumb' => $dataImage['thumbnail_name'],
+                    'tour_image' => $tour_images,
+                    'tour_image_thumb' => $tour_thumb,
                     'tour_guide_info' => $this->input->post('tour_guide_info'),
                     'tour_color' => $this->input->post('tour_color'),
                     'tour_link' => $this->input->post('tour_link'),
@@ -252,6 +261,7 @@ class Tour_info extends CI_Controller {
                 }else{
                     $data['flash_message'] = FALSE;
                 }
+                $data['error_upload'] = $error_upload;
             }
         }
         $data_field_tour_location = $this->tour_location_model->get_data_field_tour_location();
@@ -288,6 +298,7 @@ class Tour_info extends CI_Controller {
             //if the form has passed through the validation
             if ($this->form_validation->run())
             {
+
                 $startdate = date("Y-m-d", strtotime($this->input->post('start_date')));
                 $location_link = $this->input->post('location_link');
                 $data_to_tour = array(
@@ -309,10 +320,12 @@ class Tour_info extends CI_Controller {
                     'modify_by' => $this->session->userdata('user_id'),
                 );
                 $dataImage = uploadImage('tour_image');
-                $dataImageName = $dataImage['uploadInfo'];
-                if(!empty($dataImage)){
-                    $data_to_tour['tour_image'] = $dataImageName['file_name'];
-                    $data_to_tour['tour_image_thumb'] = $dataImage['thumbnail_name'];
+                if(is_array($dataImage)){
+                    $dataImageName = $dataImage['uploadInfo'];
+                    if(!empty($dataImage)){
+                        $data_to_tour['tour_image'] = $dataImageName['file_name'];
+                        $data_to_tour['tour_image_thumb'] = $dataImage['thumbnail_name'];
+                    }
                 }
                 //if the insert has returned true then we show the flash message
                 if($this->tour_info_model->update_tour_info($id, $data_to_tour, $location_link) == TRUE){

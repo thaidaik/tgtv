@@ -40,7 +40,7 @@
                 echo '<tr>';
                 echo '<td>'.$row['name'].' <span class="badge"> '.$row['count'].'</span></td>';
                 echo '<td class="crud-actions">
-                  <a href="'.site_url("admin").'/role/update/'.$row['id'].'" class="btn btn-info">'.$this->config->item('text_edit').'</a>  ';
+                  <a href="'.site_url("admin").'/role/update/'.$row['id'].'" class="btn btn-info"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.$this->config->item('text_edit').'</a>  ';
                 if($row['count'] == 0){
                     echo '<a href="'.site_url("admin").'/role/delete/'.$row['id'].'" class="btn btn-danger">'.$this->config->item('text_delete').'</a> ';
                 }

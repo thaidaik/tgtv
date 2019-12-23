@@ -85,7 +85,7 @@
                         echo '<td>Not</td>';
                     }
                     echo '<td><a href="'.site_url("guest").'/add/payment/'.$this->uri->segment(4).'/'.$row['guest_tour_link_id'].'" class="btn btn-success btn-xs">Cập nhật thanh toán</a>';
-                    echo '<a href="'.site_url("guest").'/link/tour/'.$this->uri->segment(4).'/'.$select_date.'/'.$row['guest_tour_link_id'].'" class="btn btn-info btn-xs">'.$this->config->item('text_edit').'</a></td>';
+                    echo '<a href="'.site_url("guest").'/link/tour/'.$this->uri->segment(4).'/'.$select_date.'/'.$row['guest_tour_link_id'].'" class="btn btn-info btn-xs"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.$this->config->item('text_edit').'</a></td>';
                     echo '</tr>';
                 }
                 ?>

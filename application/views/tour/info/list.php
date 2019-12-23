@@ -98,6 +98,7 @@
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
+                    <th class=""></th>
                     <th class="">Tour Code</th>
                     <th class="">Tour Name</th>
                     <th class="">Giá Tour</th>
@@ -113,11 +114,12 @@
                 $this->load->helper('true_function');
                 foreach($tour_infos as $row)
                 {
-                    //echo '<tr class="'.$row['tour_color'].'">';
+                    echo '<tr class="'.$row['tour_color'].'">';
                     $night = $row['tour_duration'] - 1;
                     $slot = $row['group_size'] - $row['group_slot'];
 
-                    echo '<tr>';
+                    //echo '<tr>';
+                    echo '<td width="80px"><img alt="Image" src="'.base_url(). 'uploads/' .$row['tour_image_thumb']. '" width="80px" class="img-thumbnail"/></td>';
                     echo '<td><a href="#" class="view-tour" data-id="'.$row['tour_id'].'" data-title="'.$row['tour_name'].'" data-toggle="modal" data-target="#myModal">'.$row['tour_code'].'</a></td>';
                     echo '<td><a href="'.$row['tour_link'].'" target="_blank"><span class="tooltip-showname" data-toggle="tooltip" data-placement="right" id="tooltip-top" data-original-title="'.$row['tour_name'].'">'.truncateWords($row['tour_name'], 25).'</span></a></td>';
                     echo '<td>'.number_format($row['tour_price']).'</td>';
@@ -126,7 +128,7 @@
                     echo '<td>'.$slot.'</td>';
                     echo '<td>'.convertDateDMY($row['start_date']).'<br/> '.$row['departs'].' '.$row['flight'].'</td>';
                     echo '<td class="crud-actions">
-                  <a href="'.site_url("tour").'/info/update/'.$row['tour_id'].'" class="btn btn-info">'.$this->config->item('text_edit').'</a>  
+                  <a href="'.site_url("tour").'/info/update/'.$row['tour_id'].'" class="btn btn-info"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.$this->config->item('text_edit').'</a>  
                   <a href="'.site_url("tour").'/info/delete/'.$row['tour_id'].'" class="btn btn-danger">'.$this->config->item('text_delete').'</a>
                 </td>';
                     echo '</tr>';

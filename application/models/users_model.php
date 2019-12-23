@@ -186,6 +186,7 @@ class Users_model extends CI_Model {
     {
         $this->db->select('*');
         $this->db->from('membership');
+        $this->db->where('block', '0');
         $this->db->group_by('id');
         $this->db->order_by('id', 'Asc');
         $query = $this->db->get();

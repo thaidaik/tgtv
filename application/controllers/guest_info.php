@@ -283,11 +283,14 @@ class Guest_info extends CI_Controller {
                     'guest_modify_by' => $this->session->userdata('user_id'),
                 );
                 $dataImage = uploadImage('tour_image');
-                $dataImageName = $dataImage['uploadInfo'];
-                if(!empty($dataImage)){
-                    $data_to_tour['guest_images'] = $dataImageName['file_name'];
-                    $data_to_tour['guest_thumb'] = $dataImage['thumbnail_name'];
+                if(is_array($dataImage)){
+                    $dataImageName = $dataImage['uploadInfo'];
+                    if(!empty($dataImage)){
+                        $data_to_tour['guest_images'] = $dataImageName['file_name'];
+                        $data_to_tour['guest_thumb'] = $dataImage['thumbnail_name'];
+                    }
                 }
+
                 //if the insert has returned true then we show the flash message
                 if($this->guest_info_model->update_guest_info($id, $data_to_tour) == TRUE){
                     $this->session->set_flashdata('flash_message', 'updated');

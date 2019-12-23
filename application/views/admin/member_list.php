@@ -79,7 +79,13 @@
                     if($row['block'] == '1'){
                         echo 'class="text_gach"';
                     }
-                    echo '>'.$row['first_name'].'</a></td>';
+                    echo '>'.$row['first_name'];
+                    if($row['block'] == '1'){
+                        echo ' <i class="fa fa-times" aria-hidden="true"></i>';
+                    }else{
+                        echo ' <i class="fa fa-check-circle" aria-hidden="true"></i>';
+                    }
+                    echo '</a></td>';
                     echo '<td>'.$row['email_address'].'</td>';
                     echo '<td>'.$row['phone'].'</td>';
                     echo '<td>'.$birthday.'</td>';
@@ -87,7 +93,7 @@
                     echo '<td>'.$row['modify_date'].'</td>';
                     echo '<td class="crud-actions">
                         <img alt="Image" src="'.base_url(). 'uploads/' .$row['thumb']. '" class="img-thumbnail">  <br/>
-                        <a href="'.site_url("admin").'/edit_member/'.$row['id'].'" class="btn btn-primary">'.$this->config->item('text_edit').'</a>
+                        <a href="'.site_url("admin").'/edit_member/'.$row['id'].'" class="btn btn-primary"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.$this->config->item('text_edit').'</a>
                         
                 </td>';
                     echo '</tr>';

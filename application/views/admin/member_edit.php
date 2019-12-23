@@ -98,9 +98,14 @@
     <div class="control-group"><label class="control-label required" for="color">Select Color</label>
         <input type="text" name="color" value="" class="form-control jscolor" style="background-color: <?php echo $member['0']['color']; ?>;">
     </div>
+    <?php
+    if($member['0']['role'] != '1704'): ?>
     <div class="control-group"><label class="control-label required" for="role"><?php echo $this->config->item('text_role'); ?></label>
         <?php echo form_dropdown('role', $options_role, $member['0']['role'], 'class="form-control"'); ?>
     </div>
+    <?php else: ?>
+        <input type="hidden" name="role" value="<?php echo $member['0']['role']; ?>" >
+    <?php endif;?>
     </div>
     </div>
     <div class="row">

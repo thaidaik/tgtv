@@ -106,11 +106,12 @@
                     echo '<td>'.$row['guest_used_tour'].'</td>';
                     echo '<td class="crud-actions">
                   <a href="'.site_url("guest").'/link/tour/gid_'.$row['guest_id'].'/mnow'.'" class="btn btn-success btn-xs">Quản lý tour</a>  
-                  <a href="'.site_url("guest").'/info/update/'.$row['guest_id'].'" class="btn btn-info btn-xs">'.$this->config->item('text_edit').'</a>  
-                  <a href="'.site_url("guest").'/info/delete/'.'" class="btn btn-danger btn-xs">'.$this->config->item('text_delete').'</a>
+                  <a href="'.site_url("guest").'/info/update/'.$row['guest_id'].'" class="btn btn-info btn-xs"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.$this->config->item('text_edit').'</a>  
+                  
                 </td>';
                     echo '</tr>';
                 }
+                //<a href="'.site_url("guest").'/info/delete/'.'" class="btn btn-danger btn-xs">'.$this->config->item('text_delete').'</a>
                 ?>
                 </tbody>
             </table>
