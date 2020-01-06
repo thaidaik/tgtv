@@ -164,6 +164,7 @@ class Tour_location extends CI_Controller {
                 //if the insert has returned true then we show the flash message
                 if($this->tour_location_model->add_tour_location($data_to_add)){
                     $data['flash_message'] = TRUE;
+                    redirect('tour/location');
                 }else{
                     $data['flash_message'] = FALSE;
                 }

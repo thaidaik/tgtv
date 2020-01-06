@@ -37,7 +37,7 @@
                     </li>
 
                     <li class="dropdown <?php if($this->uri->segment(1) == 'tour'){echo ' active';}?>">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" ><i class="fa fa-paper-plane" aria-hidden="true"></i> Quản lý Tour<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" ><i class="fa fa-paper-plane" aria-hidden="true"></i> Quản lý Tour <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li <?php if($this->uri->segment(1) == 'tour' && $this->uri->segment(2) == 'info' && $this->uri->segment(3) == ''){echo 'class="active"';}?>>
                                 <a href="<?php echo base_url(); ?>tour/info">Danh sách Tour</a>
@@ -53,7 +53,7 @@
                     </li>
 
                     <li class="dropdown <?php if($this->uri->segment(1) == 'guest'){echo ' active';}?>">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" ><i class="fa fa-address-card-o" aria-hidden="true"></i> Quản lý khách hàng<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" ><i class="fa fa-address-card-o" aria-hidden="true"></i> Quản lý khách hàng <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li <?php if($this->uri->segment(1) == 'guest' && $this->uri->segment(2) == 'info' && $this->uri->segment(3) == ''){echo 'class="active"';}?>>
                                 <a href="<?php echo base_url(); ?>guest/info">Danh sách khách hàng</a>

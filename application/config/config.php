@@ -371,6 +371,10 @@ $config['user_block'] = array(
     '0'=>'Active',
     '1'=>'Block account',
 );
+$config['start_location'] = array(
+    '0'=>'Sài Gòn',
+    '1'=>'Hà Nội',
+);
 $config['user_sex_text'] = array(
     'male'=>'Mr',
     'female'=>'Ms',

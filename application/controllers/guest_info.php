@@ -387,13 +387,17 @@ class Guest_info extends CI_Controller {
             if ($this->form_validation->run()){
                 $sale_id = $this->input->post('sale_id');
                 $tour_id = $this->input->post('tour_id');
+                $start_location = $this->input->post('start_location');
+                $custom_price = $this->input->post('custom_price');
                 $data_to_tour = array(
                     'guest_info_id' => $guest_id,
                     'tour_info_id' => $tour_id,
                     'user_sale_id' => $sale_id,
+                    'start_location' => $start_location,
+                    'custom_price' => str_replace(".","",$custom_price),
                 );
                 //if the insert has returned true then we show the flash message
-                if($this->guest_info_model->add_sale_and_tour_toguest($data_to_tour, $guest_id, $tour_id, $id) == TRUE){
+                if($this->guest_info_model->add_sale_and_tour_toguest($data_to_tour, $guest_id, $tour_id, $id, $start_location) == TRUE){
                     $this->session->set_flashdata('flash_message', 'updated');
                 }else{
                     $this->session->set_flashdata('flash_message', 'not_updated');
@@ -438,12 +442,11 @@ class Guest_info extends CI_Controller {
             if ($this->form_validation->run()){
                 $guest_pay_status = $this->input->post('guest_pay_status');
                 $guest_pay_by_user_id = $this->input->post('guest_pay_by_user_id');
-                $guest_pay_price = $this->input->post('guest_pay_price');
+                $guest_pay_price = str_replace(".","",$this->input->post('guest_pay_price'));
                 $guest_pay_by_type = $this->input->post('guest_pay_by_type');
                 $guest_pay_finish = $this->input->post('guest_pay_finish');
                 $user_sale_id = $this->input->post('user_sale_id');
                 $tour_info_id = $this->input->post('tour_info_id');
-
 
                 //if the insert has returned true then we show the flash message
                 if($payment_id){

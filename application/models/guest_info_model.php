@@ -242,7 +242,7 @@ class Guest_info_model extends CI_Model {
     }
 
     public function get_tour_info_id_by_id($id){
-        $this->db->select('tour_info_id, guest_info_id');
+        $this->db->select('tour_info_id, guest_info_id, start_location');
         $this->db->from('guest_tour_link');
         $this->db->where('id', $id);
         $query = $this->db->get();
@@ -260,14 +260,14 @@ class Guest_info_model extends CI_Model {
 
     public function get_tour_info_slot_by_id($id)
     {
-        $this->db->select('group_slot');
+        $this->db->select('group_slot, group_slot_saigon, group_slot_hanoi');
         $this->db->from('tour_info');
         $this->db->where('tour_id', $id);
         $query = $this->db->get();
         return $query->row();
     }
 
-    public function update_data_slot($guest_id, $tour_id, $check_slot){
+    public function update_data_slot($guest_id, $tour_id, $start_location, $check_slot){ // true = + 1 count, false = - 1 count
         $dataslot_usedtour = $this->get_guest_info_used_tour_by_id($guest_id);
         $slot_usedtour = $dataslot_usedtour->guest_used_tour;
         if($check_slot == true){
@@ -280,27 +280,42 @@ class Guest_info_model extends CI_Model {
 
         $dataslot = $this->get_tour_info_slot_by_id($tour_id);
         $slot = $dataslot->group_slot;
+        $slot_location_sg = $dataslot->group_slot_saigon;
+        $slot_location_hn = $dataslot->group_slot_hanoi;
+
         if($check_slot == true){
             $slot = $slot+1;
+            if($start_location == 0){
+                $slot_location_sg = $slot_location_sg+1;
+            }else{
+                $slot_location_hn = $slot_location_hn+1;
+            }
+
         }else{
             $slot = $slot-1;
+            if($start_location == 0){
+                $slot_location_sg = $slot_location_sg-1;
+            }else{
+                $slot_location_hn = $slot_location_hn-1;
+            }
         }
-        $data_slot=array( 'group_slot'=> $slot );
+        $data_slot=array( 'group_slot'=> $slot, 'group_slot_saigon'=> $slot_location_sg, 'group_slot_hanoi'=> $slot_location_hn );
         $this->update_tour_info_slot($tour_id, $data_slot);
     }
 
-    function add_sale_and_tour_toguest($data, $guest_id, $tour_id, $id=null)
+    function add_sale_and_tour_toguest($data, $guest_id, $tour_id, $id=null, $start_location)
     {
         if($id){
             $tour_info_data = $this->get_tour_info_id_by_id($id);
             $tour_info_id = $tour_info_data->tour_info_id;
             $guest_info_id = $tour_info_data->guest_info_id;
-            $this->update_data_slot($guest_info_id, $tour_info_id, false);
+            $start_location_id = $tour_info_data->start_location;
+            $this->update_data_slot($guest_info_id, $tour_info_id, $start_location_id, false); // - 1 count
             $this->db->where('id', $id);
             $this->db->delete('guest_tour_link');
         }
         if($tour_id){
-            $this->update_data_slot($guest_id, $tour_id, true);
+            $this->update_data_slot($guest_id, $tour_id, $start_location, true); // + 1 count
         }
         $insert = $this->db->insert('guest_tour_link', $data);
         return $insert;
@@ -308,7 +323,7 @@ class Guest_info_model extends CI_Model {
 
     function get_sale_and_tour_toguest($guestid)
     {
-        $this->db->select('guest_tour_link.id as guest_tour_link_id, guest_tour_link.guest_info_id as guest_info_id, guest_tour_link.tour_info_id as tour_info_id, guest_tour_link.user_sale_id as user_sale_id, guest_info.guest_name as guest_name, membership.id as user_id, membership.first_name as user_name, tour_info.tour_id as tour_id, tour_info.tour_name as tour_name, tour_info.start_date as start_date, tour_info.tour_price as tour_price');
+        $this->db->select('guest_tour_link.id as guest_tour_link_id, guest_tour_link.guest_info_id as guest_info_id, guest_tour_link.tour_info_id as tour_info_id, guest_tour_link.user_sale_id as user_sale_id, guest_tour_link.custom_price as custom_price, guest_tour_link.start_location as start_location, guest_info.guest_name as guest_name, membership.id as user_id, membership.first_name as user_name, tour_info.tour_id as tour_id, tour_info.tour_name as tour_name, tour_info.start_date as start_date, tour_info.tour_price as tour_price');
         $this->db->from('guest_tour_link');
         $this->db->join('membership', 'membership.id = guest_tour_link.user_sale_id', 'inner');
         $this->db->join('tour_info', 'tour_info.tour_id = guest_tour_link.tour_info_id', 'inner');
@@ -321,9 +336,24 @@ class Guest_info_model extends CI_Model {
         return $query->result_array();
     }
 
+    function get_sale_and_guest_totour($tourid)
+    {
+        $this->db->select('guest_tour_link.id as guest_tour_link_id, guest_tour_link.guest_info_id as guest_info_id, guest_tour_link.tour_info_id as tour_info_id, guest_tour_link.user_sale_id as user_sale_id, guest_tour_link.custom_price as custom_price, guest_tour_link.start_location as start_location, guest_info.guest_name as guest_name, membership.id as user_id, membership.first_name as user_name, tour_info.tour_id as tour_id, tour_info.tour_name as tour_name, tour_info.start_date as start_date, tour_info.tour_price as tour_price');
+        $this->db->from('guest_tour_link');
+        $this->db->join('membership', 'membership.id = guest_tour_link.user_sale_id', 'inner');
+        $this->db->join('tour_info', 'tour_info.tour_id = guest_tour_link.tour_info_id', 'inner');
+        $this->db->join('guest_info', 'guest_info.guest_id = guest_tour_link.guest_info_id', 'inner');
+
+        $this->db->where('guest_tour_link.tour_info_id', $tourid);
+        $this->db->group_by('guest_tour_link.id');
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     function get_guest_tour_sale_data($id)
     {
-        $this->db->select('guest_tour_link.id as guest_tour_link_id, guest_info.guest_name as guest_name, membership.id as user_id, membership.first_name as user_name, tour_info.tour_id as tour_id, tour_info.tour_name as tour_name, tour_info.start_date as start_date');
+        $this->db->select('guest_tour_link.id as guest_tour_link_id, guest_tour_link.custom_price as custom_price, guest_tour_link.start_location as start_location, guest_info.guest_name as guest_name, membership.id as user_id, membership.first_name as user_name, tour_info.tour_id as tour_id, tour_info.tour_name as tour_name, tour_info.start_date as start_date');
         $this->db->from('guest_tour_link');
         $this->db->join('membership', 'membership.id = guest_tour_link.user_sale_id', 'inner');
         $this->db->join('tour_info', 'tour_info.tour_id = guest_tour_link.tour_info_id', 'inner');

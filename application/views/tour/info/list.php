@@ -104,6 +104,8 @@
                     <th class="">Giá Tour</th>
                     <th class="">Số ngày</th>
                     <th class="">Số khách</th>
+                    <th class="">K SG</th>
+                    <th class="">K HN</th>
                     <th class="">Còn nhận</th>
                     <th class="">Khởi hành</th>
                     <th class=""></th>
@@ -120,16 +122,18 @@
 
                     //echo '<tr>';
                     echo '<td width="80px"><img alt="Image" src="'.base_url(). 'uploads/' .$row['tour_image_thumb']. '" width="80px" class="img-thumbnail"/></td>';
-                    echo '<td><a href="#" class="view-tour" data-id="'.$row['tour_id'].'" data-title="'.$row['tour_name'].'" data-toggle="modal" data-target="#myModal">'.$row['tour_code'].'</a></td>';
+                    echo '<td><a href="" class="view-tour" data-id="'.$row['tour_id'].'" data-title="'.$row['tour_name'].'" data-toggle="modal" data-target="#myModal">'.$row['tour_code'].'</a></td>';
                     echo '<td><a href="'.$row['tour_link'].'" target="_blank"><span class="tooltip-showname" data-toggle="tooltip" data-placement="right" id="tooltip-top" data-original-title="'.$row['tour_name'].'">'.truncateWords($row['tour_name'], 25).'</span></a></td>';
-                    echo '<td>'.number_format($row['tour_price']).'</td>';
+                    echo '<td>'.number_format($row['tour_price'],0,",",".").'</td>';
                     echo '<td>'.$row['tour_duration'].'N'.$night.'Đ</td>';
                     echo '<td>'.$row['group_size'].'</td>';
+                    echo '<td>'.$row['group_slot_saigon'].'</td>';
+                    echo '<td>'.$row['group_slot_hanoi'].'</td>';
                     echo '<td>'.$slot.'</td>';
                     echo '<td>'.convertDateDMY($row['start_date']).'<br/> '.$row['departs'].' '.$row['flight'].'</td>';
                     echo '<td class="crud-actions">
-                  <a href="'.site_url("tour").'/info/update/'.$row['tour_id'].'" class="btn btn-info"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.$this->config->item('text_edit').'</a>  
-                  <a href="'.site_url("tour").'/info/delete/'.$row['tour_id'].'" class="btn btn-danger">'.$this->config->item('text_delete').'</a>
+                  <a href="'.site_url("tour").'/info/update/'.$row['tour_id'].'" class="btn btn-info btn-xs"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.$this->config->item('text_edit').'</a>  
+                  <a href="'.site_url("payment").'/'.$row['tour_id'].'" class="btn btn-success btn-xs">View</a>
                 </td>';
                     echo '</tr>';
                 }

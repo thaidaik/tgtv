@@ -77,7 +77,6 @@ $route['ajax-viewTour'] = 'tour_info/ajaxViewTour';
 $route['tour_xls'] = 'tour_info/createXLS';
 
 $route['tour/location'] = 'tour_location/index';
-$route['tour/location/(:any)'] = 'tour_location/index/$1'; //$1 = page number
 $route['tour/location/add'] = 'tour_location/add';
 $route['tour/location/update'] = 'tour_location/update';
 $route['tour/location/update/(:any)'] = 'tour_location/update/$1';
@@ -94,6 +93,8 @@ $route['guest_xls'] = 'guest_info/createXLS';
 
 $route['guest/link/tour/(:any)'] = 'guest_info/addInfoTour/$1';
 $route['guest/add/payment/(:any)'] = 'guest_info/addPayment/$1';
+
+$route['payment/(:any)'] = 'pay_info/index/$1';
 //test
 
 $route['ajax-request-test'] = 'ItemController/ajaxRequest';

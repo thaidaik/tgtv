@@ -74,7 +74,7 @@ class Tour_info extends CI_Controller {
                 $order_type = $this->session->userdata('order_type');
             }else{
                 //if we have nothing inside session, so it's the default "Asc"
-                $order_type = 'Asc';
+                $order_type = 'Desc';
             }
         }
         //make the data type var avaible to our view
@@ -258,6 +258,7 @@ class Tour_info extends CI_Controller {
                 //if the insert has returned true then we show the flash message
                 if($this->tour_info_model->add_tour_info($data_to_store, $location_link)){
                     $data['flash_message'] = TRUE;
+                    redirect('tour/info/list/');
                 }else{
                     $data['flash_message'] = FALSE;
                 }
@@ -428,11 +429,15 @@ class Tour_info extends CI_Controller {
         $sheet->SetCellValue('A1', 'TGTV TOUR');
         $sheet->mergeCells('A1:AA1');
         $sheet->SetCellValue('A2', '#');
-        $sheet->SetCellValue('B2', 'tour_name');
-        $sheet->SetCellValue('C2', 'tour_price');
-        $sheet->SetCellValue('D2', 'start_date');
-        $sheet->SetCellValue('E2', 'group_size');
-        $sheet->SetCellValue('F2', 'tour_code');
+        $sheet->SetCellValue('B2', 'tour_code');
+        $sheet->SetCellValue('C2', 'tour_name');
+        $sheet->SetCellValue('D2', 'tour_price');
+        $sheet->SetCellValue('E2', 'start_date');
+        $sheet->SetCellValue('F2', 'group_size');
+        $sheet->SetCellValue('G2', 'group_slot');
+        $sheet->SetCellValue('H2', 'group_slot_saigon');
+        $sheet->SetCellValue('I2', 'group_slot_hanoi');
+        $sheet->SetCellValue('J2', 'tour_duration');
         // set Row
         $rowCount = 3;
 
@@ -444,32 +449,41 @@ class Tour_info extends CI_Controller {
             $sheet->getStyle('C'. $rowCount .':F'.$rowCount)->getAlignment()->applyFromArray(
                 array('vertical' => PHPExcel_Style_Alignment::VERTICAL_TOP) // top text
             );
-
+            $night = $element['tour_duration']-1;
             $sheet->SetCellValue('A' . $rowCount, $listID);
-            $sheet->SetCellValue('B' . $rowCount, $element['tour_name']);
-            $sheet->SetCellValue('C' . $rowCount, $element['tour_price']);
-            $sheet->SetCellValue('D' . $rowCount, convertDateDMY($element['start_date']));
-            $sheet->SetCellValue('E' . $rowCount, $element['group_size']);
-            $sheet->SetCellValue('F' . $rowCount, $element['tour_code']);
+            $sheet->SetCellValue('B' . $rowCount, $element['tour_code']);
+            $sheet->SetCellValue('C' . $rowCount, $element['tour_name']);
+            $sheet->SetCellValue('D' . $rowCount, number_format($element['tour_price'],0,",","."));
+            $sheet->SetCellValue('E' . $rowCount, convertDateDMY($element['start_date']) . ' '. $element['departs'].' '.$element['flight']);
+            $sheet->SetCellValue('F' . $rowCount, $element['group_size']);
+            $sheet->SetCellValue('G' . $rowCount, $element['group_slot']);
+            $sheet->SetCellValue('H' . $rowCount, $element['group_slot_saigon']);
+            $sheet->SetCellValue('I' . $rowCount, $element['group_slot_hanoi']);
+            $sheet->SetCellValue('J' . $rowCount, $element['tour_duration'].'N '.$night.'Đ');
+
             $rowCount++;
         }
 //        $sheet->getRowDimension('1')->setRowHeight(20);
-        $sheet->getColumnDimension('B')->setWidth(70);
-        $sheet->getColumnDimension('C')->setWidth(15);
+        $sheet->getColumnDimension('B')->setWidth(20);
+        $sheet->getColumnDimension('C')->setWidth(40);
         $sheet->getColumnDimension('D')->setWidth(15);
-        $sheet->getColumnDimension('E')->setWidth(15);
-        $sheet->getColumnDimension('F')->setWidth(20);
+        $sheet->getColumnDimension('E')->setWidth(25);
+        $sheet->getColumnDimension('F')->setWidth(5);
+        $sheet->getColumnDimension('G')->setWidth(5);
+        $sheet->getColumnDimension('H')->setWidth(5);
+        $sheet->getColumnDimension('I')->setWidth(5);
+        $sheet->getColumnDimension('J')->setWidth(10);
 
         $sheet->getStyle("A1")->getFont()->setBold(true);
-        $sheet->getStyle("A2:F2")->getFont()->setBold(true);
-        $sheet->getStyle("A2:F2")->getFill()->applyFromArray(array(
+        $sheet->getStyle("A2:J2")->getFont()->setBold(true);
+        $sheet->getStyle("A2:J2")->getFill()->applyFromArray(array(
             'type' => PHPExcel_Style_Fill::FILL_SOLID,
             'startcolor' => array(
                 'rgb' => 'F48024' //mau background
             ),
         ));
 
-        $sheet->getStyle("A2:F2")->applyFromArray(array(
+        $sheet->getStyle("A2:J2")->applyFromArray(array(
             'borders' => array(
                 'allborders' => array(
                     'style' => PHPExcel_Style_Border::BORDER_MEDIUM,

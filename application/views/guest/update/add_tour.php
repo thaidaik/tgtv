@@ -7,6 +7,7 @@
     </div>
     <?php
     $this->load->helper('true_function');
+    $start_location = $this->config->item('start_location');
     //flash messages
     if(isset($flash_message)){
         if($flash_message == TRUE)
@@ -53,12 +54,14 @@
     }else{
         echo '<h2>Danh sách Tour sử dụng</h2>';
         echo '<hr class="style1">';
+
         if(isset($guest_sale_tour_info_data) && count($guest_sale_tour_info_data)){ ?>
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
                     <th class="">Khách hàng</th>
                     <th class="">Tour name</th>
+                    <th class="">Khởi hành</th>
                     <th class="">Sale</th>
                     <th class="">Số lần thanh toán</th>
                     <th class="">Đã thanh toán</th>
@@ -75,10 +78,16 @@
                     echo '<tr>';
                     echo '<td>'.$row['guest_name'].'</td>';
                     echo '<td>'.$row['tour_name'].'</td>';
+                    echo '<td>'.$start_location[$row['start_location']].'</td>';
                     echo '<td>'.$row['user_name'].'</td>';
                     echo '<td>'.$row['total_number_price'].'</td>';
-                    echo '<td>'.number_format($row['total_price']).'</td>';
-                    echo '<td>'.number_format($row['tour_price']).'</td>';
+                    echo '<td>'.number_format($row['total_price'],0,",",".").'</td>';
+                    if($row['custom_price'] > '0'){
+                        echo '<td>'.number_format($row['custom_price'],0,",",".").'</td>';
+                    }else{
+                        echo '<td>'.number_format($row['tour_price'],0,",",".").'</td>';
+                    }
+
                     if($row['total_finish'] != '0'){
                         echo '<td>Done</td>';
                     }else{
@@ -121,17 +130,35 @@
             echo form_open_multipart('guest/link/tour/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6), $attributes);
             $select_sale = $get_guest_tour_sale_data[0]['user_id'];
             $select_tour = $get_guest_tour_sale_data[0]['tour_id'];
+            $select_start_location = $get_guest_tour_sale_data[0]['start_location'];
+            $custom_price = number_format($get_guest_tour_sale_data[0]['custom_price'],0,",",".");
+
         }else{
             echo form_open_multipart('guest/link/tour/'.$this->uri->segment(4).'/'.$this->uri->segment(5), $attributes);
             $select_sale = null;
             $select_tour = null;
+            $select_start_location = null;
+            $custom_price = '';
         }
-
         echo '<div class="col-sm-12">';
             echo '<div class="row">';
                 echo '<div class="col-md-6">';
                     echo '<div class="control-group"><label class="control-label required bottom-block" for="sale_id">Chọn Sale đang chăm sóc khách hàng</label>';
-                    echo form_dropdown('sale_id', $all_users, $select_sale, 'class="form-control"');
+                        echo form_dropdown('sale_id', $all_users, $select_sale, 'class="form-control"');
+                        echo '</div>';
+                    echo '</div>';
+                    echo '<div class="col-md-6">';
+                        echo '<div class="control-group"><label class="control-label required bottom-block" for="start_location">Khởi hành từ</label>';
+                        echo form_dropdown('start_location', $start_location, $select_start_location, 'class="form-control"');
+                        echo '</div>';
+                    echo '</div>';
+                echo '</div>';
+
+                echo '<div class="row">';
+                    echo '<div class="col-md-6">';
+                        echo '<div class="control-group"><label class="control-label required" for="guest_pay_price">Tổng số tiền thu đặc biệt</label>';
+                        echo form_input('custom_price', $custom_price, 'placeholder="" class="form-control" id="convert_number"');
+                    echo '</div>';
                 echo '</div>';
             echo '</div>';
         echo '</div>'; ?>
@@ -176,8 +203,8 @@
                    echo ' checked="checked" ';
                 }
                 echo '></td>';
-                echo '<td><a href="#" class="view-tour" data-id="'.$row['tour_id'].'" data-title="'.$row['tour_name'].'" data-toggle="modal" data-target="#myModal">'.$row['tour_code'].'</a></td>';
-                echo '<td><span class="tooltip-showname" data-toggle="tooltip" data-placement="right" id="tooltip-top" data-original-title="'.$row['tour_name'].'">'.truncateWords($row['tour_name'], 15).'</span></td>';
+                echo '<td><a href="" class="view-tour" data-id="'.$row['tour_id'].'" data-title="'.$row['tour_name'].'" data-toggle="modal" data-target="#myModal">'.$row['tour_code'].'</a></td>';
+                echo '<td><a href="'.$row['tour_link'].'" target="_blank"><span class="tooltip-showname" data-toggle="tooltip" data-placement="right" id="tooltip-top" data-original-title="'.$row['tour_name'].'">'.truncateWords($row['tour_name'], 15).'</span></a></td>';
                 echo '<td>'.convertMilion($row['tour_price']).'</td>';
                 echo '<td>'.$row['tour_duration'].'N'.$night.'Đ</td>';
                 echo '<td>'.$row['group_size'].'</td>';

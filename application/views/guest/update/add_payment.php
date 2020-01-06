@@ -118,7 +118,7 @@
                 $select_date = convertDateDMY($row['guest_pay_time']);
                 echo '<tr>';
                 echo '<td>'.$guest_pay_status[$row['guest_pay_status']].'</td>';
-                echo '<td>'.number_format($row['guest_pay_price']).'</td>';
+                echo '<td>'.number_format($row['guest_pay_price'],0,",",".").'</td>';
                 echo '<td>'.$all_users[$row['guest_pay_by_user_id']].'</td>';
                 echo '<td>'.$guest_pay_by_type[$row['guest_pay_by_type']].'</td>';
                 echo '<td>'.$select_date.'</td>';
@@ -174,7 +174,7 @@
         echo form_dropdown('guest_pay_by_user_id', $all_users, $get_payment_toguest_by_id[0]['guest_pay_by_user_id'], 'class="form-control"');
         echo '</div>';
         echo '<div class="control-group"><label class="control-label required" for="guest_pay_price">Tổng số tiền thu</label>';
-        echo form_input('guest_pay_price', $get_payment_toguest_by_id[0]['guest_pay_price'], 'placeholder="" class="form-control"');
+        echo form_input('guest_pay_price', $get_payment_toguest_by_id[0]['guest_pay_price'], 'placeholder="" class="form-control" id="convert_number"');
         echo '</div>';
         echo '</div>';
 

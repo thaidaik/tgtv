@@ -93,7 +93,7 @@
                     echo '<td>'.$row['modify_date'].'</td>';
                     echo '<td class="crud-actions">
                         <img alt="Image" src="'.base_url(). 'uploads/' .$row['thumb']. '" class="img-thumbnail">  <br/>
-                        <a href="'.site_url("admin").'/edit_member/'.$row['id'].'" class="btn btn-primary"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.$this->config->item('text_edit').'</a>
+                        <a href="'.site_url("admin").'/edit_member/'.$row['id'].'" class="btn btn-primary btn-xs"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.$this->config->item('text_edit').'</a>
                         
                 </td>';
                     echo '</tr>';
